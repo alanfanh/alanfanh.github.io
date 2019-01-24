@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog_git/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/blog_git/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/blog_git/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog_git/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog_git/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog_git/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/blog_git/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="&amp;emsp;&amp;emsp;一直以来想搭建属于自己的博客，终于前段时间集中精力与时间去做了这件事情。   什么是hexo？&amp;emsp;&amp;emsp;Hexo是一个快速，简洁且高效的博客框架，并且免费。 安装软件环境安装node.js&amp;emsp;&amp;emsp;访问node.js官网，根据自己计算机的操作系统选择相应的安装版本。然后再选择stable版本点击下载。双击下载的安装包，点击安装。注意：window">
+<meta name="keywords" content="Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo+github搭建个人专属博客">
+<meta property="og:url" content="http://yoursite.com/2018/04/20/hexo+github搭建个人专属博客/index.html">
+<meta property="og:site_name" content="Alan&#39;s blog">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;一直以来想搭建属于自己的博客，终于前段时间集中精力与时间去做了这件事情。   什么是hexo？&amp;emsp;&amp;emsp;Hexo是一个快速，简洁且高效的博客框架，并且免费。 安装软件环境安装node.js&amp;emsp;&amp;emsp;访问node.js官网，根据自己计算机的操作系统选择相应的安装版本。然后再选择stable版本点击下载。双击下载的安装包，点击安装。注意：window">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-20T07:43:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo+github搭建个人专属博客">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;一直以来想搭建属于自己的博客，终于前段时间集中精力与时间去做了这件事情。   什么是hexo？&amp;emsp;&amp;emsp;Hexo是一个快速，简洁且高效的博客框架，并且免费。 安装软件环境安装node.js&amp;emsp;&amp;emsp;访问node.js官网，根据自己计算机的操作系统选择相应的安装版本。然后再选择stable版本点击下载。双击下载的安装包，点击安装。注意：window">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog_git/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/20/hexo+github搭建个人专属博客/">
+
+
+
+
+
+  <title>hexo+github搭建个人专属博客 | Alan's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog_git/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Alan's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">To be A coder!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog_git/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/blog_git/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog_git/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/blog_git/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/blog_git/2018/04/20/hexo+github搭建个人专属博客/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Alan Fan">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog_git/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Alan's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hexo+github搭建个人专属博客</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T13:43:07+08:00">
+                2018-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&emsp;&emsp;一直以来想搭建属于自己的博客，终于前段时间集中精力与时间去做了这件事情。  </p>
+<h3 id="什么是hexo？"><a href="#什么是hexo？" class="headerlink" title="什么是hexo？"></a>什么是hexo？</h3><p>&emsp;&emsp;<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>是一个快速，简洁且高效的博客框架，并且免费。</p>
+<h3 id="安装软件环境"><a href="#安装软件环境" class="headerlink" title="安装软件环境"></a>安装软件环境</h3><h4 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h4><p>&emsp;&emsp;访问<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js官网</a>，根据自己计算机的操作系统选择相应的安装版本。然后再选择stable版本点击下载。双击下载的安装包，点击安装。注意：windows系统平台安装node.js的过程中，需要勾选添加到path选项，以便能在cmd中直接调用node和npm。<br>&emsp;&emsp;打开cmd命令框或者终端，分别输入node -v和npm -v，能够查看到版本信息，即表示安装完成。</p>
+<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p>&emsp;&emsp;访问<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git官网</a>,下载与自己计算机系统平台相对应的安装版本。双击下载的安装包，点击安装。注意：windows系统平台安装git过程中，同样需要选择安装到path下。<br>&emsp;&emsp;打开cmd命令或者终端，输入git –version，能够查看到版本信息，即表示安装成功。</p>
+<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>&emsp;&emsp;首先在你想要存放站点配置文件和博客文章的路径下创建一个文件夹。以windows系统为例，在D盘路径下创建hexo文件夹。mac os系统<br>&emsp;&emsp;打开cmd命令框，输入D：，然后输入命令:cd hexo。将工作路径切换至D:\hexo路径下。<br>&emsp;&emsp;在命令行中输入命令:npm install hexo-cli -g等待安装完成<br>&emsp;&emsp;然后在命令行中输入npm install hexo –save等待安装完成<br>&emsp;&emsp;最后在命令行中输入hexo -v，能够查看到hexo版本信息，即表示安装完成。</p>
+<h4 id="注册github帐号"><a href="#注册github帐号" class="headerlink" title="注册github帐号"></a>注册github帐号</h4><p>&emsp;&emsp;进入<a href="https://github.com/" target="_blank" rel="noopener">github</a>官网，输入帐号名、登录密码、自己邮箱，点击sign in注册github帐号。<br>&emsp;&emsp;打开邮箱自己刚才填写的邮箱，点开Github发送给你的注册确认链接，确认注册，结束注册流程<br>&emsp;&emsp;登录github后，点击New repository，创建代码库。<br>&emsp;&emsp;进入代码库创建页面，在Repository name下填写yourname.github.io。然后点击保存。注意yourname表示你的github帐号名。</p>
+<h3 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h3><p>&emsp;&emsp;输入如下命令初始化、开启hexo服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g</span><br><span class="line">hexo server  </span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><h4 id="配置Git个人信息"><a href="#配置Git个人信息" class="headerlink" title="配置Git个人信息"></a>配置Git个人信息</h4><p>&emsp;&emsp;设置Git的user name和email：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"yourusername"</span></span><br><span class="line">git config --global user.email <span class="string">"youre-mail@example.com"</span></span><br></pre></td></tr></table></figure></p>
+<p>&emsp;&emsp;生成密钥<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"youre-mail@example.com"</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="将生成的公钥贴至github上"><a href="#将生成的公钥贴至github上" class="headerlink" title="将生成的公钥贴至github上"></a>将生成的公钥贴至github上</h4><p>&emsp;&emsp;通过cd命令进入C:\Users\Administrator.ssh；有两个文件：id_rsa为私钥、id_rsa.pub为公钥。主要将公钥贴到github上，私钥是要自己保存的。<br>&emsp;&emsp;登陆github，进入setting-SSH and GPG keys页面，新建一个new ssh key，将id_rsa.pub里的内容贴进去。<br>&emsp;&emsp;使用如下命令测试是否连接github成功。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
+<h4 id="配置Deployment"><a href="#配置Deployment" class="headerlink" title="配置Deployment"></a>配置Deployment</h4><p>在_config.yml文件中，找到deploy，然后按照如下修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>注意：yourname代表你的github帐号名</p>
+<h3 id="主题推荐"><a href="#主题推荐" class="headerlink" title="主题推荐"></a>主题推荐</h3><p>&emsp;&emsp;博主目前用的是<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">next主题</a>，下载地址推荐去github上下载，链接<a href="https://github.com/alanfanh/hexo-theme-next" target="_blank" rel="noopener">请点</a>。安装好next主题后，打开根目录下的_config.yml，此文件也可以被称为站点配置文件，通过编辑theme字段，将其更换为next。注意配置yml文件时，字段与数值之间必须有空格。不然会报错！如果需要对主题进行个性化配置，请打开myblog/themes/next/下的_config.yml文件，此文件被称为主题配置文件。具体的配置过程这里就不做详细介绍了。毕竟个人喜欢不同。<br>&emsp;&emsp;另外一个比较值得推荐主题为<a href="https://github.com/alanfanh/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>，有兴趣可以点击该链接进入github下载。</p>
+<h3 id="写文章与博客发表"><a href="#写文章与博客发表" class="headerlink" title="写文章与博客发表"></a>写文章与博客发表</h3><p>&emsp;&emsp;博客文章全是使用markdown语言语法写的，如果不清楚，<a href="https://www.jianshu.com/p/b03a8d7b1719" target="_blank" rel="noopener">请点击</a>。mac平台推荐使用Sublime文本编辑器，windows平台推荐使用nodepad++进行写作，最后文件保存为example.md格式。博客文章放置到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/myblog/<span class="built_in">source</span>/_posts路径下</span><br></pre></td></tr></table></figure></p>
+<p>通过使用如下命令进行发表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean    </span><br><span class="line">hexo g</span><br><span class="line">hexp d</span><br></pre></td></tr></table></figure></p>
+<p>当然发表文章前，最好可以使用如下命令在本地预览一下效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo sever</span><br></pre></td></tr></table></figure></p>
+<h3 id="其他一些tips"><a href="#其他一些tips" class="headerlink" title="其他一些tips"></a>其他一些tips</h3><p>&emsp;&emsp;mac用户请在配置开始前开启root用户权限，因为后续配置需要root权限。博主前面没开启root权限，使用普通用户权限生成了ssh公钥。但后面配置需要开root权限后，用ssh一直连接github失败，最后竟然是坑爹的root用户与普通用户的公钥私钥均不一致。最后博主又把root用户下的公钥贴到github上才解决。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/blog_git/tags/Hexo/" rel="tag"># Hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog_git/2018/04/17/hello-world/" rel="next" title="Hello Hexo">
+                <i class="fa fa-chevron-left"></i> Hello Hexo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog_git/2018/04/30/macOS平台安装使用虚拟机实践/" rel="prev" title="macOS平台虚拟机安装使用实践">
+                macOS平台虚拟机安装使用实践 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Alan Fan</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog_git/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/alanfanh" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:alan.fan.h@outlook.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是hexo？"><span class="nav-number">1.</span> <span class="nav-text">什么是hexo？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装软件环境"><span class="nav-number">2.</span> <span class="nav-text">安装软件环境</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装node-js"><span class="nav-number">2.1.</span> <span class="nav-text">安装node.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装git"><span class="nav-number">2.2.</span> <span class="nav-text">安装git</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装hexo"><span class="nav-number">2.3.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注册github帐号"><span class="nav-number">2.4.</span> <span class="nav-text">注册github帐号</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化Hexo"><span class="nav-number">3.</span> <span class="nav-text">初始化Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">4.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Git个人信息"><span class="nav-number">4.1.</span> <span class="nav-text">配置Git个人信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将生成的公钥贴至github上"><span class="nav-number">4.2.</span> <span class="nav-text">将生成的公钥贴至github上</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置Deployment"><span class="nav-number">4.3.</span> <span class="nav-text">配置Deployment</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主题推荐"><span class="nav-number">5.</span> <span class="nav-text">主题推荐</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#写文章与博客发表"><span class="nav-number">6.</span> <span class="nav-text">写文章与博客发表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他一些tips"><span class="nav-number">7.</span> <span class="nav-text">其他一些tips</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Alan Fan</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog_git/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog_git/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog_git/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog_git/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog_git/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog_git/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog_git/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog_git/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog_git/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog_git/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/blog_git/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/blog_git/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/blog_git/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/blog_git/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
