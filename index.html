@@ -1,1204 +1,609 @@
 <!DOCTYPE html>
+<html lang="en">
 
-
-
-  
-
-
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<!-- Head tag -->
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-  <link href="/alanfanh.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
-
-
-
-
-
-
-
-<link href="/alanfanh.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
-
-<link href="/alanfanh.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/alanfanh.github.io/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/alanfanh.github.io/images/favicon-32x32-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/alanfanh.github.io/images/favicon-16x16-next.png?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/alanfanh.github.io/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT">
-
-
-
-
-
-
-
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alan&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Alan&#39;s blog">
-<meta property="og:locale" content="zh-Hans">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Alan&#39;s blog">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/alanfanh.github.io/',
-    scheme: 'Pisces',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/">
-
-
-
-
-
-  <title>Alan's blog</title>
-  
-
-
-
-
-
-
-
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/alanfanh.github.io/img/favicon.ico">
+
+    <title>
+        
+          FanHao的博客 | Fanhao&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://yoursite.com/alanfanh.github.io/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/alanfanh.github.io/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/alanfanh.github.io/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/alanfanh.github.io/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
 </head>
 
-<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
-  
-  
-    
-  
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
 
-  <div class="container sidebar-position-left 
-  page-home">
-    <div class="headband"></div>
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/alanfanh.github.io/">Alan&#39;s blog</a>
+        </div>
 
-    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
-    
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/alanfanh.github.io/">Home</a>
+                    </li>
 
-    <div class="custom-logo-site-title">
-      <a href="/alanfanh.github.io/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Alan's blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/alanfanh.github.io/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/alanfanh.github.io/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/alanfanh.github.io/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
     </div>
-      
-        <p class="site-subtitle">To be A coder!</p>
-      
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/alanfanh.github.io/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/alanfanh.github.io/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/alanfanh.github.io/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/alanfanh.github.io/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
+    <!-- /.container -->
 </nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
 
 
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/alanfanh.github.io/2018/06/20/getopt模块用法/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alan Fan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/alanfanh.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alan's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/alanfanh.github.io/2018/06/20/getopt模块用法/" itemprop="url">getopt模块用法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-20T13:43:07+08:00">
-                2018-06-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+    <!-- Main Content -->
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/alanfanh.github.io/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Alan&#39;s blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">To be A coder!</span>
+                </div>
+            </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>&emsp;&emsp;因为需要通过外部传参来执行python代码，查阅资料，了解到python自带的getopt模块能够实现我的需求。此篇文章主要记录getopt模块的相关用法。</p>
-<h3 id="getopt简述"><a href="#getopt简述" class="headerlink" title="getopt简述"></a>getopt简述</h3><p>&emsp;&emsp;getopt模块专门用来处理命令行参数。具体用法我们通过代码实例进行验证。<br>&emsp;&emsp;如果你想直接一步到位，不想阅读我后面的文章，你也可以输入以下代码查看相关帮助信息。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import getopt</span><br><span class="line"><span class="built_in">print</span>(getopt.__doc__)</span><br></pre></td></tr></table></figure></p>
-<h3 id="getopt模块详解"><a href="#getopt模块详解" class="headerlink" title="getopt模块详解"></a>getopt模块详解</h3><p>&emsp;&emsp;这个模块有两个函数，两个属性。<br>函数：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">getopt</span><span class="selector-class">.getopt</span>()</span><br><span class="line"><span class="selector-tag">getopt</span><span class="selector-class">.gnu_getopt</span>()</span><br></pre></td></tr></table></figure></p>
-<p>属性：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">getopt</span><span class="selector-class">.error</span></span><br><span class="line"><span class="selector-tag">getopt</span><span class="selector-class">.GetoptError</span></span><br></pre></td></tr></table></figure></p>
-<p>两个属性主要用来抛出错误信息。我们一般常用的是getopt函数，文章后面主要介绍getopt函数的具体用法。</p>
-<h4 id="getopt函数的参数"><a href="#getopt函数的参数" class="headerlink" title="getopt函数的参数"></a>getopt函数的参数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getopt.getopt(args,shortopts,longopts=[])</span><br></pre></td></tr></table></figure>
-<p>args指的是当前脚本接收的参数，是一个列表。可以由sys.argv获取，sys.argv[0]表示当前脚本名。<br>shortopts是短参数，类似python3 test.py -h<br>longopts是参数，类似python3 test.py –help</p>
-<h4 id="getopt函数返回值"><a href="#getopt函数返回值" class="headerlink" title="getopt函数返回值"></a>getopt函数返回值</h4><p>我们将下面的代码写到test.py文件中。sys.argv[0]代表的是当前脚本的文件名，所以应该写sys.argv[1:]<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import sys,getopt</span><br><span class="line">args=getopt.getopt(sys.argv[1:],<span class="string">"-h"</span>,[<span class="string">"help"</span>])</span><br><span class="line"><span class="built_in">print</span>(args)</span><br></pre></td></tr></table></figure></p>
-<p>执行代码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 test.py -h helpinfo</span><br></pre></td></tr></table></figure></p>
-<p>查看代码执行结果可知getopt函数返回的一个二元组的列表。</p>
-<h4 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h4><p>以下代码是从我的一个工具开发项目中截取的部分。python文件名为Parserpkt.py。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">import sys,getopt</span><br><span class="line"><span class="comment">#命令行帮助信息</span></span><br><span class="line">def usage():</span><br><span class="line">    Usage = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">    Usage:</span></span><br><span class="line"><span class="string">    Options:</span></span><br><span class="line"><span class="string">    [--args args] \t\t-- 需要查询或者获取的参数\n \</span></span><br><span class="line"><span class="string">    [-f filename.cap] \t\t-- 获取数据包的目录，默认/tmp/packe/snmp.cap \</span></span><br><span class="line"><span class="string">    [-o parser_filename] \t-- 解析数据包生成的文件，默认/tmp/packet/result.txt\n \</span></span><br><span class="line"><span class="string">    [-v ] \t\t-- 工具程序的版本 \n\</span></span><br><span class="line"><span class="string">    [-h | --help] \t\t-- 显示帮助信息\n\</span></span><br><span class="line"><span class="string">    eg:</span></span><br><span class="line"><span class="string">        --args ip.src=192.168.1.1,ip.dst=224.0.0.2,igmp.type</span></span><br><span class="line"><span class="string">        表示查询源地址为1.1，目的IP地址0.22的组播type值</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    <span class="built_in">print</span>(Usage)</span><br><span class="line"><span class="comment">#处理参数</span></span><br><span class="line">opts,args=getopt.getopt(sys.argv[1:],<span class="string">'f:o:vh'</span>,[<span class="string">"help"</span>,<span class="string">"args="</span>])</span><br><span class="line"><span class="comment"># print('opts:',opts)</span></span><br><span class="line"><span class="comment"># print('args:',args)</span></span><br><span class="line"><span class="keyword">for</span> op,value <span class="keyword">in</span> opts:</span><br><span class="line">    <span class="keyword">if</span> op == <span class="string">'-f'</span>:</span><br><span class="line">        packetfile=value</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="string">'-o'</span>:</span><br><span class="line">        parserfile=value:</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="string">'-v'</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">'version:1.0.0'</span>)</span><br><span class="line">    <span class="keyword">elif</span> op == <span class="string">'--args'</span>:</span><br><span class="line">        allargs=value</span><br><span class="line">        kargs=&#123;&#125;</span><br><span class="line">        largs=[]</span><br><span class="line">        <span class="keyword">for</span> subargs <span class="keyword">in</span> allargs.split(<span class="string">','</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="string">"="</span> <span class="keyword">in</span> subargs:</span><br><span class="line">                kargs[subargs.split(<span class="string">'='</span>)[0]]=subargs.split(<span class="string">'='</span>)[1]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                largs.append(subargs)</span><br><span class="line">    <span class="keyword">elif</span> op <span class="keyword">in</span> (<span class="string">'-h'</span>,<span class="string">'--help'</span>):</span><br><span class="line">        usage()</span><br><span class="line">        sys.exit()</span><br></pre></td></tr></table></figure></p>
-<p>打印工具版本和帮助信息<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 Parserpkt<span class="selector-class">.py</span> -v -h</span><br></pre></td></tr></table></figure></p>
-<p>传入带值的参数，执行代码<br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 Parserpkt.py -f <span class="keyword">test</span>.pcap --args <span class="built_in">ip</span>.src=<span class="number">192.168</span><span class="meta">.1</span><span class="meta">.1</span>,<span class="built_in">ip</span>.dst</span><br></pre></td></tr></table></figure></p>
-<p>短参数名定义了 ‘f:o:vh’ , f和o后面均有”:”,这个:代表了当前参数是有值的。v和h后面没有:,所以在参数调用的时候就不需要传值。<br>长参数名定义了help和args。args需要接收参数值，所以必须在参数后面加上”=”。help在参数调用的时候就不需要传值。</p>
-<h5 id="需要传值的参数调用"><a href="#需要传值的参数调用" class="headerlink" title="需要传值的参数调用"></a>需要传值的参数调用</h5><p>短参数调用：-参数名[空格]参数值<br>长参数调用：–参数名=参数值</p>
-
-          
-        
-      
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
+</header>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/alanfanh.github.io/2018/05/10/python+selenium技术/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alan Fan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/alanfanh.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alan's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/alanfanh.github.io/2018/05/10/python+selenium技术/" itemprop="url">python+selenium技术</a></h1>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
         
 
-        <div class="post-meta">
-          <span class="post-time">
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T13:43:07+08:00">
-                2018-05-10
-              </time>
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/alanfanh.github.io/2018/06/20/getopt模块用法/">
+        <h2 class="post-title">
+            getopt模块用法
+        </h2>
+        <h3 class="post-subtitle">
             
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+        </h3>
+        <div class="post-content-preview">
+            &emsp;&emsp;因为需要通过外部传参来执行python代码，查阅资料，了解到python自带的getopt模块能够实现我的需求。此篇文章主要记录getopt模块的相关用法。
+getopt简述&emsp;&emsp;getopt模块专门用来处理命令行参数。具体用法我们通过代码实例进行验证。&emsp;&emsp;如果你想直接一步到位，不想阅读我后面的文章，你也可以输入以下代码查看相关帮......
         </div>
-      </header>
-    
+    </a>
+    <p class="post-meta">
+        Posted by Alan Fan on
+        2018-06-20
+    </p>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</div>
+<hr>
 
-      
-      
+<div class="post-preview">
 
-      
-        
-          
-            <p>&emsp;&emsp;这两天软件的一位同学，让我用python给他写一个挂机脚本。具体需求是：登录设备管理页面，进入指定页面，等待页面超时，再进行点击页面操作;之前这一块技术，自己学习过。但是坑爹的是，很长一段时间没使用，对于定位标签，竟然还需要去查找资料。此篇文章主要记录selenium相关技术，包括关于如何定位页面标签。省去以后查找资料的时间。</p>
-<h3 id="什么是selenium？"><a href="#什么是selenium？" class="headerlink" title="什么是selenium？"></a>什么是selenium？</h3><p>&emsp;&emsp;selenium是一个免费、开源、跨平台的自动化测试工具。selenium主要分为selenium1.0和selenium2.0，当然还有selenium3.0。<br>&emsp;&emsp;其中Selenium 1.0 = Selenium IDE + Selenium Grid + Selenium RC。Selenium RC（Remote Control）是Selenium家族的核心部分。Selenium RC 支持多种不同语言编写的自动化测试脚本，通过Selenium RC的服务器作为代理服务器去访问应用，从而达到测试的目的。Selenium RC分为Client Libraries和Selenium Server。Client Libraries库主要用于编写测试脚本，用来控制Selenium Server的库。Selenium Server负责控制浏览器行为。<br>&emsp;&emsp;webdriver与selenium本身并不属于同一个项目，但后面两者的合并也促使selenium2.0的诞生。所以selenium2.0=selenium1.0+webdriver。webdriver可以看作是selenium RC的替代品。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Python(webdriver)=&gt;Chromedriver=&gt;Chrome</span><br></pre></td></tr></table></figure></p>
-<h3 id="安装软件环境"><a href="#安装软件环境" class="headerlink" title="安装软件环境"></a>安装软件环境</h3><p>安装python3，进入<a href="https://www.python.org/" target="_blank" rel="noopener">python官网</a>,选择python3进行下载。注意：windows平台安装python时d，需将添加到环境变量的选项勾选。</p>
-<p>安装selenium包，cmd或者终端中输入如下命令<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> selenium</span><br></pre></td></tr></table></figure></p>
-<p>下载webdriver，点击进入<a href="https://npm.taobao.org/" target="_blank" rel="noopener">淘宝npm</a>。有人会问，为什么不用npm？因为墙的缘故。点击ChromeDriver镜像选项，下载Chromedriver。注意chromedriver.exe需要与chrome浏览器版本匹配。下载得到压缩包后，将解压得到的Chromedriver.exe放到python的环境变量路径下。</p>
-<h4 id="Mac平台下环境变量设置"><a href="#Mac平台下环境变量设置" class="headerlink" title="Mac平台下环境变量设置"></a>Mac平台下环境变量设置</h4><p>使用如下命令查看MAC的环境变量<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></p>
-<p>通过命令将Chromedriver复制至/usr/local/bin目录下即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /Users/fanhao/Downloads/chromedriver /usr/<span class="built_in">local</span>/bin</span><br></pre></td></tr></table></figure></p>
-<h4 id="Windows平台下环境变量设置"><a href="#Windows平台下环境变量设置" class="headerlink" title="Windows平台下环境变量设置"></a>Windows平台下环境变量设置</h4><p>如果之前安装python3时，已经勾选了添加到path中，则将下载得到Chromedriver.exe放到python3的路径下。</p>
-<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">driver=webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">"http://192.168.1.1"</span>)</span><br><span class="line">n=<span class="number">199</span></span><br><span class="line"><span class="keyword">while</span> n&gt;<span class="number">0</span>:</span><br><span class="line">    n=n<span class="number">-1</span></span><br><span class="line">    print(n)</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//input[@id='login-username']"</span>).send_keys(<span class="string">"admin"</span>)</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//input[@id='login-password']"</span>).send_keys(<span class="string">"password"</span>)</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//input[@id='submit']"</span>).click()</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//a[@href='./main.html#info']"</span>).click()</span><br><span class="line">    driver.switch_to_frame(<span class="string">"menufrm"</span>)</span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//a[@href='dslatm.cmd']"</span>).click()</span><br><span class="line">    time.sleep(<span class="number">300</span>)</span><br><span class="line">    <span class="comment">#driver.switch_to_frame("menufrm")</span></span><br><span class="line">    driver.find_element_by_xpath(<span class="string">"//a[@href='wancfg.cmd']"</span>).click()</span><br><span class="line">    driver.refresh()</span><br></pre></td></tr></table></figure>
-<h3 id="定位元素的方法"><a href="#定位元素的方法" class="headerlink" title="定位元素的方法"></a>定位元素的方法</h3><h4 id="绝对定位："><a href="#绝对定位：" class="headerlink" title="绝对定位："></a>绝对定位：</h4><p>此方法最为简单，具体格式为<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.find_element_by_xpath(<span class="string">"绝对路径"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>具体例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#x 代表第x个 div标签，注意，索引从1开始而不是0</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"/html/body/div[x]/form/input"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>此方法缺点显而易见，当页面元素位置发生改变时，都需要修改，因此，并不推荐使用</p>
-<h4 id="相对定位："><a href="#相对定位：" class="headerlink" title="相对定位："></a>相对定位：</h4><p>相对路径，以‘//’开头，具体格式为<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">driver.find_element_by_xpath(<span class="string">"//标签"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>具体例子：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#定位第x个input标签,[x]可以省略，默认为第一个</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//input[x]"</span>)</span><br></pre></td></tr></table></figure></p>
-<p>相对路径的长度和开始位置并不受限制，也可以采取以下方法<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#[x]依然是可以省略的</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//div[x]/form[x]/input[x]"</span>)</span><br></pre></td></tr></table></figure></p>
-<h4 id="标签加属性定位："><a href="#标签加属性定位：" class="headerlink" title="标签加属性定位："></a>标签加属性定位：</h4><p>相对比较简单，也要求属性能够定位到唯一一个元素，如果存在多个相同条件的标签，默认只是第一个，具体格式如下<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">driver.find_element_by_xpath(<span class="string">"//标签[@属性==‘属性值’]"</span>)</span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//input[@type='name' and @name='kw1']"</span>)</span><br></pre></td></tr></table></figure></p>
-<h4 id="xpath-模糊匹配"><a href="#xpath-模糊匹配" class="headerlink" title="xpath:模糊匹配"></a>xpath:模糊匹配</h4><p>以定位百度页面的超链接“hao123”为例<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">driver=webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">"https://www.baidu.com"</span>)</span><br><span class="line"><span class="comment">#xpath模糊匹配</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//*[contains(text(),'hao123')]"</span>).click()</span><br><span class="line"><span class="comment">#匹配含有kw属性值</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//*[contains(@id,'kw')]"</span>).send_keys(<span class="string">"xpath"</span>)</span><br><span class="line"><span class="comment">#匹配id值为kw开头的属性</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//*[starts-with(@id,'kw')]"</span>).send_keys(<span class="string">"test"</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><h4 id="python相关"><a href="#python相关" class="headerlink" title="python相关"></a>python相关</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf8</span></span><br><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line">driver=webdriver.Chrome()</span><br><span class="line">driver.get(<span class="string">"http://192.168.100.23/test.html"</span>)</span><br><span class="line"><span class="comment">#textfield</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//input[@data-name]"</span>).send_keys(<span class="string">'test'</span>)</span><br><span class="line"><span class="comment">#radio</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//radio[@data-male]"</span>).click()</span><br><span class="line">time.sleep(<span class="number">1</span>)</span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//radio[@data-female]"</span>).click()</span><br><span class="line"><span class="comment">#checkbox</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//checkbox[@data-bike]"</span>).click()</span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//checkbox[@data-car]"</span>).click()</span><br><span class="line"><span class="comment">#select</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//select[@data-select]"</span>).click()</span><br><span class="line"><span class="comment">#texarea</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//textarea[@data-textarea]"</span>).send_keys(<span class="string">'Te'</span>)</span><br><span class="line"><span class="comment">#a tag</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//a[@data-href]"</span>).click()</span><br><span class="line"><span class="comment">#div</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//input[@data-divinput]"</span>).send_keys(<span class="string">'test'</span>)</span><br><span class="line"><span class="comment">#submit</span></span><br><span class="line">driver.find_element_by_xpath(<span class="string">"//input[@data-submit]"</span>).click()</span><br></pre></td></tr></table></figure>
-<h4 id="ruby相关"><a href="#ruby相关" class="headerlink" title="ruby相关"></a>ruby相关</h4><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#以下为ruby-2.0.0p195 +  watir-webdriver-0.9.9 + selenium</span></span><br><span class="line"><span class="keyword">require</span> <span class="string">'watir-webdriver'</span></span><br><span class="line">b=Watir::Browser.start(<span class="string">"192.168.100.23/test.html"</span>,<span class="symbol">:chrome</span>)</span><br><span class="line">b.text_field(<span class="symbol">:xpath=&gt;<span class="string">'//input[@data-name]'</span></span>).send_keys(<span class="string">'test'</span>)   <span class="comment">#配置值</span></span><br><span class="line"><span class="comment">#b.text_field(:xpath=&gt;'//input[<span class="doctag">@data</span>-name]').value     #获取值</span></span><br><span class="line"><span class="comment">#radio</span></span><br><span class="line">b.radio(<span class="symbol">:xpath=&gt;<span class="string">'//input[@data-female]'</span></span>).click()</span><br><span class="line">b.input(<span class="symbol">:xpath=&gt;<span class="string">'//input[@data-female]'</span></span>).click()</span><br><span class="line"><span class="comment">#checkbox</span></span><br><span class="line"><span class="comment">#checkbox</span></span><br><span class="line">b.checkbox(<span class="symbol">:xpath=&gt;<span class="string">'//input[@data-bike]'</span></span>).set()     <span class="comment">#选中</span></span><br><span class="line"><span class="comment">#b.checkbox(:xpath=&gt;'//input[<span class="doctag">@data</span>-bike]').clear() #取消选中</span></span><br><span class="line"><span class="comment">#选取value值</span></span><br><span class="line">b.select(<span class="symbol">:xpath=&gt;<span class="string">'//select[@data-select]'</span></span>).select_value(<span class="string">'saab'</span>)</span><br><span class="line"><span class="comment">#选择Text</span></span><br><span class="line">b.select(<span class="symbol">:xpath=&gt;<span class="string">'//select[@data-select]'</span></span>).select(<span class="string">'Audi'</span>)</span><br><span class="line"><span class="comment">#b.select(:xpath=&gt;'//select[<span class="doctag">@data</span>-select]').value #获取选中的value</span></span><br><span class="line"><span class="comment">#textarea</span></span><br><span class="line">b.textarea(<span class="symbol">:xpath=&gt;<span class="string">'//textarea[@data-textarea]'</span></span>).send_keys(<span class="string">'TTTTT'</span>)</span><br><span class="line"><span class="comment">#a 标签</span></span><br><span class="line">b.a(<span class="symbol">:xpath=&gt;<span class="string">'//a[@data-href]'</span></span>).click()</span><br><span class="line"><span class="comment">#按钮</span></span><br><span class="line">b.button(<span class="symbol">:xpath=&gt;<span class="string">'//input[@data-submit]'</span></span>).click()</span><br><span class="line">b.input(<span class="symbol">:xpath=&gt;<span class="string">'//input[@data-submit]'</span></span>).click()</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/alanfanh.github.io/2018/04/30/macOS平台安装使用虚拟机实践/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alan Fan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/alanfanh.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alan's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/alanfanh.github.io/2018/04/30/macOS平台安装使用虚拟机实践/" itemprop="url">macOS平台虚拟机安装使用实践</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+    <a href="/alanfanh.github.io/2018/05/10/python+selenium技术/">
+        <h2 class="post-title">
+            python+selenium技术
+        </h2>
+        <h3 class="post-subtitle">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-30T13:43:07+08:00">
-                2018-04-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+        </h3>
+        <div class="post-content-preview">
+            &emsp;&emsp;这两天软件的一位同学，让我用python给他写一个挂机脚本。具体需求是：登录设备管理页面，进入指定页面，等待页面超时，再进行点击页面操作;之前这一块技术，自己学习过。但是坑爹的是，很长一段时间没使用，对于定位标签，竟然还需要去查找资料。此篇文章主要记录selenium相关技术，包括关于如何定位页面标签。省去以后查找资料的时间。
+什么是selenium？&emsp;&e......
         </div>
-      </header>
-    
+    </a>
+    <p class="post-meta">
+        Posted by Alan Fan on
+        2018-05-10
+    </p>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</div>
+<hr>
 
-      
-      
+<div class="post-preview">
 
-      
-        
-          
-            <h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><p>因为女朋友周末在家工作需要用到windows系统，而家里只有一台macbook pro。博主之前读书时用到的windows笔记本，因为体验太差，被博主彻底抛弃，放在老家吃灰。因为只是简单的办公需求，重新购置一台新的windows笔记本也不够划算。所以考虑以上种种。博主考虑到使用parallels Desktop+win7的一个解决方案。当然还有其他的解决方法，比如说安装双系统、直接安装windows系统。但博主觉得macbook装windows系统有点不伦不类，所以强烈推荐使用虚拟机方法。</p>
-<h5 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h5><p>win7系统iso文件<a href="ed2k://|file|cn_windows_7_ultimate_with_sp1_x64_dvd_u_677408.iso|3420557312|B58548681854236C7939003B583A8078|/" target="_blank" rel="noopener">下载地址</a></p>
-<p>Parallels Desktop软件，推荐使用<a href="https://www.virtualbox.org/" target="_blank" rel="noopener">virtualbox</a>，毕竟免费。</p>
-<h5 id="环境安装与搭建"><a href="#环境安装与搭建" class="headerlink" title="环境安装与搭建"></a>环境安装与搭建</h5><p>打开Parallels安装包，进行安装。安装完成后，会生成如下路径</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/user/y</span>ouraccount<span class="regexp">/Parallels</span></span><br></pre></td></tr></table></figure>
-<p>将下载完成的iso软件放置以上路径下，打开Parallels软件，选择<strong><em>新建-安装windows</em></strong>，双击。下一步查找该iso文件，并打开。下一个步骤可能会遇到需要windows产品秘钥，如果自己暂时没有，可以考虑先把秘钥前方的小勾勾去掉，也是一样可以正常安装的，然后就等待windows7系统安装完成。</p>
-<p>当然如果有对linux系统有需求，也可以选择下载安装免费系统下的linux。</p>
-<h5 id="Parallels其他个性化配置"><a href="#Parallels其他个性化配置" class="headerlink" title="Parallels其他个性化配置"></a>Parallels其他个性化配置</h5><p>保持默认配置即可。如果有需求，可以通过点击<strong><em>操作-配置</em></strong>，配置虚拟机的CPU与内存、磁盘空间、USB与蓝牙、网络等配置。关于网络这一块，默认使用的是共享网络，也就是是虚拟机是可以访问外网的。对于多网卡设备，也可以使用桥接方式，进行网络区分。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/alanfanh.github.io/2018/04/20/hexo+github搭建个人专属博客/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alan Fan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/alanfanh.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alan's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/alanfanh.github.io/2018/04/20/hexo+github搭建个人专属博客/" itemprop="url">hexo+github搭建个人专属博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+    <a href="/alanfanh.github.io/2018/04/30/macOS平台安装使用虚拟机实践/">
+        <h2 class="post-title">
+            macOS平台虚拟机安装使用实践
+        </h2>
+        <h3 class="post-subtitle">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-20T13:43:07+08:00">
-                2018-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+        </h3>
+        <div class="post-content-preview">
+            应用场景因为女朋友周末在家工作需要用到windows系统，而家里只有一台macbook pro。博主之前读书时用到的windows笔记本，因为体验太差，被博主彻底抛弃，放在老家吃灰。因为只是简单的办公需求，重新购置一台新的windows笔记本也不够划算。所以考虑以上种种。博主考虑到使用parallels Desktop+win7的一个解决方案。当然还有其他的解决方法，比如说安装双系统、直接安......
         </div>
-      </header>
-    
+    </a>
+    <p class="post-meta">
+        Posted by Alan Fan on
+        2018-04-30
+    </p>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</div>
+<hr>
 
-      
-      
+<div class="post-preview">
 
-      
-        
-          
-            <p>&emsp;&emsp;一直以来想搭建属于自己的博客，终于前段时间集中精力与时间去做了这件事情。  </p>
-<h3 id="什么是hexo？"><a href="#什么是hexo？" class="headerlink" title="什么是hexo？"></a>什么是hexo？</h3><p>&emsp;&emsp;<a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>是一个快速，简洁且高效的博客框架，并且免费。</p>
-<h3 id="安装软件环境"><a href="#安装软件环境" class="headerlink" title="安装软件环境"></a>安装软件环境</h3><h4 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h4><p>&emsp;&emsp;访问<a href="https://nodejs.org/en/" target="_blank" rel="noopener">node.js官网</a>，根据自己计算机的操作系统选择相应的安装版本。然后再选择stable版本点击下载。双击下载的安装包，点击安装。注意：windows系统平台安装node.js的过程中，需要勾选添加到path选项，以便能在cmd中直接调用node和npm。<br>&emsp;&emsp;打开cmd命令框或者终端，分别输入node -v和npm -v，能够查看到版本信息，即表示安装完成。</p>
-<h4 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h4><p>&emsp;&emsp;访问<a href="https://git-scm.com/downloads" target="_blank" rel="noopener">git官网</a>,下载与自己计算机系统平台相对应的安装版本。双击下载的安装包，点击安装。注意：windows系统平台安装git过程中，同样需要选择安装到path下。<br>&emsp;&emsp;打开cmd命令或者终端，输入git –version，能够查看到版本信息，即表示安装成功。</p>
-<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><p>&emsp;&emsp;首先在你想要存放站点配置文件和博客文章的路径下创建一个文件夹。以windows系统为例，在D盘路径下创建hexo文件夹。mac os系统<br>&emsp;&emsp;打开cmd命令框，输入D：，然后输入命令:cd hexo。将工作路径切换至D:\hexo路径下。<br>&emsp;&emsp;在命令行中输入命令:npm install hexo-cli -g等待安装完成<br>&emsp;&emsp;然后在命令行中输入npm install hexo –save等待安装完成<br>&emsp;&emsp;最后在命令行中输入hexo -v，能够查看到hexo版本信息，即表示安装完成。</p>
-<h4 id="注册github帐号"><a href="#注册github帐号" class="headerlink" title="注册github帐号"></a>注册github帐号</h4><p>&emsp;&emsp;进入<a href="https://github.com/" target="_blank" rel="noopener">github</a>官网，输入帐号名、登录密码、自己邮箱，点击sign in注册github帐号。<br>&emsp;&emsp;打开邮箱自己刚才填写的邮箱，点开Github发送给你的注册确认链接，确认注册，结束注册流程<br>&emsp;&emsp;登录github后，点击New repository，创建代码库。<br>&emsp;&emsp;进入代码库创建页面，在Repository name下填写yourname.github.io。然后点击保存。注意yourname表示你的github帐号名。</p>
-<h3 id="初始化Hexo"><a href="#初始化Hexo" class="headerlink" title="初始化Hexo"></a>初始化Hexo</h3><p>&emsp;&emsp;输入如下命令初始化、开启hexo服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo g</span><br><span class="line">hexo server  </span><br><span class="line">`</span><br></pre></td></tr></table></figure></p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><h4 id="配置Git个人信息"><a href="#配置Git个人信息" class="headerlink" title="配置Git个人信息"></a>配置Git个人信息</h4><p>&emsp;&emsp;设置Git的user name和email：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"yourusername"</span></span><br><span class="line">git config --global user.email <span class="string">"youre-mail@example.com"</span></span><br></pre></td></tr></table></figure></p>
-<p>&emsp;&emsp;生成密钥<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"youre-mail@example.com"</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="将生成的公钥贴至github上"><a href="#将生成的公钥贴至github上" class="headerlink" title="将生成的公钥贴至github上"></a>将生成的公钥贴至github上</h4><p>&emsp;&emsp;通过cd命令进入C:\Users\Administrator.ssh；有两个文件：id_rsa为私钥、id_rsa.pub为公钥。主要将公钥贴到github上，私钥是要自己保存的。<br>&emsp;&emsp;登陆github，进入setting-SSH and GPG keys页面，新建一个new ssh key，将id_rsa.pub里的内容贴进去。<br>&emsp;&emsp;使用如下命令测试是否连接github成功。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure></p>
-<h4 id="配置Deployment"><a href="#配置Deployment" class="headerlink" title="配置Deployment"></a>配置Deployment</h4><p>在_config.yml文件中，找到deploy，然后按照如下修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: git@github.com:yourname/yourname.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
-<p>注意：yourname代表你的github帐号名</p>
-<h3 id="主题推荐"><a href="#主题推荐" class="headerlink" title="主题推荐"></a>主题推荐</h3><p>&emsp;&emsp;博主目前用的是<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">next主题</a>，下载地址推荐去github上下载，链接<a href="https://github.com/alanfanh/hexo-theme-next" target="_blank" rel="noopener">请点</a>。安装好next主题后，打开根目录下的_config.yml，此文件也可以被称为站点配置文件，通过编辑theme字段，将其更换为next。注意配置yml文件时，字段与数值之间必须有空格。不然会报错！如果需要对主题进行个性化配置，请打开myblog/themes/next/下的_config.yml文件，此文件被称为主题配置文件。具体的配置过程这里就不做详细介绍了。毕竟个人喜欢不同。<br>&emsp;&emsp;另外一个比较值得推荐主题为<a href="https://github.com/alanfanh/hexo-theme-yilia" target="_blank" rel="noopener">yilia</a>，有兴趣可以点击该链接进入github下载。</p>
-<h3 id="写文章与博客发表"><a href="#写文章与博客发表" class="headerlink" title="写文章与博客发表"></a>写文章与博客发表</h3><p>&emsp;&emsp;博客文章全是使用markdown语言语法写的，如果不清楚，<a href="https://www.jianshu.com/p/b03a8d7b1719" target="_blank" rel="noopener">请点击</a>。mac平台推荐使用Sublime文本编辑器，windows平台推荐使用nodepad++进行写作，最后文件保存为example.md格式。博客文章放置到<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/myblog/<span class="built_in">source</span>/_posts路径下</span><br></pre></td></tr></table></figure></p>
-<p>通过使用如下命令进行发表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean    </span><br><span class="line">hexo g</span><br><span class="line">hexp d</span><br></pre></td></tr></table></figure></p>
-<p>当然发表文章前，最好可以使用如下命令在本地预览一下效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo sever</span><br></pre></td></tr></table></figure></p>
-<h3 id="其他一些tips"><a href="#其他一些tips" class="headerlink" title="其他一些tips"></a>其他一些tips</h3><p>&emsp;&emsp;mac用户请在配置开始前开启root用户权限，因为后续配置需要root权限。博主前面没开启root权限，使用普通用户权限生成了ssh公钥。但后面配置需要开root权限后，用ssh一直连接github失败，最后竟然是坑爹的root用户与普通用户的公钥私钥均不一致。最后博主又把root用户下的公钥贴到github上才解决。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/alanfanh.github.io/2018/04/17/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Alan Fan">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/alanfanh.github.io/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Alan's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/alanfanh.github.io/2018/04/17/hello-world/" itemprop="url">Hello Hexo</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+    <a href="/alanfanh.github.io/2018/04/20/hexo+github搭建个人专属博客/">
+        <h2 class="post-title">
+            hexo+github搭建个人专属博客
+        </h2>
+        <h3 class="post-subtitle">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-17T09:38:30+08:00">
-                2018-04-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+        </h3>
+        <div class="post-content-preview">
+            &emsp;&emsp;一直以来想搭建属于自己的博客，终于前段时间集中精力与时间去做了这件事情。  
+什么是hexo？&emsp;&emsp;Hexo是一个快速，简洁且高效的博客框架，并且免费。
+安装软件环境安装node.js&emsp;&emsp;访问node.js官网，根据自己计算机的操作系统选择相应的安装版本。然后再选择stable版本点击下载。双击下载的安装包，点击安装。注意：win......
         </div>
-      </header>
-    
+    </a>
+    <p class="post-meta">
+        Posted by Alan Fan on
+        2018-04-20
+    </p>
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+</div>
+<hr>
 
-      
-      
+<div class="post-preview">
 
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-
-
-          </div>
-          
-
-
-          
-
+    <a href="/alanfanh.github.io/2018/04/17/hello-world/">
+        <h2 class="post-title">
+            Hello Hexo
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Qu......
         </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+    </a>
+    <p class="post-meta">
+        Posted by Alan Fan on
+        2018-04-17
+    </p>
 
-  <aside id="sidebar" class="sidebar">
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
     
-    <div class="sidebar-inner">
+    
+</ul>
 
-      
 
-      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-            
-              <p class="site-author-name" itemprop="name">Alan Fan</p>
-              <p class="site-description motion-element" itemprop="description"></p>
-          </div>
-
-          <nav class="site-state motion-element">
-
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/alanfanh.github.io/archives/">
-              
-                  <span class="site-state-item-count">5</span>
-                  <span class="site-state-item-name">日志</span>
-                </a>
-              </div>
-            
-
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
+                <!-- 如果开启评论功能 -->
                 
-                  <span class="site-state-item-count">4</span>
-                  <span class="site-state-item-name">标签</span>
-                
-              </div>
-            
 
-          </nav>
-
-          
-
-          
-            <div class="links-of-author motion-element">
+            </div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
                 
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/alanfanh" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/alanfanh.github.io/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                            <a href="/alanfanh.github.io/tags/#Hexo" title="Hexo" rel="2">Hexo</a>
+                            
+                        
+                            
+                            <a href="/alanfanh.github.io/tags/#python" title="python" rel="2">python</a>
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </section>
                 
-                  <span class="links-of-author-item">
-                    <a href="mailto:alan.fan.h@outlook.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/alanfanh.github.io/about/">ABOUT ME</a></h5>
+                    <div class="short-about">
+
+                        
+                            <img src="/alanfanh.github.io//img/avatar.JPG">
+                        
+
+                        
+                            <p>我要成为code魔法师!</p>
+                        
+
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                            
+                                <li>
+                                    <a target="_blank" href="https://twitter.com/Alan_Fan_H">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+                            
+                                <li>
+                                    <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+
+                            
+
+                            
+                                <li>
+                                    <a target="_blank" href="https://www.facebook.com/Alan Fan">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+
+                            
+                                <li>
+                                    <a target="_blank" href="https://github.com/alanfanh">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+                            
+                            
+                            
+                        </ul>
+                    </div>
+                </section>
+                
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
                 
             </div>
-          
-
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
         
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Alan Fan</span>
-
-  
+    </div>
 </div>
 
 
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Alan_Fan_H">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Alan Fan">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/alanfanh">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Alan&#39;s blog 2019 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/alanfanh.github.io/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/alanfanh.github.io/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/alanfanh.github.io/js/hux-blog.min.js"></script>
 
 
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
 
 
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://yoursite.com/alanfanh.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
 
 
-
-        
-
+<!-- Google Analytics -->
 
 
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA';
+    var _gaDomain = 'test.me';
 
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-
-
-        
-      </div>
-    </footer>
-
-    
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
-
-    
-
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
 </script>
 
 
 
 
+<!-- Baidu Tongji -->
 
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f202900';
 
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 
 
+<!-- Side Catalog -->
 
-  
 
 
-  
 
 
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/alanfanh.github.io/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/alanfanh.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/alanfanh.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/alanfanh.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/alanfanh.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/alanfanh.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/alanfanh.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/alanfanh.github.io/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/alanfanh.github.io/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/alanfanh.github.io/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/alanfanh.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/alanfanh.github.io/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
+<!-- Image to hack wechat -->
+<img src="http://yoursite.com/alanfanh.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
+
 </html>
