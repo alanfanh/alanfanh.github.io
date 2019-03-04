@@ -13,11 +13,11 @@
 
     <title>
         
-          Archives - FanHao的博客 | Fanhao&#39;s Blog
+          数据可视化学习之pygal模块简单应用一 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/archives/">
+    <link rel="canonical" href="https://alanfanh.github.io/2018/07/28/数据可视化之pygal模块练习一/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,184 +147,152 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/tag-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Archives</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Archives.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                    <h1>数据可视化学习之pygal模块简单应用一</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2018-07-28
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 归档列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-             <!-- 归档列表 -->
+                <h3 id="工具包安装"><a href="#工具包安装" class="headerlink" title="工具包安装"></a>工具包安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install pygal</span><br></pre></td></tr></table></figure>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>我们直接通过写一个小段代码来学习pygal模块，pygal官方文档地址请点击<a href="http://www.pygal.org/en/stable/" target="_blank" rel="noopener">pygal</a>。</p>
+<p>代码实现目标：模拟同时掷三个6面骰子10万次，得到10万个数据。请通过可视化展示同时掷三个D6骰子的点数累加结果。</p>
+<p>以下代码构建一个骰子，保存为dice.py<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dice</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self,num_sides=<span class="number">6</span>)</span>:</span></span><br><span class="line">        <span class="comment">#默认6面</span></span><br><span class="line">        self.num_sides=num_sides</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">roll</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment">#返回1~num_sides的随机数</span></span><br><span class="line">        <span class="keyword">return</span> randint(<span class="number">1</span>,num_side)</span><br></pre></td></tr></table></figure></p>
+<p>以下代码完成目标功能，保存为three_dice.py<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encodeing=utf-8</span></span><br><span class="line"><span class="keyword">from</span> dice <span class="keyword">import</span> Dice</span><br><span class="line"><span class="keyword">import</span> pygal</span><br><span class="line"><span class="comment">#实例化三个骰子</span></span><br><span class="line">dice1=Dice()</span><br><span class="line">dice2=Dice()</span><br><span class="line">dice3=Dice()</span><br><span class="line"><span class="comment">#同时抛三个骰子10万次</span></span><br><span class="line">results=[]</span><br><span class="line"><span class="keyword">for</span> val <span class="keyword">in</span> range(<span class="number">100000</span>):</span><br><span class="line">    result=dice1.roll()+dice2.roll()+dice3.roll()</span><br><span class="line">    results.append(result)</span><br><span class="line"><span class="comment">#统计每个可能结果出现的次数</span></span><br><span class="line">max_result=dice1.num_sides+dice2.num_sides+dice3.num_sides</span><br><span class="line">frequencies=[]</span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> range(<span class="number">3</span>,max_result+<span class="number">1</span>):</span><br><span class="line">    frequency=results.count(value)</span><br><span class="line">    frequencies.append(frequency)</span><br><span class="line"><span class="comment">#可视化数据</span></span><br><span class="line">visual=pygal.Bar()</span><br><span class="line">visual.title=<span class="string">'results of roll three D6 100000 times'</span></span><br><span class="line">visual.x_title=<span class="string">'Result'</span></span><br><span class="line">visual.y_title=<span class="string">'Frequency of Result'</span></span><br><span class="line">visual.x_labels=[]</span><br><span class="line"><span class="keyword">for</span> value <span class="keyword">in</span> range(<span class="number">3</span>,max_result+<span class="number">1</span>):</span><br><span class="line">    visual.x_labels.append(value)</span><br><span class="line"></span><br><span class="line">visual.add(<span class="string">'D6+D6+D6'</span>,frequencies)</span><br><span class="line">visual.render_to_file(<span class="string">'visual_data.svg'</span>)</span><br></pre></td></tr></table></figure></p>
 
 
+                <hr>
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
-                    <span class="tag-text">2018</span>
-                </span>
-                <ul>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    10-28
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/10/28/MacOS安装PyQt踩坑记录/" style="color: #0085a1">
-                        <span>
-                            MacOS平台安装PyQt5以及如何打开QtDesigner踩坑记录
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    07-28
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/07/28/数据可视化之pygal模块练习一/" style="color: #0085a1">
-                        <span>
-                            数据可视化学习之pygal模块简单应用一
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    06-28
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/06/28/paramiko包简单学习/" style="color: #0085a1">
-                        <span>
-                            paramiko包学习及简单应用
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    06-20
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/06/20/getopt模块用法/" style="color: #0085a1">
-                        <span>
-                            getopt模块用法
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    05-10
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/05/10/python+selenium技术/" style="color: #0085a1">
-                        <span>
-                            python+selenium技术
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    05-02
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/05/02/Sublime Text3快捷编译python程序/" style="color: #0085a1">
-                        <span>
-                            MacOS平台在Sublime Text3中快速运行python代码
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    04-30
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/30/macOS平台安装使用虚拟机实践/" style="color: #0085a1">
-                        <span>
-                            macOS平台虚拟机安装使用实践
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    04-20
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/20/hexo+github搭建个人专属博客/" style="color: #0085a1">
-                        <span>
-                            hexo+github搭建个人专属博客
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    04-17
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/17/hello-world/" style="color: #0085a1">
-                        <span>
-                            Hello Hexo
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
                 
 
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/10/28/MacOS安装PyQt踩坑记录/" data-toggle="tooltip" data-placement="top" title="MacOS平台安装PyQt5以及如何打开QtDesigner踩坑记录">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/06/28/paramiko包简单学习/" data-toggle="tooltip" data-placement="top" title="paramiko包学习及简单应用">Next Post &rarr;</a>
+                        </li>
+                    
                 </ul>
-            </div>
-            
 
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
+                
+            </div>
 
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2018/07/28/数据可视化之pygal模块练习一/";
+    var disqus_url = "https://alanfanh.github.io/2018/07/28/数据可视化之pygal模块练习一/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
 
 
     <!-- Footer -->

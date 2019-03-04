@@ -13,11 +13,11 @@
 
     <title>
         
-          Archives - FanHao的博客 | Fanhao&#39;s Blog
+          MacOS平台在Sublime Text3中快速运行python代码 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/archives/">
+    <link rel="canonical" href="https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,184 +147,154 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/tag-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Archives</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Archives.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                    <h1>MacOS平台在Sublime Text3中快速运行python代码</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2018-05-02
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 归档列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-             <!-- 归档列表 -->
+                <p>公司电脑是window系统，写python代码一直默认用的是notepad++。后面为了在自己的Macbook练习python程序，了解到了有一款神器—Sublime Text3。以下主要记录如何配置Sublime Text3使其快捷运行python代码。</p>
+<h3 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h3><h4 id="tab键设置"><a href="#tab键设置" class="headerlink" title="tab键设置"></a>tab键设置</h4><p>python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。<br>1、菜单栏打开Preferences-Settings，在新打开的窗口Preferences.sublime-settings–User中添加如下字段，tab键将默认转换为4个空格键。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">"tab_size":</span> <span class="number">4</span><span class="string">,</span></span><br><span class="line"><span class="attr">"translate_tabs_to_spaces":</span> <span class="literal">true</span><span class="string">,</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="sublime插件包"><a href="#sublime插件包" class="headerlink" title="sublime插件包"></a>sublime插件包</h4><p>sublime提供了很多插件包，但是需要自己手动下载安装。推荐安装python语法提示的相关插件，能够在你编码的时候的进行提示，大大提升你的编码速率。第二推荐安装你喜爱的主题插件，毕竟一个让你赏心悦目的界面能够让你眼睛不会那么疲劳。</p>
+<h4 id="快捷执行python代码设置"><a href="#快捷执行python代码设置" class="headerlink" title="快捷执行python代码设置"></a>快捷执行python代码设置</h4><p>首先打开终端，输入以下命令。因为我常用python3<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> -a python3</span><br></pre></td></tr></table></figure></p>
+<p>此时得到返回结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 is /Library/Frameworks/Python.framework/Versions/3.6/bin/python3</span><br><span class="line">python3 is /usr/<span class="built_in">local</span>/bin/python3</span><br></pre></td></tr></table></figure></p>
+<p>然后进入sublime的菜单栏，点击tools-Bulid System-New Bulid System，此时将会打开一个新窗口，修改如下<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"shell_cmd"</span>: [<span class="string">"/usr/local/bin/python3"</span>,<span class="string">"-u"</span>,<span class="string">"$file"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>保存为python3.sublime-build。进入tools-Bulid System，选择python3即可。</p>
 
 
+                <hr>
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2018">
-                    <span class="tag-text">2018</span>
-                </span>
-                <ul>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    10-28
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/10/28/MacOS安装PyQt踩坑记录/" style="color: #0085a1">
-                        <span>
-                            MacOS平台安装PyQt5以及如何打开QtDesigner踩坑记录
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    07-28
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/07/28/数据可视化之pygal模块练习一/" style="color: #0085a1">
-                        <span>
-                            数据可视化学习之pygal模块简单应用一
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    06-28
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/06/28/paramiko包简单学习/" style="color: #0085a1">
-                        <span>
-                            paramiko包学习及简单应用
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    06-20
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/06/20/getopt模块用法/" style="color: #0085a1">
-                        <span>
-                            getopt模块用法
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    05-10
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/05/10/python+selenium技术/" style="color: #0085a1">
-                        <span>
-                            python+selenium技术
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    05-02
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/05/02/Sublime Text3快捷编译python程序/" style="color: #0085a1">
-                        <span>
-                            MacOS平台在Sublime Text3中快速运行python代码
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    04-30
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/30/macOS平台安装使用虚拟机实践/" style="color: #0085a1">
-                        <span>
-                            macOS平台虚拟机安装使用实践
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    04-20
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/20/hexo+github搭建个人专属博客/" style="color: #0085a1">
-                        <span>
-                            hexo+github搭建个人专属博客
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li>
-                    04-17
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2018/04/17/hello-world/" style="color: #0085a1">
-                        <span>
-                            Hello Hexo
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
                 
 
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/05/10/python+selenium技术/" data-toggle="tooltip" data-placement="top" title="python+selenium技术">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/04/30/macOS平台安装使用虚拟机实践/" data-toggle="tooltip" data-placement="top" title="macOS平台虚拟机安装使用实践">Next Post &rarr;</a>
+                        </li>
+                    
                 </ul>
-            </div>
-            
 
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
+                
+            </div>
 
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/";
+    var disqus_url = "https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
 
 
     <!-- Footer -->
