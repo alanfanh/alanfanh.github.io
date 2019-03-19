@@ -13,11 +13,11 @@
 
     <title>
         
-          MacOS平台在Sublime Text3中快速运行python代码 - FanHao的博客 | Fanhao&#39;s Blog
+          关于python参数传递的理解 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/">
+    <link rel="canonical" href="https://alanfanh.github.io/2019/02/20/python参数理解/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -168,11 +168,11 @@
                           <a class="tag" href="/tags/#python" title="python">python</a>
                         
                     </div>
-                    <h1>MacOS平台在Sublime Text3中快速运行python代码</h1>
+                    <h1>关于python参数传递的理解</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by FanHao on
-                        2018-05-02
+                        2019-02-20
                     </span>
                 </div>
             </div>
@@ -191,13 +191,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>公司电脑是window系统，写python代码一直默认用的是notepad++。后面为了在自己的Macbook练习python程序，了解到了有一款神器—Sublime Text3。以下主要记录如何配置Sublime Text3使其快捷运行python代码。</p>
-<h3 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h3><h4 id="tab键设置"><a href="#tab键设置" class="headerlink" title="tab键设置"></a>tab键设置</h4><p>python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。<br>1、菜单栏打开Preferences-Settings，在新打开的窗口Preferences.sublime-settings–User中添加如下字段，tab键将默认转换为4个空格键。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">"tab_size":</span> <span class="number">4</span><span class="string">,</span></span><br><span class="line"><span class="attr">"translate_tabs_to_spaces":</span> <span class="literal">true</span><span class="string">,</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="sublime插件包"><a href="#sublime插件包" class="headerlink" title="sublime插件包"></a>sublime插件包</h4><p>sublime提供了很多插件包，但是需要自己手动下载安装。推荐安装python语法提示的相关插件，能够在你编码的时候的进行提示，大大提升你的编码速率。第二推荐安装你喜爱的主题插件，毕竟一个让你赏心悦目的界面能够让你眼睛不会那么疲劳。</p>
-<h4 id="快捷执行python代码设置"><a href="#快捷执行python代码设置" class="headerlink" title="快捷执行python代码设置"></a>快捷执行python代码设置</h4><p>首先打开终端，输入以下命令。因为我常用python3<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> -a python3</span><br></pre></td></tr></table></figure></p>
-<p>此时得到返回结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 is /Library/Frameworks/Python.framework/Versions/3.6/bin/python3</span><br><span class="line">python3 is /usr/<span class="built_in">local</span>/bin/python3</span><br></pre></td></tr></table></figure></p>
-<p>然后进入sublime的菜单栏，点击tools-Bulid System-New Bulid System，此时将会打开一个新窗口，修改如下<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"shell_cmd"</span>: [<span class="string">"/usr/local/bin/python3"</span>,<span class="string">"-u"</span>,<span class="string">"$file"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>保存为python3.sublime-build。进入tools-Bulid System，选择python3即可。</p>
+                <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>之前和同学聊到了python关键字del与内存回收相关的问题。通过以下内容可以帮助理解</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>参数有形参和实参之分。形参也就是形式参数，不在内存中占用内存地址，如def定义函数时括号内的变量就是形参。实参全称为实际参数，在调用函数时提供的值或者变量称作为实际参数，占用内存地址。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下面x,y即为形参</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x+y</span><br><span class="line"></span><br><span class="line"><span class="comment">#1,2为实参</span></span><br><span class="line">add(<span class="number">1</span>,<span class="number">2</span>)</span><br><span class="line"><span class="comment">#以下的x,y为实参</span></span><br><span class="line">x=<span class="number">2</span></span><br><span class="line">y=<span class="number">3</span></span><br><span class="line">add(x,y)</span><br></pre></td></tr></table></figure></p>
+<h4 id="参数的传递"><a href="#参数的传递" class="headerlink" title="参数的传递"></a>参数的传递</h4><p>首先我们来看一段python代码<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:  </span><br><span class="line">    a=<span class="number">2</span>       </span><br><span class="line">    b=a       </span><br><span class="line">    c=a       </span><br><span class="line">    <span class="keyword">del</span> a     </span><br><span class="line">    <span class="keyword">del</span> b     </span><br><span class="line">    print(c)</span><br></pre></td></tr></table></figure></p>
+<p>最终程序得到的结果为2。可能有人会感觉很奇怪，明明a已经被del了，c=a还是可以得到1的结果。<br>所以我们需要明确概念，del作为python的关键字，不同于C free和C++ delete。del语句只作用于变量，而不作用于数据对象。所以del a只是删除了变量a,而不是数据对象。而python有GC机制也就是垃圾回收机制，将a和b del之后，2的引用计数仍然为1，所以不会被清除。只有当引用次数为0后，数据对象内存地址被自动回收。</p>
+<h5 id="什么叫引用"><a href="#什么叫引用" class="headerlink" title="什么叫引用"></a>什么叫引用</h5><p>在python中，一切皆对象。python中赋值语句a=2可以把a看成是对象2的一个引用。<br>文章的下面内容，我们将详细分析</p>
+<h5 id="python的GC机制是什么"><a href="#python的GC机制是什么" class="headerlink" title="python的GC机制是什么"></a>python的GC机制是什么</h5><p>GC机制也就是垃圾回收机制。当对象2的引用计数为0时，将自动被清除。<br>具体分析如下:<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__==<span class="string">'__main__'</span>:  </span><br><span class="line">    a=<span class="number">2</span>  <span class="comment">#2的引用次数=1      </span></span><br><span class="line">    b=a  <span class="comment">#2的引用次数+1，此时为2     </span></span><br><span class="line">    c=a  <span class="comment">#2的引用次数+1，此时为3</span></span><br><span class="line">    <span class="keyword">del</span> a   <span class="comment">#引用次数-1，此时为2</span></span><br><span class="line">    <span class="keyword">del</span> b   <span class="comment">#引用次数-1，此时为1</span></span><br><span class="line">    print(c)  <span class="comment">#c的值为2</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="参数的传递和改变"><a href="#参数的传递和改变" class="headerlink" title="参数的传递和改变"></a>参数的传递和改变</h5><p>首先我们学习一个函数id(),它是python自带的函数，函数的解释是返回对象的唯一标识，CPython使用的对象的内存地址。其实总结就是返回对象的内存地址。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>x=<span class="number">8</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(x)</span><br><span class="line"><span class="number">1617486720</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(<span class="number">2</span>)</span><br><span class="line"><span class="number">1617486720</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>y=<span class="string">'hi'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(y)</span><br><span class="line"><span class="number">35985280</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(<span class="string">'hi'</span>)</span><br><span class="line"><span class="number">35985280</span></span><br></pre></td></tr></table></figure></p>
+<p>从以上代码可以看出，id(x)和id(8)的值是一样的，id(y)和id(‘hi’)的值也是一样的。<br>在Python中一切皆对象。8,’hi’都是对象，8是一个整型对象，而’hi’是一个字符串对象。上面的x=8，在python中实际的处理过程是这样的：先申请一段内存分配给一个整型对象来存储整型值8，然后让变量x去指向这个对象，实际上就是指向这段内存（类似C语言中的指针）。而id(8)和id(x)的结果一样，说明id函数在作用于变量时，其返回的是变量指向的对象的地址。因为变量也是对象，所以在这里可以将x看成是对象8的一个引用。<br>下面我们在看几个例子。<br>例一：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="number">6</span></span><br><span class="line">b=<span class="number">6</span></span><br><span class="line">print(id(a))</span><br><span class="line">print(id(b))</span><br><span class="line">print(id(<span class="number">6</span>))</span><br><span class="line">s=<span class="string">'hello'</span></span><br><span class="line">t=s</span><br><span class="line">print(id(<span class="string">'hello'</span>))</span><br><span class="line">print(id(s))</span><br><span class="line">print(id(t))</span><br></pre></td></tr></table></figure></p>
+<p>通过执行以上代码可以发现，id(a)、id(b)、id(6)的结果相同。id(‘hello’),id(s)和id(t)的结果也是相同的。说明a和b指向的是同一对象，而t和s也是指向的同一对象。a=6这句让变量a指向了int类型的对象6，而a=6这句执行时，并不重新为6分配地址空间，而是让a直接指向了已经存在的int类型的对象2。这个很好理解，因为本身只是想给a赋一个值2，而在内存中已经存在了这样一个int类型对象2，所以就直接让y指向了已经存在的对象。这样一来不仅能达到目的，还能节约内存空间。t=s这句变量互相赋值，也相当于是让t指向了已经存在的字符串类型的对象’hello’。<br>例二：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x=<span class="number">1</span></span><br><span class="line">y=<span class="number">2</span></span><br><span class="line">print(id(<span class="number">1</span>),id(x))</span><br><span class="line">x=<span class="number">3</span></span><br><span class="line">print(id(<span class="number">3</span>),id(x))</span><br></pre></td></tr></table></figure></p>
+<p>执行以上代码后，前后两次执行id(x)得到的值不同。x=1时，申请一段内存存储对象1，再将变量x只想对象1。执行x=3时，同样是申请一段内存存储对象3，再将变量x重新指向对象3，此时对象1的引用次数变为0。并不是获取x指向对象1的内存地址，再将内存中的值改为1.<br>例三：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">L=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">x=<span class="number">3</span></span><br><span class="line">M=L</span><br><span class="line">print(id(M),id(L))</span><br><span class="line">L[<span class="number">0</span>]=<span class="number">3</span></span><br><span class="line">print(M,L)</span><br><span class="line">print(id(M),id(L))</span><br><span class="line">print(id(x),id(L[<span class="number">0</span>]),id(L[<span class="number">2</span>]))</span><br></pre></td></tr></table></figure></p>
+<p>执行结果如下<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2269912</span> <span class="number">2269912</span></span><br><span class="line">[<span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>] [<span class="number">3</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="number">2269912</span> <span class="number">2269912</span></span><br><span class="line"><span class="number">1617486640</span> <span class="number">1617486640</span> <span class="number">1617486640</span></span><br></pre></td></tr></table></figure></p>
+<p>在Python中，复杂元素的对象是允许更改的，比如列表、字典、元组等。Python中变量存储的是对象的引用，对于列表，其id()值返回的是列表第一个子元素L[0]本身的存储地址。上面的例子，L=[1,2,3]，这里的L有三个子元素L[0]，L[1]，L[2]。L[0]、L[1]、L[2]分别指向对象1、2、3。M和L是指向同一个对象，所以在L中子元素的值后，M中子元素的值也相应改变了。但是id(L)和id(M)的值没有改变，因为L[0]=3只是让L[0]指向了对象3，并没有改变L[0]自身的存储地址。（id(L)的值实际等于L[0]自身的存储地址）<br>分析上面代码的执行结果，可以得出与上面分析一样的结论。<br>画一个简单的示意图帮助我们进行理解<br>L —–&gt; | L[0] | —–&gt; 1<br>         | L[1] | —–&gt; 2<br>         | L[2] | —–&gt; 3 &lt;—– x  </p>
 
 
                 <hr>
@@ -206,13 +211,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2018/05/10/python+selenium技术/" data-toggle="tooltip" data-placement="top" title="python+selenium技术">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2018/04/30/macOS平台安装使用虚拟机实践/" data-toggle="tooltip" data-placement="top" title="macOS平台虚拟机安装使用实践">Next Post &rarr;</a>
+                            <a href="/2018/12/28/centos常用相关命令总结/" data-toggle="tooltip" data-placement="top" title="centos常用相关命令总结">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -281,8 +282,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/";
-    var disqus_url = "https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/";
+    var disqus_identifier = "https://alanfanh.github.io/2019/02/20/python参数理解/";
+    var disqus_url = "https://alanfanh.github.io/2019/02/20/python参数理解/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
