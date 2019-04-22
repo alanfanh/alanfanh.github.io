@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          部署Flask-Web项目踩坑之旅 - FanHao的博客 | Fanhao&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://alanfanh.github.io/2019/04/01/部署Flask-web项目踩坑之旅/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Fannnhao&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Python,Flask" title="Python,Flask">Python,Flask</a>
+                        
+                    </div>
+                    <h1>部署Flask-Web项目踩坑之旅</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2019-04-01
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>献给那些和我一样懵懂中不断汲取知识，进步的人们。</p>
+<h5 id="部署目标"><a href="#部署目标" class="headerlink" title="部署目标"></a>部署目标</h5><p>web项目基于python3+flask+MySQL进行开发。项目为实验室资产管理平台，面向用户为实验室管理员提供管理权限，为其他同事提供查询权限。<br>项目准备部署在本地虚拟机系统上（Linux），采用服务器组件为nginx+uWSGI+MySQL，至于为什么选择这些组件，因为是行业标准。刚开始部署的时候采用的是centos系统，部署过程发现比较麻烦，后改用Ubuntu系统。<br>说句题外话，强烈推荐Ubuntu系统，就算是面向个人使用，Ubuntu也有比较友好的图形操作界面。</p>
+<h5 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h5><p>在本地系统（Windows）上安装WMware软件（一定要下载高版本15及以上，不然很可能出现兼容性问题。我在部署过程的就在这里出现了兼容性问题）。<br>然后去<a href="https://www.ubuntu.com/download/desktop" target="_blank" rel="noopener">Ubuntu官网</a>下载iso文件。<br>在VMware中安装Ubuntu系统，具体安装过程不再介绍，如果不清楚，可以去网上查找相关资料。<br>下面主要介绍一下，网络适配器相关设置，因为我们需要与虚拟机系统进行通信。</p>
+<h6 id="网络适配器设置"><a href="#网络适配器设置" class="headerlink" title="网络适配器设置"></a>网络适配器设置</h6><p>关于网卡设置这一块，具体根据需求和你的网络拓扑而定。在这里，介绍一下我的环境及网卡配置。我本地计算机操作系统为Win10，总共有7个网络适配器（实体网卡），别问我为什么计算机会有这么多网卡- -。目前本地计算机只用到了两张实体网卡，一张连接办公网，另一张连接路由器LAN口，用于访问外网。在VMware虚拟机设置中，为Ubuntu系统创建2个网络适配器，分别桥接至VMnet0、VMnet8。然后在VMware软件编辑-虚拟编辑器中设置VMnet0、VMnet8分别桥接至两张实体网卡。Ubuntu系统中桥接至办公网的虚拟网卡设置为静态IP地址，另一张虚拟网卡则设置为自动获取方式。<br>为什么我需要这样设置？桥接至办公网，一方面为了向内网同事提供平台web服务，另一方面便于从我Windows计算机通过终端软件（SecureCRT）SSH访问Ubuntu。从VMware软件中操作Ubuntu系统终端，实在太过繁琐且又比较占用计算机资源。桥接外网，便于Ubuntu系统从互联网上下载安装依赖包。<br>网卡设置完成后，在Ubuntu中打开终端并安装openssh-server，安装完成后，可以关闭VMware软件，选择后台运行虚拟机。在本地计算机上通过SecureCRT访问虚拟系统终端。</p>
+<h5 id="安装软件"><a href="#安装软件" class="headerlink" title="安装软件"></a>安装软件</h5><p>更新apt<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure></p>
+<p>一条命令就可以下载一些常用包，是不是非常方便。（Ubuntu系统自带python3）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install net-tools openssh-server vim mysql-server nginx python3-pip</span><br></pre></td></tr></table></figure></p>
+<p>下载uwsgi<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install uwsgi</span><br></pre></td></tr></table></figure></p>
+<h5 id="MySQL相关设置"><a href="#MySQL相关设置" class="headerlink" title="MySQL相关设置"></a>MySQL相关设置</h5><h6 id="修改MySQL账户和密码"><a href="#修改MySQL账户和密码" class="headerlink" title="修改MySQL账户和密码"></a>修改MySQL账户和密码</h6><p>通过apt-get命令安装MySQL后，我们会存在一个疑问，我们怎么知道root用户的登录密码呢。不知道没关系，使用管理员权限进行设置。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo mysql</span><br></pre></td></tr></table></figure></p>
+<p>使用mysql库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">use mysql</span><br></pre></td></tr></table></figure></p>
+<p>修改root用户名登录密码为root<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> authentication_string=<span class="string">'root'</span> <span class="built_in">where</span> user=<span class="string">'root'</span></span><br></pre></td></tr></table></figure></p>
+<h6 id="设置远程连接MySQL"><a href="#设置远程连接MySQL" class="headerlink" title="设置远程连接MySQL"></a>设置远程连接MySQL</h6><p>mysql安装完成后，输入以下命令。可以查看到127.0.0.1:3306,3306是mysql服务的默认端口。127.0.0.1代表只监听本地连接。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anltp</span><br></pre></td></tr></table></figure></p>
+<p>如果未查到相关信息，则mysql服务未启动，输入下面命令启动mysql<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql start</span><br></pre></td></tr></table></figure></p>
+<p>关闭mysql服务则采用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql stop</span><br></pre></td></tr></table></figure></p>
+<p>注释/etc/mysql/mysql.conf.d/mysqld.cnf中的bind-adress 127.0.0.1，然后重启msyql。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql restart</span><br></pre></td></tr></table></figure></p>
+<p>再次输入以下命令，结果显示的是:::3306表示设置成功。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -apn|grep 3306</span><br></pre></td></tr></table></figure></p>
+<p>后面再修改mysql用户登录权限,以root权限在本地登录mysql。选择MySQL库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">use mysql;</span><br><span class="line">select host,user from user;</span><br></pre></td></tr></table></figure></p>
+<p>更新user表，将root用户记录host改为’%’，最后刷新权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> host =<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">lush privileges;</span><br></pre></td></tr></table></figure></p>
+<p>以上设置完成后，就可以在我的开发环境（Windows系统）上通过办公网，远程访问生产环境中数据库了。不过要注意保管生产环境中MySQL数据库的账户名密码，以保证数据安全。</p>
+<h6 id="MySQL数据传输"><a href="#MySQL数据传输" class="headerlink" title="MySQL数据传输"></a>MySQL数据传输</h6><p>前面已经设置了能远程连接Ubuntu系统中的MySQL。这里推荐在本地计算机上使用Navicat for MySQL软件（30天免费试用）远程连接Ubuntu系统中的MySQL，可以获得图形化操作界面，便于操作查看数据。<br>在Ubuntu系统的MySQL创建数据库，注意这里的数据库名应与代码里数据库名保持一致，否则连接不到数据库。然后可以使用Navicat软件将开发环境中MySQL数据库中的数据传输到生产环境中的MySQL对应的数据库中。</p>
+<h5 id="源码上传"><a href="#源码上传" class="headerlink" title="源码上传"></a>源码上传</h5><p>将源码上传至Ubuntu系统的/srv目录下，然后通过pip3安装项目依赖库。<br>Tips:如果Ubuntu系统上还部署了其他python项目，且项目之间依赖库的版本存在冲突。那么此时可以使用python虚环境，将本项目的依赖库安装在虚环境中，实现隔离。我们可以通过使用virtualenv库实现。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure></p>
+<p>创建目录，然后进入该目录下创建一个独立运行的Python环境<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virtualenv --no-site-packages venv</span><br></pre></td></tr></table></figure></p>
+<p>激活venv环境，此时通过pip安装的都被放到这个环境中<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> venv/bin/activate</span><br></pre></td></tr></table></figure></p>
+<p>关闭venv环境，使用以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deactivate</span><br></pre></td></tr></table></figure></p>
+<p>因为我的系统只部署这一个项目，没有存在项目冲突的情况，所以不使用虚环境。<br>一键安装项目依赖库文件。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 -r requirements.txt</span><br></pre></td></tr></table></figure></p>
+<p>此文件可以通过以下命令得到（注意如果该项目不是虚环境中开发的，那么其他一些非依赖库也被添加进来，注意在.txt文件中删除。）<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">pip3</span> <span class="selector-tag">freeze</span> &gt; <span class="selector-tag">requiremtns</span><span class="selector-class">.txt</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="服务器组件"><a href="#服务器组件" class="headerlink" title="服务器组件"></a>服务器组件</h5><h6 id="nginx介绍"><a href="#nginx介绍" class="headerlink" title="nginx介绍"></a>nginx介绍</h6><p>nginx是一个高性能的web和反向代理服务器，也可以用做邮件代理服务器。nginx尤其在处理静态文件和资源拥有比较高的效率。在本项目中采用nginx组件，也是考虑使用它来处理静态资源，同时作为反向代理把动态请求交给uWSGI处理。<br>关于nginx详细配置，这里贴一下<a href="http://www.nginx.cn/doc/" target="_blank" rel="noopener">nginx</a>官方中文文档。</p>
+<h6 id="nginx简单配置"><a href="#nginx简单配置" class="headerlink" title="nginx简单配置"></a>nginx简单配置</h6><p>nginx是一个非常强大的服务器组件，想在短时间内将它的功能和配置全部掌握基本不可能。我们根据自己的需求学习即可，一切均是为了业务而服务。<br>在Ubuntu系统中通过命令安装nginx后，nginx配置文件存放/etc/nginx/路径下。<br>进入/etc/nginx/sites-available下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /etc/nginx/sites-available</span><br><span class="line">sudo vim default</span><br></pre></td></tr></table></figure></p>
+<p>修改default文件为如下配置,#代表注释：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##</span></span><br><span class="line"><span class="comment"># You should look at the following URL's in order to grasp a solid understanding</span></span><br><span class="line"><span class="comment"># of Nginx configuration files in order to fully unleash the power of Nginx.</span></span><br><span class="line"><span class="comment"># https://www.nginx.com/resources/wiki/start/</span></span><br><span class="line"><span class="comment"># https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/</span></span><br><span class="line"><span class="comment"># https://wiki.debian.org/Nginx/DirectoryStructure</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># In most cases, administrators will remove this file from sites-enabled/ and</span></span><br><span class="line"><span class="comment"># leave it as reference inside of sites-available where it will continue to be</span></span><br><span class="line"><span class="comment"># updated by the nginx packaging team.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># This file will automatically load configuration files provided by other</span></span><br><span class="line"><span class="comment"># applications, such as Drupal or Wordpress. These applications will be made</span></span><br><span class="line"><span class="comment"># available underneath a path with that package name, such as /drupal8.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.</span></span><br><span class="line"><span class="comment">##</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Default server configuration</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">server &#123;</span><br><span class="line">        <span class="comment"># nginx监听80端口</span></span><br><span class="line">        listen 80;</span><br><span class="line">        <span class="comment"># 设置项目根路径及日志文件存放</span></span><br><span class="line">        root /srv/Lab_mangement/app;</span><br><span class="line">        access_log /srv/Lab_mangement/<span class="built_in">log</span>/acess_log;</span><br><span class="line">        error_log /srv/Lab_mangement/<span class="built_in">log</span>/error_log;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Add index.php to the list if you are using PHP</span></span><br><span class="line">        index index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">        server_name localhost;</span><br><span class="line">        <span class="comment"># 处理静态文件</span></span><br><span class="line">        location /favicon.ico &#123;</span><br><span class="line">                root /srv/Lab_mangement/app;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># 处理静态资源</span></span><br><span class="line">        location ~ ^\/static\/.*$ &#123;</span><br><span class="line">                root /srv/Lab_mangement/app;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># 设置与uWSGI通信，动态请求转发给uWSGI</span></span><br><span class="line">        location / &#123;</span><br><span class="line">                <span class="comment"># First attempt to serve request as file, then</span></span><br><span class="line">                <span class="comment"># as directory, then fall back to displaying a 404.</span></span><br><span class="line">                <span class="comment">#proxy_pass http://127.0.0.1:5000;</span></span><br><span class="line">                include uwsgi_params;</span><br><span class="line">                uwsgi_pass 127.0.0.1:8888;</span><br><span class="line">                <span class="comment">#proxy_set_header X-Real-IP $remote_addr;</span></span><br><span class="line">                <span class="comment">#proxy_set_header Host $host;</span></span><br><span class="line">                <span class="comment">#proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span></span><br><span class="line">                <span class="comment">#try_files $uri $uri/ =404;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># Virtual Host configuration for example.com</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># You can move that to a different file under sites-available/ and symlink that</span></span><br><span class="line"><span class="comment"># to sites-enabled/ to enable it.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#server &#123;</span></span><br><span class="line"><span class="comment">#       listen 80;</span></span><br><span class="line"><span class="comment">#       listen [::]:80;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#       server_name example.com;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#       root /var/www/example.com;</span></span><br><span class="line"><span class="comment">#       index index.html;</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment">#       location / &#123;</span></span><br><span class="line"><span class="comment">#               try_files $uri $uri/ =404;</span></span><br><span class="line"><span class="comment">#       &#125;</span></span><br><span class="line"><span class="comment">#&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>配置default完成后，进入/etc/nginx/sites-enabled路径,删除default,创建软链接<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">pwd</span></span><br><span class="line">/etc/nginx/sites-enabled</span><br><span class="line">$ sudo ln -s /etc/nginx/sites-available/default .</span><br></pre></td></tr></table></figure></p>
+<p>以下列出一些配置nginx服务的命令<br>启动nginx服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/nginx start</span><br></pre></td></tr></table></figure></p>
+<p>停止nginx服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/nginx stop</span><br></pre></td></tr></table></figure></p>
+<p>重启nginx服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo /etc/init.d/nginx restart</span><br></pre></td></tr></table></figure></p>
+<h6 id="uWSGI介绍"><a href="#uWSGI介绍" class="headerlink" title="uWSGI介绍"></a>uWSGI介绍</h6><p>首先我们需要理清楚几个概念，uWSGI/WSGI/uwsgi，注意大小写。<br>uWSGI是一个c语言写的web服务器，性能比较高，能够用于实际生产环境。作为HTTP服务器，它将HTTP协议转化成语言支持的网络协议，比如把HTTP协议转化成WSGI 协议，让Python可以直接使用。Flask框架也自带web服务器，但只适用于开发调试，不适合实际生产环境。<br>WSGI(Web Server Gateway Interface)Web服务器网关接口。它是Web服务器（如nginx，uWSGI等服务器）与web应用（如用Flask、Django框架写的程序）通信的一种规范。<br><a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/Protocol.html" target="_blank" rel="noopener">uwsgi</a>协议是uWSGI服务器使用的本地协议，常用于在uWSGI服务器与其他网络服务器的数据通信。<br>Flask和Django是一个web框架，框架的作用使我们开发web应用时，关注于处理request和response。使得开发web应用更简单（专注于业务，而不是底层http通信等）。</p>
+<h6 id="uWSGI简单配置"><a href="#uWSGI简单配置" class="headerlink" title="uWSGI简单配置"></a>uWSGI简单配置</h6><p>创建uwsgi_cnf.ini，可以将其放在web项目根目录下<br>.ini文件内容如下，一些更复杂的配置请参考<a href="https://uwsgi-docs-zh.readthedocs.io/zh_CN/latest/Options.html" target="_blank" rel="noopener">uWSGI文档</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[uwsgi]</span><br><span class="line"><span class="comment"># 与nginx通信接口，必须与前面nginx的配置保持一致</span></span><br><span class="line">socket = 127.0.0.1:8888</span><br><span class="line"><span class="comment"># web应用的入口文件</span></span><br><span class="line">wsgi-file = /srv/Lab_mangement/manage.py</span><br><span class="line"><span class="comment"># 项目根路径</span></span><br><span class="line"><span class="built_in">chdir</span>=/srv/Lab_mangement/</span><br><span class="line"><span class="comment">#</span></span><br><span class="line">callable=app</span><br><span class="line"><span class="comment"># 启用线程指定进程数、线程数</span></span><br><span class="line"><span class="built_in">enable</span>-threads=<span class="literal">true</span></span><br><span class="line">processes=1</span><br><span class="line">threads=2</span><br><span class="line">master=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 使用的协议</span></span><br><span class="line">protocol = uwsgi</span><br><span class="line"></span><br><span class="line">buffer-size=65536</span><br></pre></td></tr></table></figure></p>
+<p>终端执行命令拉起uWSGI服务<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi uwsgi_conf.ini</span><br></pre></td></tr></table></figure></p>
+<h6 id="其他组件"><a href="#其他组件" class="headerlink" title="其他组件"></a>其他组件</h6><p>通过查阅资料，还有一些比较有用的工具，本次部署项目虽然没有用上，但先做个记录。比如Fabric，Supervisor<br><a href="http://www.fabfile.org/" target="_blank" rel="noopener">Fabric</a>是一个用Python写的自动化工具，能够利用Fabric将本地开发环境上的代码自动部署到Linux系统,推荐Fabric，它能够支持python2和python3。<br><a href="http://supervisord.org/" target="_blank" rel="noopener">Supervisor</a>是一个管理进程的工具，可以随系统启动而启动服务，它还时刻监控服务进程，如果服务进程意外退出，Supervisor可以自动重启服务。</p>
+<h5 id="组件之间是如何进行工作的？"><a href="#组件之间是如何进行工作的？" class="headerlink" title="组件之间是如何进行工作的？"></a>组件之间是如何进行工作的？</h5><p>简单说一下个人的理解，如有不正确的地方，欢迎发邮件给我指正。<br>首先浏览器发起http请求到nginx服务器，Nginx根据接收到请求包，进行url 分析，判断访问的资源类型，如果是静态资源，直接读取静态资源返回给浏览器，如果请求的是动态资源就转交给uWSGI服务器，uWSGI服务器根据自身的uwsgi和WSGI 协议，找到对应的flask框架，flask框架下的应用进行逻辑处理，有可能还需读取MySQL，将返回值发送到uWSGI服务器，然后uWSGI服务器再返回给nginx，最后 nginx将返回值返回给浏览器进行渲染显示给用户。</p>
+<h5 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h5><p>以上均设置无误的话。假设Ubuntu系统桥接至办公网的那张网络适配器IP地址192.168.97.61，其他在局域办公网内的计算机通过浏览器访问这个地址，就能刷新打开页面了。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/02/20/python参数理解/" data-toggle="tooltip" data-placement="top" title="关于python参数传递的理解">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Python,Flask" title="Python,Flask">Python,Flask</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2019/04/01/部署Flask-web项目踩坑之旅/";
+    var disqus_url = "https://alanfanh.github.io/2019/04/01/部署Flask-web项目踩坑之旅/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Alan_Fan_H">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Alan Fan">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/alanfanh">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Fannnhao&#39;s blog 2019 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://alanfanh.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA';
+    var _gaDomain = 'test.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
