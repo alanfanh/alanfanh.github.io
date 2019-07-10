@@ -207,7 +207,7 @@
 <p>注释/etc/mysql/mysql.conf.d/mysqld.cnf中的bind-adress 127.0.0.1，然后重启msyql。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service mysql restart</span><br></pre></td></tr></table></figure></p>
 <p>再次输入以下命令，结果显示的是:::3306表示设置成功。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -apn|grep 3306</span><br></pre></td></tr></table></figure></p>
 <p>后面再修改mysql用户登录权限,以root权限在本地登录mysql。选择MySQL库<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">use mysql;</span><br><span class="line">select host,user from user;</span><br></pre></td></tr></table></figure></p>
-<p>更新user表，将root用户记录host改为’%’，最后刷新权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> host =<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">lush privileges;</span><br></pre></td></tr></table></figure></p>
+<p>更新user表，将root用户记录host改为’%’，最后刷新权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update user <span class="built_in">set</span> host =<span class="string">'%'</span> <span class="built_in">where</span> user=<span class="string">'root'</span>;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure></p>
 <p>以上设置完成后，就可以在我的开发环境（Windows系统）上通过办公网，远程访问生产环境中数据库了。不过要注意保管生产环境中MySQL数据库的账户名密码，以保证数据安全。</p>
 <h6 id="MySQL数据传输"><a href="#MySQL数据传输" class="headerlink" title="MySQL数据传输"></a>MySQL数据传输</h6><p>前面已经设置了能远程连接Ubuntu系统中的MySQL。这里推荐在本地计算机上使用Navicat for MySQL软件（30天免费试用）远程连接Ubuntu系统中的MySQL，可以获得图形化操作界面，便于操作查看数据。<br>在Ubuntu系统的MySQL创建数据库，注意这里的数据库名应与代码里数据库名保持一致，否则连接不到数据库。然后可以使用Navicat软件将开发环境中MySQL数据库中的数据传输到生产环境中的MySQL对应的数据库中。</p>
 <h5 id="源码上传"><a href="#源码上传" class="headerlink" title="源码上传"></a>源码上传</h5><p>将源码上传至Ubuntu系统的/srv目录下，然后通过pip3安装项目依赖库。<br>Tips:如果Ubuntu系统上还部署了其他python项目，且项目之间依赖库的版本存在冲突。那么此时可以使用python虚环境，将本项目的依赖库安装在虚环境中，实现隔离。我们可以通过使用virtualenv库实现。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install virtualenv</span><br></pre></td></tr></table></figure></p>
@@ -237,9 +237,13 @@
 
                 <ul class="pager">
                     
+                        <li class="previous">
+                            <a href="/2019/06/28/任务调度模块APScheduler总结/" data-toggle="tooltip" data-placement="top" title="任务调度模块APScheduler总结">&larr; Previous Post</a>
+                        </li>
+                    
                     
                         <li class="next">
-                            <a href="/2019/02/20/python参数理解/" data-toggle="tooltip" data-placement="top" title="关于python参数传递的理解">Next Post &rarr;</a>
+                            <a href="/2019/03/08/scapy包学习总结/" data-toggle="tooltip" data-placement="top" title="scapy包总结">Next Post &rarr;</a>
                         </li>
                     
                 </ul>

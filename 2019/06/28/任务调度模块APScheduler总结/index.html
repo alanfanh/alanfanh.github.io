@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          任务调度模块APScheduler总结 - FanHao的博客 | Fanhao&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://alanfanh.github.io/2019/06/28/任务调度模块APScheduler总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Fannnhao&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                    </div>
+                    <h1>任务调度模块APScheduler总结</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2019-06-28
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>首先学习该模块之前，需要了解进程和操作系统的相关知识。</p>
+<h4 id="什么是任务调度？"><a href="#什么是任务调度？" class="headerlink" title="什么是任务调度？"></a>什么是任务调度？</h4><p>任务调度是指基于给定的时间点，给定的时间间隔或者给定的执行次数自动的执行任务。任务调度是操作系统的重要组成部分，而对于实时的操作系统，任务调度直接影响着操作系统的实时性能。任务调度涉及到多线程并发、运行时间规则定制及解析、线程池的维护等诸多方面的工作。 </p>
+<h4 id="APScheduler介绍"><a href="#APScheduler介绍" class="headerlink" title="APScheduler介绍"></a>APScheduler介绍</h4><p>APScheduler是一个Python定时任务框架。提供了基于日期、固定时间间隔以及crontab类型的任务。目前最新版本为3.6.0。APScheduler模块的官方文档，请点击<a href="https://apscheduler.readthedocs.io/en/latest/" target="_blank" rel="noopener">这里</a>。</p>
+<h5 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h5><p>APScheduler模块包含了四个组件:</p>
+<ul>
+<li>触发器(trigger)</li>
+<li>作业存储(job store)</li>
+<li>执行器(executer)</li>
+<li>调度器(scheduler)</li>
+</ul>
+<p><strong>触发器</strong>包含了调度逻辑。每个任务都有它自己的触发器，触发器确定了任务下次什么时候该执行。除了他们的初始化配置，触发器完全是无状态的。</p>
+<p><strong>作业存储</strong>存放了预定任务。默认的作业存储只是将作业保存在内存中，但是其他作业存储可以存储在各种不同类型的数据库（sqlite或者MongoDB）中。作业的数据保存到持久性作业存储时会被序列化，并在从其中加载时进行反序列化。作业存储（默认存储除外）不会将作业数据保留在内存中，而是充当中间人，用于在后端保存、更新和搜索作业。绝对不能在调度器之间共享作业存储。</p>
+<p><strong>执行器</strong>是处理任务的运行。它们通常通过将作业中指定的可调用对象交给线程或进程池来完成此操作。当任务完成后，这个执行器会通知调度器，调度器随后发出相应的事件。</p>
+<p><strong>调度器</strong>将其余部分绑定在一起。你通常只在应用程序中调用一个调度程序(器)。应用程序开发人员通常不直接处理作业存储，执行器或触发器。相反的，调度程序提供了适当的接口来处理所有这些。配置作业存储和执行器是通过调度程序(器)完成的、添加、修改和删除作业也是如此。</p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install apscheduler</span><br></pre></td></tr></table></figure>
+<h5 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h5><p>APScheduler模块有多个不同的调度器。如何选择调度器取决于你程序运行环境和你使用APScheduler的目的。</p>
+<ul>
+<li>BlockingScheduler:阻塞调度。当你的程序只运行这个调度器时可以使用。</li>
+<li>BackgroundScheduler:后台调度。你的应用程序不止运行调度器，且想它在应用程序中后台运行时，可以使用该调度器。</li>
+<li>AsyncIOScheduler:如果 你应用的程序使用了asyncio模块，需要使用此调度器。</li>
+<li>GeventScheduler:如果你的应用程序使用了gevent技术，需要使用此调度器。</li>
+<li>TornadoScheduler:可以用于开发Tornado应用程序。</li>
+<li>TwistedScheduler:可以用于开发Twisted应用程序。</li>
+<li>QtScheduler:可以用于开发Qt应用程序。</li>
+</ul>
+<h5 id="作业存储"><a href="#作业存储" class="headerlink" title="作业存储"></a>作业存储</h5><p>要选择适当的作业存储，需要确定是否需要作业持久性。如果您总是在应用程序启动时重新创建作业，那么您可以使用默认作业存储（MemoryJobStore）。但是，如果您需要将作业保留在调度程序重新启动或应用程序崩溃之上，那么您的选择通常可以归结为编程环境中使用的工具。 如果你可以自由选择，那么由于其强大的数据完整性保护，PostgreSQL后端上的SQLAlchemy   JobStore是比较推荐的选择。</p>
+<h5 id="执行器"><a href="#执行器" class="headerlink" title="执行器"></a>执行器</h5><p>默认的执行器ThreadPoolExecutor应该足以满足大多数用途，最大支持10个线程数。如果你的工作负载涉及CPU密集型操作，则应考虑使用ProcessPoolExecutor来使用多个CPU核心。甚至你可以同时使用两者，将进程池执行程序添加为辅助执行程序。</p>
+<h5 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h5><p>APScheduler的触发器总共有三种触发类型。</p>
+<ol>
+<li>date:当你想要在确定的时间运行一次作业(任务)，可以使用。</li>
+<li>interval:当你想要运行在固定的间隔时间内运行作业(任务)。</li>
+<li>cron:当你想要周期性的运行该任务。例如每天，每周或者每月，可以使用cron类型</li>
+</ol>
+<p>####配置和使用</p>
+<p>#####配置调度器</p>
+<p>使用默认的MemoryJobStore和ThreadPoolExecutor。先创建调度器，在配置和添加作业。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> apscheduler.schedulers.blocking <span class="keyword">import</span> BlockingScheduler</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_job</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'hello world'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 初始化一个Blocking类型的调度器</span></span><br><span class="line">sched = BlockingScheduler()</span><br><span class="line">sched.add_job(my_job, <span class="string">'interval'</span>, seconds=<span class="number">5</span>, id=<span class="string">'my_job_id'</span>)</span><br><span class="line">sched.start()</span><br></pre></td></tr></table></figure>
+<p>不使用默认的作业存储和执行器。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pytz <span class="keyword">import</span> utc</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> apscheduler.schedulers.background <span class="keyword">import</span> BackgroundScheduler</span><br><span class="line"><span class="keyword">from</span> apscheduler.jobstores.mongodb <span class="keyword">import</span> MongoDBJobStore</span><br><span class="line"><span class="keyword">from</span> apscheduler.jobstores.sqlalchemy <span class="keyword">import</span> SQLAlchemyJobStore</span><br><span class="line"><span class="keyword">from</span> apscheduler.executors.pool <span class="keyword">import</span> ThreadPoolExecutor, ProcessPoolExecutor</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">jobstores = &#123;</span><br><span class="line">    <span class="string">'mongo'</span>: MongoDBJobStore(),</span><br><span class="line">    <span class="string">'default'</span>: SQLAlchemyJobStore(url=<span class="string">'sqlite:///jobs.sqlite'</span>)</span><br><span class="line">&#125;</span><br><span class="line">executors = &#123;</span><br><span class="line">    <span class="string">'default'</span>: ThreadPoolExecutor(<span class="number">20</span>),</span><br><span class="line">    <span class="string">'processpool'</span>: ProcessPoolExecutor(<span class="number">5</span>)</span><br><span class="line">&#125;</span><br><span class="line">job_defaults = &#123;</span><br><span class="line">    <span class="string">'coalesce'</span>: <span class="keyword">False</span>,</span><br><span class="line">    <span class="string">'max_instances'</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">scheduler = BackgroundScheduler(jobstores=jobstores, executors=executors, job_defaults=job_defaults, timezone=utc)</span><br></pre></td></tr></table></figure>
+<h5 id="操作作业"><a href="#操作作业" class="headerlink" title="操作作业"></a>操作作业</h5><p>运行调度器，通过调用start()方法运行。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sched.start()</span><br></pre></td></tr></table></figure>
+<p>添加作业，通过add_job()方法或者使用scheduler_job()装饰器进行添加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> apscheduler.schedulers.background <span class="keyword">import</span> BackgroundScheduler</span><br><span class="line"></span><br><span class="line"><span class="comment"># 装饰器的方法添加作业</span></span><br><span class="line">scheduler=BackgroundScheduler()</span><br><span class="line"><span class="meta">@scheduler.scheduled_job('date',run_date=datetime(2019, 6, 18, 16, 40, 30))</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">	print(<span class="string">'Test'</span>)</span><br></pre></td></tr></table></figure>
+<p>暂停和恢复作业</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#暂停</span></span><br><span class="line">apscheduler.job.Job.pause()</span><br><span class="line">apscheduler.schedulers.base.BaseScheduler.pause_job()</span><br><span class="line"><span class="comment">#恢复</span></span><br><span class="line">apscheduler.job.Job.resume()</span><br><span class="line">apscheduler.schedulers.base.BaseScheduler.resume_job()</span><br></pre></td></tr></table></figure>
+<p>移除作业。通过remove()或者remove_job()方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># remove()方法</span></span><br><span class="line">job = scheduler.add_job(myfunc, <span class="string">'interval'</span>, minutes=<span class="number">2</span>)</span><br><span class="line">job.remove()</span><br><span class="line"><span class="comment"># remove_job()方法</span></span><br><span class="line">scheduler.add_job(myfunc, <span class="string">'interval'</span>, minutes=<span class="number">2</span>, id=<span class="string">'my_job_id'</span>)</span><br><span class="line">scheduler.remove_job(<span class="string">'my_job_id'</span>)</span><br></pre></td></tr></table></figure>
+<p>获取作业(job)列表。通过get_jobs()返回所有job实例或者print_jobs()输出格式化的作业列表</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">scheduler</span><span class="selector-class">.get_jobs</span>()</span><br><span class="line"><span class="selector-tag">scheduler</span><span class="selector-class">.print_jobs</span>()</span><br></pre></td></tr></table></figure>
+<p>修改作业。通过modify()和modify_job()方法。可以修改除id外，job的任何属性。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">job.modify(max_instances=<span class="number">6</span>, name=<span class="string">'Alternate name'</span>)</span><br></pre></td></tr></table></figure>
+<p>重新rescheduler作业。可以使用reschedule()或者reschedule_job()方法。需要重新组件一个触发器，并且重新计算下一次触发时间。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.reschedule_job(<span class="string">'my_job_id'</span>, trigger=<span class="string">'cron'</span>, minute=<span class="string">'*/5'</span>)</span><br></pre></td></tr></table></figure>
+<p>关闭调度。使用shutdown()方法关闭，不想等待，可以将wait设置为False</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.shutdown(<span class="attribute">wait</span>=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+<p>#####触发器参数</p>
+<p>date定时，作业只执行一次。</p>
+<ul>
+<li><strong>run_date</strong> (datetime|str) – the date/time to run the job at </li>
+<li><strong>timezone</strong> (datetime.tzinfo|str) – time zone for run_date if it doesn’t have one already </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sched.add_job(my_job, <span class="string">'date'</span>, run_date=date(<span class="number">2009</span>, <span class="number">11</span>, <span class="number">6</span>), args=[<span class="string">'text'</span>])</span><br><span class="line"><span class="comment"># 2019年7月6号16时30分5s执行</span></span><br><span class="line">sched.add_job(my_job, <span class="string">'date'</span>, run_date=datetime(<span class="number">2019</span>, <span class="number">7</span>, <span class="number">6</span>, <span class="number">16</span>, <span class="number">30</span>, <span class="number">5</span>), args=[<span class="string">'text'</span>])</span><br></pre></td></tr></table></figure>
+<p>interval间隔调度</p>
+<ul>
+<li><strong>weeks</strong> (int) – number of weeks to wait </li>
+<li><strong>days</strong> (int) – number of days to wait </li>
+<li><strong>hours</strong> (int) – number of hours to wait </li>
+<li><strong>minutes</strong> (int) – number of minutes to wait </li>
+<li><strong>seconds</strong> (int) – number of seconds to wait </li>
+<li><strong>start_date</strong> (datetime|str) – starting point for the interval calculation </li>
+<li><strong>end_date</strong> (datetime|str) – latest possible date/time to trigger on</li>
+<li><strong>timezone</strong> (datetime.tzinfo|str) – time zone to use for the date/time calculations</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scheduler.add_job(job_function, <span class="string">'interval'</span>, hours=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+<p>cron调度</p>
+<ul>
+<li><strong>year</strong> (int|str) – 4-digit year </li>
+<li><strong>month</strong> (int|str) – month (1-12) </li>
+<li><strong>day</strong> (int|str) – day of the (1-31) </li>
+<li><strong>week</strong> (int|str) – ISO week (1-53) </li>
+<li><strong>day_of_week</strong> (int|str) – number or name of weekday (0-6 or mon,tue,wed,thu,fri,sat,sun) </li>
+<li><strong>hour</strong> (int|str) – hour (0-23) </li>
+<li><strong>minute</strong> (int|str) – minute (0-59) </li>
+<li><strong>second</strong> (int|str) – second (0-59) </li>
+<li><strong>start_date</strong> (datetime|str) – earliest possible date/time to trigger on (inclusive) </li>
+<li><strong>end_date</strong> (datetime|str) – latest possible date/time to trigger on (inclusive) </li>
+<li><strong>timezone</strong> (datetime.tzinfo|str) – time zone to use for the date/time calculations (defaults to scheduler timezone) </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 6-8,11-12月第三个周五 00:00, 01:00, 02:00, 03:00运行</span></span><br><span class="line">scheduler.add_job(job_function, <span class="string">'cron'</span>, month=<span class="string">'6-8,11-12'</span>, day=<span class="string">'3rd fri'</span>, hour=<span class="string">'0-3'</span>)</span><br><span class="line"><span class="comment"># 每周一到周五运行 直到2024-05-30 00:00:00</span></span><br><span class="line">scheduler.add_job(job_function, <span class="string">'cron'</span>, day_of_week=<span class="string">'mon-fri'</span>, hour=<span class="number">5</span>, minute=<span class="number">30</span>, end_date=<span class="string">'2024-05-30'</span></span><br></pre></td></tr></table></figure>
+<h4 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h4><p>#####实例一</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> apscheduler.schedulers.background <span class="keyword">import</span> BackgroundScheduler</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">tick</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    print(<span class="string">'Tick! The time is: %s'</span> % datetime.now())</span><br><span class="line"></span><br><span class="line"><span class="comment"># 非阻塞，cron类型触发器</span></span><br><span class="line">scheduler = BackgroundScheduler()</span><br><span class="line">scheduler.add_job(tick, <span class="string">'cron'</span>, day_of_week=<span class="string">'mon-fri'</span>, hour=<span class="number">9</span>, minute=<span class="number">30</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="comment"># 运行任务调度</span></span><br><span class="line">    scheduler.start()</span><br><span class="line">    print(scheduler.get_jobs())</span><br><span class="line">    print(<span class="string">'Press Ctrl+&#123;0&#125; to exit'</span>.format(<span class="string">'Break'</span> <span class="keyword">if</span> os.name == <span class="string">'nt'</span> <span class="keyword">else</span> <span class="string">'C'</span>))</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            time.sleep(<span class="number">5</span>)</span><br><span class="line">            print(<span class="string">'sleep!'</span>)</span><br><span class="line">    <span class="keyword">except</span> (KeyboardInterrupt,SystemExit):</span><br><span class="line">        <span class="comment"># 关闭调度</span></span><br><span class="line">        scheduler.shutdown(wait=<span class="keyword">False</span>)</span><br><span class="line">        print(<span class="string">'Exit The Job!'</span>)</span><br></pre></td></tr></table></figure>
+<h4 id="解决模块使用问题"><a href="#解决模块使用问题" class="headerlink" title="解决模块使用问题"></a>解决模块使用问题</h4><h5 id="查看开发者经常提到的问题"><a href="#查看开发者经常提到的问题" class="headerlink" title="查看开发者经常提到的问题"></a>查看开发者经常提到的问题</h5><p>请点击<a href="https://apscheduler.readthedocs.io/en/latest/faq.html" target="_blank" rel="noopener">这里</a>，查看问题回答。</p>
+<p>#####通过查看日志</p>
+<p>如果你的调度程序没有按预期执行，可以按如下设置查看打印日志</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.basicConfig()</span><br><span class="line">logging.getLogger(<span class="string">'apscheduler'</span>).setlevel(logging.DEBUG)</span><br></pre></td></tr></table></figure>
+<h4 id="提交模块bug"><a href="#提交模块bug" class="headerlink" title="提交模块bug"></a>提交模块bug</h4><p>如果你发现APScheduler模块有bug，可以通过Github方式提交<a href="https://github.com/agronholm/apscheduler/issues" target="_blank" rel="noopener">问题</a></p>
+<h4 id="获取帮助"><a href="#获取帮助" class="headerlink" title="获取帮助"></a>获取帮助</h4><p>在Gitter的<a href="https://gitter.im/apscheduler/Lobby" target="_blank" rel="noopener">apscheduler room</a>中提问。</p>
+<p>在<a href="http://stackoverflow.com/questions/tagged/apscheduler" target="_blank" rel="noopener">StackOverflow</a>中提问并且打上apscheduler的tag标签。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/04/01/部署Flask-web项目踩坑之旅/" data-toggle="tooltip" data-placement="top" title="部署Flask-Web项目踩坑之旅">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2019/06/28/任务调度模块APScheduler总结/";
+    var disqus_url = "https://alanfanh.github.io/2019/06/28/任务调度模块APScheduler总结/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Alan_Fan_H">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Alan Fan">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/alanfanh">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Fannnhao&#39;s blog 2019 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://alanfanh.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA';
+    var _gaDomain = 'test.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
