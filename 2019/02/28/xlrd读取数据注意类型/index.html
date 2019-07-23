@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          xlrd模块用法的一些总结 - FanHao的博客 | Fanhao&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://alanfanh.github.io/2019/02/28/xlrd读取数据注意类型/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Fannnhao&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                    </div>
+                    <h1>xlrd模块用法的一些总结</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2019-02-28
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="xlrd模块"><a href="#xlrd模块" class="headerlink" title="xlrd模块"></a>xlrd模块</h4><h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><p>python xlrd库主要用来读取excel表格文件的数据，支持.xls和.xlsx类型的文件。</p>
+<p>python版本3.6，xlrd版本1.1.0。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install xlrd</span><br></pre></td></tr></table></figure>
+<h5 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h5><p>打开一份excel表格</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line">data = xlrd.open_workbook(path)</span><br></pre></td></tr></table></figure>
+<p>获取excel文件所有工作簿的名称</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">names = data.sheet_names()</span><br></pre></td></tr></table></figure>
+<p>创建此sheet的对象</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根据索引的顺序</span></span><br><span class="line">sheet=data.sheet_by_index(sheet_index)</span><br><span class="line"><span class="comment"># 根据顺序，以下为获取第一个sheet</span></span><br><span class="line">sheet=data.sheets()[<span class="number">0</span>]</span><br><span class="line"><span class="comment"># 根据sheet名称创建对象</span></span><br><span class="line">sheet=data.sheet_by_name(<span class="string">u'Sheet1'</span>)</span><br></pre></td></tr></table></figure>
+<p>获取表格的行数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取该sheet中的有效行数</span></span><br><span class="line">row_num=sheet.nrows</span><br><span class="line"><span class="comment"># 返回由该行中所有单元格对象组成的的列表</span></span><br><span class="line">row_list=sheet.row(rowx)</span><br></pre></td></tr></table></figure>
+<p>获取列数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取该sheet中的有效列数</span></span><br><span class="line">cols_num=sheet.ncols</span><br><span class="line"><span class="comment"># 返回由该列中所有单元格对象组成的列表</span></span><br><span class="line">sheet.col(colx, start_rowx=<span class="number">0</span>, end_rowx=<span class="keyword">None</span>)</span><br><span class="line"><span class="comment"># 返回由该列中所有单元格数据组成的列表</span></span><br><span class="line">sheet.col(colx, start_rowx=<span class="number">0</span>, end_rowx=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>通过行和列读取整个sheet中的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rowlist=[]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(row_num):</span><br><span class="line">    row = sheet.row_values(i)</span><br><span class="line">    print(<span class="string">"%s row is %s"</span> %(i, row))</span><br><span class="line">    rowlist.append(i)</span><br><span class="line"></span><br><span class="line">collist=[]</span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> range(cols_num):</span><br><span class="line">    col=sheet.cl_values(j)</span><br><span class="line">    print(<span class="string">"%s cal is %s"</span> %(j, col))</span><br><span class="line">    collist.append(col)</span><br></pre></td></tr></table></figure>
+<p>单元格操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 返回单元格对象，rowx,colx分别为表格的行数,列数。</span></span><br><span class="line">sheet.cell(rowx,colx)</span><br><span class="line"><span class="comment"># 返回单元格的数据</span></span><br><span class="line">sheet.cell_value(rowx,colx)</span><br></pre></td></tr></table></figure>
+<h5 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h5><p>excel表格的单元格内的数据，有不同的数据类型。对于一些数据，需要经过特殊处理，不然读取到的数据不符合我们的预期结果。这里尤其注意<strong>date</strong>类型的数据。</p>
+<p>python读取excel中单元格的内容返回的有5种类型，如下所示:</p>
+<ul>
+<li>0 empty</li>
+<li>1 string</li>
+<li>2 number</li>
+<li>3 date</li>
+<li>4 boolean</li>
+<li>5 error</li>
+</ul>
+<p>获取单元格内容的数据类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctype=sheet.cell(rowx, colx).ctype</span><br></pre></td></tr></table></figure>
+<p>打印单元格的数据类型。</p>
+<p>以下是一个简单的读取excel表格，对其中<strong>date</strong>类型的数据，进行特殊处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> xlrd <span class="keyword">import</span> xldate_as_tuple</span><br><span class="line"><span class="comment"># 读取excel文件</span></span><br><span class="line">worksheet=xlrd.open_workbook(filename)</span><br><span class="line"><span class="comment"># 获取第一个sheet</span></span><br><span class="line">sheet=worksheet.sheet_by_index(<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 获取sheet的有效行数，有效列数</span></span><br><span class="line">rows=sheet.nrows</span><br><span class="line">cols=sheet.ncols</span><br><span class="line"><span class="comment"># 获取第一行，表格头部信息</span></span><br><span class="line">head=sheet.row_values(<span class="number">0</span>)</span><br><span class="line"><span class="comment"># 遍历行数</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,rows):</span><br><span class="line">    row=sheet.row_values(i)</span><br><span class="line">    <span class="comment"># 遍历列数</span></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(cols):</span><br><span class="line">        <span class="comment"># 获取单元格的值</span></span><br><span class="line">        cell=sheet.cell_value(i, j)</span><br><span class="line">        <span class="comment"># 获取单元值的数据类型</span></span><br><span class="line">        ctype=sheet.cell(i, j).ctype</span><br><span class="line">        <span class="keyword">if</span> ctype == <span class="number">0</span>:</span><br><span class="line">            print(<span class="string">"%s 类型为empty"</span> % cell)</span><br><span class="line">        <span class="keyword">elif</span> ctype == <span class="number">1</span>:</span><br><span class="line">            print(<span class="string">"%s 类型为string"</span> % cell)</span><br><span class="line">        <span class="keyword">elif</span> ctype == <span class="number">2</span>:</span><br><span class="line">            print(<span class="string">"%s 类型为number"</span> % cell)</span><br><span class="line">        <span class="keyword">elif</span> ctype == <span class="number">3</span>:</span><br><span class="line">            <span class="comment"># date类型的数据需要特殊处理，不然读取数据的时候会被转成数字</span></span><br><span class="line">            date = datetime(*xldate_as_tuple(cell, <span class="number">0</span>))</span><br><span class="line">            cell = date.strftime(<span class="string">'%Y/%d/%m %H:%M:%S'</span>)</span><br><span class="line">            print(<span class="string">"%s 类型为date"</span> % cell)</span><br><span class="line">        <span class="keyword">elif</span> ctype == <span class="number">4</span>:</span><br><span class="line">            print(<span class="string">"%s 类型为boolean"</span> % cell)</span><br></pre></td></tr></table></figure>
+<h5 id="代码实例"><a href="#代码实例" class="headerlink" title="代码实例"></a>代码实例</h5><p>实例一</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> xlrd</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> xlrd <span class="keyword">import</span> xldate_as_tuple</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_excel</span><span class="params">(filename)</span>:</span></span><br><span class="line">    <span class="comment"># filename=os.path.basename(path)</span></span><br><span class="line">    <span class="keyword">if</span> filename.endswith(<span class="string">'xls'</span>):</span><br><span class="line">        worksheet = xlrd.open_workbook(filename)</span><br><span class="line">        sheet = worksheet.sheet_by_index(<span class="number">0</span>)</span><br><span class="line">        rows = sheet.nrows</span><br><span class="line">        cols = sheet.ncols</span><br><span class="line">        data = []</span><br><span class="line">        head = sheet.row_values(<span class="number">0</span>)</span><br><span class="line">        print(<span class="string">'head='</span>,head)</span><br><span class="line">        data.append(head)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,rows):</span><br><span class="line">            row = sheet.row_values(i)</span><br><span class="line">            print(<span class="string">'row='</span>,row)</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(cols):</span><br><span class="line">                cell=sheet.cell_value(i,j)</span><br><span class="line">                ctype=sheet.cell(i,j).ctype</span><br><span class="line">                <span class="comment"># if ctype == 3:</span></span><br><span class="line">                <span class="comment"># print('cell',cell)</span></span><br><span class="line">                <span class="comment"># print(cols,len(row))</span></span><br><span class="line">            <span class="keyword">if</span> row:</span><br><span class="line">                app = &#123;&#125;</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(len(row)):</span><br><span class="line">                    ctype=sheet.cell(i,j).ctype</span><br><span class="line">                    <span class="keyword">if</span> ctype == <span class="number">3</span>:</span><br><span class="line">                        date = datetime(*xldate_as_tuple(row[j], <span class="number">0</span>))</span><br><span class="line">                        row[j]=date.strftime(<span class="string">'%Y-%m-%d'</span>)</span><br><span class="line">                    print(i,j)</span><br><span class="line">                    print(<span class="string">'type,value:'</span>,sheet.cell(i,j).ctype,row[j])</span><br><span class="line">                    app[head[j]] = row[j]</span><br><span class="line">                data.append(app)</span><br><span class="line">    <span class="keyword">elif</span> filename.endswith(<span class="string">'xlsx'</span>):</span><br><span class="line">        worksheet = load_workbook(path)</span><br><span class="line">        sheets = worksheet.get_sheet_names()</span><br><span class="line">        sheet = worksheet.get_sheet_by_name(sheets[<span class="number">0</span>])</span><br><span class="line">        rows = sheet.rows</span><br><span class="line">        columns = sheet.columns</span><br><span class="line">        data = []</span><br><span class="line">        head = [col.value <span class="keyword">for</span> col <span class="keyword">in</span> rows[<span class="number">0</span>]]</span><br><span class="line">        data.append(head)</span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> rows:</span><br><span class="line">            app = &#123;&#125;</span><br><span class="line">            <span class="keyword">if</span> row:</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> range(len(row)):</span><br><span class="line">                    app[head[i]] = row[i].value</span><br><span class="line">                data.append(app)</span><br><span class="line">        <span class="comment"># data.remove(data[0])</span></span><br><span class="line">    <span class="comment"># print('data=',data)</span></span><br><span class="line">    <span class="keyword">return</span> data</span><br></pre></td></tr></table></figure>
+<h4 id="xlwt模块"><a href="#xlwt模块" class="headerlink" title="xlwt模块"></a>xlwt模块</h4><h5 id="介绍-1"><a href="#介绍-1" class="headerlink" title="介绍"></a>介绍</h5><p>主要用来写excel文件，生成excel文件。以下总结一些简单的用法</p>
+<h5 id="基础用法-1"><a href="#基础用法-1" class="headerlink" title="基础用法"></a>基础用法</h5><p>创建一个worksheet</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化一个excel文件对象</span></span><br><span class="line">workbook=xlwt.Workbook(encoding=<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="comment"># 创建一个sheet,命名为worksheet1，允许重写</span></span><br><span class="line">sheet1=workbook.add_sheet(<span class="string">'worksheet1'</span>, cell_overwrite_ok=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
+<p>写入excel</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 写入第row行，第col列的数据，style为单元格的风格样式</span></span><br><span class="line">sheet1.write(row,col,style)</span><br></pre></td></tr></table></figure>
+<p>保存，生产excel文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存为test.xls</span></span><br><span class="line">workbook.save(<span class="string">'test.xls'</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="不常用方法"><a href="#不常用方法" class="headerlink" title="不常用方法"></a>不常用方法</h5><p>初始化表格样式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">style=xlwt.XFStyle()</span><br></pre></td></tr></table></figure>
+<p>设置字体样式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">font=xlwt.Font()</span><br><span class="line"><span class="comment"># 字体</span></span><br><span class="line">font.name=<span class="string">'Times New Roman'</span></span><br><span class="line"><span class="comment"># 加粗</span></span><br><span class="line">font.bold=<span class="keyword">True</span></span><br><span class="line"><span class="comment"># 下划线</span></span><br><span class="line">font.underline=<span class="keyword">True</span></span><br><span class="line"><span class="comment"># 斜体字</span></span><br><span class="line">font.italic=<span class="keyword">True</span></span><br><span class="line">style.font=font</span><br></pre></td></tr></table></figure>
+<p>设定对齐方式样式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">alignment = xlwt.Alignment()</span><br><span class="line"><span class="comment"># May be: HORZ_GENERAL, HORZ_LEFT, HORZ_CENTER, HORZ_RIGHT</span></span><br><span class="line">alignment.horz = xlwt.Alignment.HORZ_CENTER</span><br><span class="line"><span class="comment"># May be: VERT_TOP, VERT_CENTER, VERT_BOTTOM</span></span><br><span class="line">alignment.vert = xlwt.Alignment.VERT_CENTER</span><br><span class="line"><span class="comment"># Add Alignment to Style</span></span><br><span class="line">style.alignment = alignment</span><br></pre></td></tr></table></figure>
+<p>设定边框样式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">borders = xlwt.Borders() <span class="comment"># Create Borders</span></span><br><span class="line">borders.left = xlwt.Borders.DASHED <span class="comment">#DASHED虚线 NO_LINE没有 THIN实线</span></span><br><span class="line">borders.left_colour = <span class="number">0x40</span></span><br><span class="line">style.borders = borders <span class="comment"># Add Borders to Style</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create the Pattern</span></span><br><span class="line">pattern = xlwt.Pattern()</span><br><span class="line"><span class="comment"># May be: NO_PATTERN, SOLID_PATTERN, or 0x00 through 0x12</span></span><br><span class="line">pattern.pattern = xlwt.Pattern.SOLID_PATTERN </span><br><span class="line">pattern.pattern_fore_colour = <span class="number">5</span> </span><br><span class="line"><span class="comment">##May be: 8 through 63. 0 = Black, 1 = White, 2 = Red, 3 = Green, 4 = Blue, 5 = Yellow, 6 = Magenta, 7 = Cyan, 16 = Maroon, 17 = Dark Green, 18 = Dark Blue, 19 = Dark Yellow , almost brown), 20 = Dark Magenta, 21 = Teal, 22 = Light Gray, 23 = Dark Graystyle.pattern = pattern # Add Pattern to Style</span></span><br></pre></td></tr></table></figure>
+<p>合并列和行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheet1.write_merge(<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="string">'Second Merge'</span>, style)</span><br></pre></td></tr></table></figure>
+<p>单元格添加一个超链接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hyperlink=xlwt.Formula(<span class="string">'HYPERLINK("http://www.google.com";"Google")'</span>)</span><br><span class="line">sheet1.write(<span class="number">1</span>, <span class="number">1</span>, hyperlink)</span><br></pre></td></tr></table></figure>
+<h5 id="代码实例-1"><a href="#代码实例-1" class="headerlink" title="代码实例"></a>代码实例</h5><p>实例一</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">write_excel</span><span class="params">(data,filename)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    根据传入数据data生成excel文件filename</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    print(<span class="string">"**start write**"</span>)</span><br><span class="line">    workbook = xlwt.Workbook()</span><br><span class="line">    sheet = workbook.add_sheet(<span class="string">'data'</span>,cell_overwrite_ok=<span class="keyword">True</span>)</span><br><span class="line">    <span class="comment"># list_table_head = [data[0][0],data[0][1],data[0][2],data[0][3],data[0][4],data[0][5],data[0][6],data[0][7],data[0][8],data[0][9],data[0][10],data[0][11],data[0][12]]</span></span><br><span class="line">    <span class="keyword">for</span> row <span class="keyword">in</span> range(len(data)):</span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> range(len(data[row])):</span><br><span class="line">            sheet.write(row,col,data[row][col])</span><br><span class="line">    workbook.save(filename)</span><br></pre></td></tr></table></figure>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/03/08/scapy包学习总结/" data-toggle="tooltip" data-placement="top" title="scapy包总结">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/02/20/python参数理解/" data-toggle="tooltip" data-placement="top" title="关于python参数传递的理解">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2019/02/28/xlrd读取数据注意类型/";
+    var disqus_url = "https://alanfanh.github.io/2019/02/28/xlrd读取数据注意类型/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Alan_Fan_H">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Alan Fan">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/alanfanh">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Fannnhao&#39;s blog 2019 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://alanfanh.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA';
+    var _gaDomain = 'test.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

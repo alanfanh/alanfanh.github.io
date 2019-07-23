@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -181,6 +181,100 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2018/11/20/关于python装饰器的理解/">
+        <h2 class="post-title">
+            关于python装饰器的理解
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            装饰器是什么“装饰器”（Decorator）可以让其他函数在不需要做任何代码变动的前提下增加额外功能。简单的说，装饰器的作用就是为已经存在的函数或对象添加额外的功能。本质上，decorator是一个返回函数的高阶函数。具体使用场景：插入日志、性能测试、事务处理、缓存、权限校验等场景。之前通过实际代码学习和装饰器的具体用途。代码记录如下:
+普通装饰器python提供了可变参数*args和关键字......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2018-11-20
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/28/MacOS安装PyQt踩坑记录/">
+        <h2 class="post-title">
+            MacOS平台安装PyQt5以及如何打开QtDesigner踩坑记录
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            之前因为工作任务，使用PyQt写过几个工具项目。后面想要在家里写PyQt程序，系统平台为MacOS。通过快捷命令安装PyQt5工具包后，却没有找到Designer
+安装安装qt程序1brew install qt
+安装sip1brew install sip
+安装PyQt51pip install PyQt5
+打开QtDesigner使用命令打开Qt-Designer画图程序1open -a......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2018-10-28
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/10/18/python打包程序总结/">
+        <h2 class="post-title">
+            python打包成可执行程序踩坑总结
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前言为了方便将开发的测试工具交付给测试人员使用，查阅资料得知python有以下几个打包工具。将使用过程与心得总结记录下来。持续更新中····
+py2exepy2exe是一个将python脚本转换成windows上的可独立执行的可执行程序(*.exe)的工具。这样，你就可以不用装python和其他相关环境，而可以在windows系统上运行这个可执行程序。
+用法：1、写一个用于发布程序的设置脚本......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2018-10-18
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2018/07/28/数据可视化之pygal模块练习一/">
+        <h2 class="post-title">
+            数据可视化学习之pygal模块简单应用一
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            工具包安装1pip install pygal
+应用我们直接通过写一个小段代码来学习pygal模块，pygal官方文档地址请点击pygal。
+代码实现目标：模拟同时掷三个6面骰子10万次，得到10万个数据。请通过可视化展示同时掷三个D6骰子的点数累加结果。
+以下代码构建一个骰子，保存为dice.py123456789#encoding=utf-8from random import rand......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2018-07-28
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -315,28 +409,6 @@ getopt简述&emsp;&emsp;getopt模块专门用来处理命令行参数。具体�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/04/17/hello-world/">
-        <h2 class="post-title">
-            Hello Hexo
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-04-17
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -347,6 +419,10 @@ Qu......
             <a href="/">&larr; Newer Posts</a>
         </li>
     
+    
+        <li class="next">
+            <a href="/page/3/">Older Posts &rarr;</a>
+        </li>
     
 </ul>
 
@@ -372,6 +448,10 @@ Qu......
                     <div class="tags">
                         
                             
+                            <a href="/tags/#Linux" title="Linux" rel="2">Linux</a>
+                            
+                        
+                            
                             <a href="/tags/#python" title="python" rel="9">python</a>
                             
                         
@@ -388,9 +468,11 @@ Qu......
                             
                         
                             
+                            <a href="/tags/#Python" title="Python" rel="3">Python</a>
+                            
                         
                             
-                            <a href="/tags/#Python" title="Python" rel="2">Python</a>
+                        
                             
                         
                     </div>

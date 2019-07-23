@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          操作MySQL数据库的几种方法 - FanHao的博客 | Fanhao&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://alanfanh.github.io/2019/04/18/操作MySQL的几种方法总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Fannnhao&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
+                        
+                    </div>
+                    <h1>操作MySQL数据库的几种方法</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2019-04-18
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>本文主要总结我实际使用python操作MySQL数据库用到的几种方法，希望能对你有所帮助。在学习后面实例代码前。首先对数据库需要有一定的了解，而且本地需要安装MySQL数据库，并设置好MySQL账户和密码。</p>
+<p>数据库主要分为关系型和非关系型数据库。MySQL属于关系型数据库库。</p>
+<h4 id="PyMySQL模块"><a href="#PyMySQL模块" class="headerlink" title="PyMySQL模块"></a>PyMySQL模块</h4><p>首先总结pymysql模块所常用到的一些方法，它主要用来操作MySQL数据库。如需查看官方文档，请点击<a href="https://pymysql.readthedocs.io/en/latest/user/installation.html" target="_blank" rel="noopener">这里</a>。</p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>推荐使用pip方式安装，最新版本为0.9.2。本文方法基于此版本总结。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pymysql</span><br></pre></td></tr></table></figure>
+<h5 id="要求"><a href="#要求" class="headerlink" title="要求"></a>要求</h5><p>python2版本要求2.7及以上，python3版本要求3.5及以上。</p>
+<p>MySQL版本&gt;=5.5，MariaDB版本&gt;=5.5。</p>
+<h5 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h5><p>我们对数据的操作基本可以概括为增、删、改、查这几个方面。所以pymysql用法也主要是以这4个方面为主。</p>
+<p>下面的实例代码为使用pymysql库初始连接对象，定义游标和执行sql命令调用的相关方法。</p>
+<p><strong>注意</strong>：每次执行数据库操作时，最好先初始化数据库连接，同时数据库操作完毕之后，关闭连接。因为数据库连接如果长时间不操作的话，会自动终止连接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">CONFIG = &#123;</span><br><span class="line">    <span class="string">'host'</span>: <span class="string">'localhost'</span>,</span><br><span class="line">    <span class="string">'port'</span>: <span class="number">3306</span>,</span><br><span class="line">    <span class="string">'user'</span>: <span class="string">'root'</span>,</span><br><span class="line">    <span class="string">'passwd'</span>: <span class="string">''</span>,</span><br><span class="line">    <span class="string">'db'</span>: <span class="string">'test'</span>,</span><br><span class="line">    <span class="string">'charset'</span>: <span class="string">'utf8'</span>,</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">init_connect</span><span class="params">(**kargs)</span>:</span></span><br><span class="line">    <span class="comment"># 初始化数据库连接，依次传入数据地址，数据库账户，密码，数据库名</span></span><br><span class="line">	db=pymysql.connect(**kargs)</span><br><span class="line">	<span class="comment"># 定义游标</span></span><br><span class="line">	cursor=db.cursor()</span><br><span class="line">    <span class="comment"># 返回元祖</span></span><br><span class="line">	<span class="keyword">return</span> db,cursor</span><br></pre></td></tr></table></figure>
+<h5 id="创建表"><a href="#创建表" class="headerlink" title="创建表"></a>创建表</h5><p>创建一个classes表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sql=<span class="string">"""CREATE TABLE classes (</span></span><br><span class="line"><span class="string">           id INT(10) NOT NULL AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">           name CHAR(20) NOT NULL,</span></span><br><span class="line"><span class="string">           PRIMARY KEY(id)</span></span><br><span class="line"><span class="string">	    ) DEFAULT CHARSET=utf8"""</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">'create table failed'</span>)</span><br></pre></td></tr></table></figure>
+<p>创建一个students表</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">sql=<span class="string">"""CREATE TABLE students (</span></span><br><span class="line"><span class="string">		 id INT(10) NOT NULL AUTO_INCREMENT,</span></span><br><span class="line"><span class="string">         name  CHAR(20) NOT NULL,</span></span><br><span class="line"><span class="string">         age INT(4),</span></span><br><span class="line"><span class="string">         gender CHAR(1),</span></span><br><span class="line"><span class="string">         class_id  INT(10),</span></span><br><span class="line"><span class="string">         FOREIGN KEY(class_id) REFERENCES classes(id),</span></span><br><span class="line"><span class="string">         PRIMARY KEY (id)</span></span><br><span class="line"><span class="string">        ) DEFAULT CHARSET=utf8"""</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cursor.execute(sql)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">'create table failed'</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="增"><a href="#增" class="headerlink" title="增"></a>增</h5><p>增，增加MySQL数据库中的数据表的记录，也就是添加数据。对应的SQL命令是INSERT</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据库连接</span></span><br><span class="line">function=init_connect(**CONFIG)</span><br><span class="line">db=function[<span class="number">0</span>]</span><br><span class="line">cursor=function[<span class="number">1</span>]</span><br><span class="line">sql = <span class="string">"""INSERT INTO STUDENTS(NAME, AGE, SEX, CLASS) VALUES ('%s', %s, '%s', '%s')" % ('xiaoming', 20, 'M', 'class1')"""</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="comment"># 执行sql语句</span></span><br><span class="line">   cursor.execute(sql)</span><br><span class="line">   <span class="comment"># 提交</span></span><br><span class="line">   db.commit()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="comment"># 发生错误时回滚</span></span><br><span class="line">   db.rollback()</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 关闭数据库连接</span></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<h5 id="删"><a href="#删" class="headerlink" title="删"></a>删</h5><p>删，删除数据表中的记录，也就是删除数据。对应SQL命令是DELETE</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据库连接</span></span><br><span class="line">function=init_connect(**CONFIG)</span><br><span class="line">db=function[<span class="number">0</span>]</span><br><span class="line">cursor=function[<span class="number">1</span>]</span><br><span class="line"><span class="comment"># SQL 删除语句</span></span><br><span class="line">sql = <span class="string">"DELETE FROM STUDENTS WHERE AGE &gt; %s"</span> % (<span class="number">20</span>)</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">   <span class="comment"># 执行SQL语句</span></span><br><span class="line">   cursor.execute(sql)</span><br><span class="line">   <span class="comment"># 提交修改</span></span><br><span class="line">   db.commit()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">   <span class="comment"># 发生错误时回滚</span></span><br><span class="line">   db.rollback()</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 关闭连接</span></span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<h5 id="改"><a href="#改" class="headerlink" title="改"></a>改</h5><p>改，修改数据表中的记录，也就是更新数据。对应的SQL命令是UPDATE</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据库连接</span></span><br><span class="line">function=init_connect(**CONFIG)</span><br><span class="line">db=function[<span class="number">0</span>]</span><br><span class="line">cursor=function[<span class="number">1</span>]</span><br><span class="line">sql=<span class="string">"UPDATE students SET AGE = 19 WHERE NAME='xiaoming'"</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 执行sql</span></span><br><span class="line">    cursor.execute(sql)</span><br><span class="line">    <span class="comment"># 提交</span></span><br><span class="line">    db.commit()</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    db.rollback()</span><br><span class="line">db.close()</span><br></pre></td></tr></table></figure>
+<h5 id="查"><a href="#查" class="headerlink" title="查"></a>查</h5><p>查，查询数据表中的记录。对应的SQL命令是SELECT。如果使用默认的cursorclass查询数据表记录，默认返回的数据类型为元祖类型。</p>
+<ul>
+<li>fetchall()        返回所有查询的所有记录</li>
+<li>fetchone()     返回单条记录</li>
+<li>rawcount()    返回执行execute()方法影响的命令行</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据库连接，cursorclass设置后将返回字典格式的数据。</span></span><br><span class="line"><span class="comment"># 如果cursorclass使用默认设置，查询返回的数据类型为元组类型</span></span><br><span class="line">CONFIG = &#123;</span><br><span class="line">    <span class="string">'host'</span>: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">    <span class="string">'port'</span>: <span class="number">3306</span>,</span><br><span class="line">    <span class="string">'user'</span>: <span class="string">'root'</span>,</span><br><span class="line">    <span class="string">'passwd'</span>: <span class="string">''</span>,</span><br><span class="line">    <span class="string">'db'</span>: <span class="string">'test'</span>,</span><br><span class="line">    <span class="string">'charset'</span>: <span class="string">'utf8'</span>,</span><br><span class="line">    <span class="string">'cursorclass'</span>: pymysql.cursors.DictCursor</span><br><span class="line">&#125;</span><br><span class="line">db=pymysql.connect(**CONFIG)</span><br><span class="line">cursor=db.cursor()</span><br><span class="line">sql=<span class="string">"SELECT * FROM students WHERE CLASS="</span>class1<span class="string">"</span></span><br><span class="line"><span class="string">try:</span></span><br><span class="line"><span class="string">    # 执行sql命令</span></span><br><span class="line"><span class="string">    cursor.execute(sql)</span></span><br><span class="line"><span class="string">    # 获取所有记录列表，字典类型的数据</span></span><br><span class="line"><span class="string">    results=cursor.fetchall()</span></span><br><span class="line"><span class="string">    # 根据需要处理数据，这里只是打印</span></span><br><span class="line"><span class="string">    for i in results：</span></span><br><span class="line"><span class="string">    	print(i)</span></span><br><span class="line"><span class="string">except:</span></span><br><span class="line"><span class="string">    print('Error')</span></span><br></pre></td></tr></table></figure>
+<h4 id="SQLAlchemy模块"><a href="#SQLAlchemy模块" class="headerlink" title="SQLAlchemy模块"></a>SQLAlchemy模块</h4><h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><p>SQLAlchemy库是python中著名的ORM(Object Relationship Mapping)框架。在学习这个库之前，先要学习并理解什么是ORM框架。ORM全称对象关系映射，把关系型数据库的表结构映射到对象上。谁来做映射这个动作呢？没错，就是ORM框架，也就是本文中的SQLAlchemy模块。</p>
+<p>简而言之，ORM就是把数据库表的行与相应的对象建立关联，互相转换。</p>
+<p>该模块支持<a href="https://docs.sqlalchemy.org/en/13/dialects/postgresql.html" target="_blank" rel="noopener">PostgreSQL</a> | <a href="https://docs.sqlalchemy.org/en/13/dialects/mysql.html" target="_blank" rel="noopener">MySQL</a> | <a href="https://docs.sqlalchemy.org/en/13/dialects/sqlite.html" target="_blank" rel="noopener">SQLite</a> | <a href="https://docs.sqlalchemy.org/en/13/dialects/oracle.html" target="_blank" rel="noopener">Oracle</a> | <a href="https://docs.sqlalchemy.org/en/13/dialects/mssql.html" target="_blank" rel="noopener">Microsoft SQL Server</a>等数据库，一般我们常用的是MySQL数据库。</p>
+<h5 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h5><p>主要应用了metaclass元类这一强大的功能，对于我们来说基本上很难用上元类这个功能，所以以下这些理解即可。什么叫元类？我们知道实例对象根据定义的类生成，而类则可以根据元类生成。你也理解成类是根据metaclass创建的”实例对象”。如果你想自己写一个简单ORM框架，那么元类可以去深入学习。</p>
+<h5 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h5><p>sqlalchemy版本为: 1.2.14。本文所有方法基于此版本总结。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install sqlalchemy</span><br></pre></td></tr></table></figure>
+<h5 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h5><p>同样的SQLAlchemy用于操作数据库能够实现增、删、改、查等几个动作。它相比pymysql更加抽象，但也更加易用。常用于web应用的后端开发。</p>
+<p>舒适化</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String, create_engine, ForeignKey</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成基类</span></span><br><span class="line">Base=declarative_base()</span><br><span class="line"><span class="comment"># 创建数据库连接引擎</span></span><br><span class="line">engine=create_engine(<span class="string">"mysql+mysqlconnector://root:@localhost:3306/test"</span>, encoding=<span class="string">'utf-8'</span>, echo=<span class="keyword">True</span>)</span><br><span class="line"><span class="comment"># 创建会话类</span></span><br><span class="line">DBSession=sessionmaker(bind=engine)</span><br></pre></td></tr></table></figure>
+<h5 id="表映射"><a href="#表映射" class="headerlink" title="表映射"></a>表映射</h5><p>首先我们需要在数据库test中创建两张表，以下使用sql语言创建了2张表，并插入了一些数据记录。这里解释一下主键，主键一般命名为id，它唯一标识了一条数据记录。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="keyword">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> <span class="keyword">test</span>;</span><br><span class="line"><span class="comment">-- 切换test数据库</span></span><br><span class="line"><span class="keyword">USE</span> <span class="keyword">test</span>;</span><br><span class="line"><span class="comment">-- 如果存在phone和company表，则删除</span></span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> phone <span class="keyword">IF</span> <span class="keyword">EXISTS</span>;</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> company <span class="keyword">IF</span> <span class="keyword">EXISTS</span>;</span><br><span class="line"><span class="comment">-- 创建company表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> company (</span><br><span class="line">	<span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    country <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br><span class="line"><span class="comment">-- 创建phone表</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> phone (</span><br><span class="line"> 	<span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</span><br><span class="line">    <span class="keyword">name</span> <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    price <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    company_name <span class="built_in">VARCHAR</span>(<span class="number">20</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">    PRIMARY <span class="keyword">KEY</span>(<span class="keyword">id</span>)</span><br><span class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 插入数据记录</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> company(<span class="keyword">id</span>, <span class="keyword">name</span>, country) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">'Apple'</span>, <span class="string">'America'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> company(<span class="keyword">id</span>, <span class="keyword">name</span>, country) <span class="keyword">VALUES</span> (<span class="number">2</span>, <span class="string">'Samsung'</span>, <span class="string">'Korea'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> company(<span class="keyword">id</span>, <span class="keyword">name</span>, country) <span class="keyword">VALUES</span> (<span class="number">3</span>, <span class="string">'Huawei'</span>, <span class="string">'China'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> company(<span class="keyword">id</span>, <span class="keyword">name</span>, country) <span class="keyword">VALUES</span> (<span class="number">4</span>, <span class="string">'Xiaomi'</span>, <span class="string">'China'</span>);</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> company(<span class="keyword">id</span>, <span class="keyword">name</span>, country) <span class="keyword">VALUES</span> (<span class="number">5</span>, <span class="string">'Vivo'</span>, <span class="string">'China'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> phone(<span class="keyword">id</span>, <span class="keyword">name</span>, price, company_name) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">'CC9'</span>, <span class="number">1999</span>, <span class="string">'Xiaomi'</span>)</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> phone(<span class="keyword">id</span>, <span class="keyword">name</span>, price, company_name) <span class="keyword">VALUES</span> (<span class="number">1</span>, <span class="string">'Xiaomi9'</span>, <span class="number">2999</span>, <span class="string">'Xiaomi'</span>)</span><br><span class="line"><span class="comment">-- ok</span></span><br><span class="line"><span class="keyword">SELECT</span> <span class="string">'OK'</span> <span class="keyword">AS</span> <span class="string">'Result:'</span>;</span><br></pre></td></tr></table></figure>
+<p>将数据库中的表映射成类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Company</span><span class="params">(Base)</span>:</span></span><br><span class="line">    <span class="comment"># 表的名字</span></span><br><span class="line">    __tablename__ = <span class="string">'company'</span></span><br><span class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>, autoincrement=<span class="keyword">True</span>)</span><br><span class="line">    name = Column(String(<span class="number">20</span>))</span><br><span class="line">    country = Column(String(<span class="number">20</span>))</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Phone</span><span class="params">(Base)</span>:</span></span><br><span class="line">    <span class="comment"># 表的名字</span></span><br><span class="line">    __tablename__=<span class="string">'phone'</span></span><br><span class="line">	<span class="comment"># 定义表的结构</span></span><br><span class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>, autoincrement=<span class="keyword">True</span>)</span><br><span class="line">    name = Column(String(<span class="number">20</span>))</span><br><span class="line">    price = Column(Integer)</span><br><span class="line">    company_name = Column(String(<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+<h5 id="外键"><a href="#外键" class="headerlink" title="外键"></a>外键</h5><p>关系数据库的多个表可以用外键实现一对多、多对多等关联。但使用外键会降低数据库的查询性能。</p>
+<p>例如，如果一个User拥有多个Book，就可以定义一对多关系如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Base)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'user'</span></span><br><span class="line"></span><br><span class="line">    id = Column(String(<span class="number">20</span>), primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = Column(String(<span class="number">20</span>))</span><br><span class="line">    <span class="comment"># 一对多:</span></span><br><span class="line">    books = relationship(<span class="string">'Book'</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Book</span><span class="params">(Base)</span>:</span></span><br><span class="line">    __tablename__ = <span class="string">'book'</span></span><br><span class="line"></span><br><span class="line">    id = Column(String(<span class="number">20</span>), primary_key=<span class="keyword">True</span>)</span><br><span class="line">    name = Column(String(<span class="number">20</span>))</span><br><span class="line">    <span class="comment"># “多”的一方的book表是通过外键关联到user表的:</span></span><br><span class="line">    user_id = Column(String(<span class="number">20</span>), ForeignKey(<span class="string">'user.id'</span>))</span><br></pre></td></tr></table></figure>
+<h5 id="增-1"><a href="#增-1" class="headerlink" title="增"></a>增</h5><p>增，即添加数据。数据库表中添加一条记录，使用ORM框架后可以视为添加一个phone对象。</p>
+<p>关键是获取session，然后把对象添加到session，最后提交并关闭。<code>DBSession</code>对象可视为当前数据库连接。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建session对象</span></span><br><span class="line">session=DBSession()</span><br><span class="line"><span class="comment"># 创建phone对象</span></span><br><span class="line">iphoneX=Phone(id=<span class="number">2</span>, name=<span class="string">'iPhone X'</span>, price=<span class="number">8388</span>, company_name=<span class="string">'Apple'</span>)</span><br><span class="line">P30Pro=Phone(id=<span class="number">3</span>, name=<span class="string">'P30 Pro'</span>, price=<span class="number">5488</span>, company_name=<span class="string">'Huawei'</span>)</span><br><span class="line">S10=Phone(name=<span class="string">'Galaxy S10'</span>, price=<span class="number">5999</span>, company_name=<span class="string">'Samsung'</span>)</span><br><span class="line">Z5x=Phone(name=<span class="string">'Vivo Z5x'</span>, price=<span class="number">1599</span>, company_name=<span class="string">'vivo'</span>)</span><br><span class="line">Neo=Phone(name=<span class="string">'IQOO Neo'</span>, price=<span class="number">2499</span>,company_name=<span class="string">'vivo'</span>)</span><br><span class="line"><span class="comment"># 逐条添加到session</span></span><br><span class="line">session.add(iphoneX)</span><br><span class="line"><span class="comment"># 通过list添加多个对象到session中,传入对象list</span></span><br><span class="line">session.add_all([P30Pro,S10,Z5x,Neo])</span><br><span class="line"><span class="comment"># 提交到数据库中</span></span><br><span class="line">session.commit()</span><br><span class="line"><span class="comment"># 关闭</span></span><br><span class="line">session.close()</span><br></pre></td></tr></table></figure>
+<h5 id="删-1"><a href="#删-1" class="headerlink" title="删"></a>删</h5><p>删，即删除数据。在删除数据前，首先需要查找到该数据。例如：删除Phone表中，属于Vivo公司手机的数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建session对象</span></span><br><span class="line">session=DBSession()</span><br><span class="line"><span class="comment"># 条件查询数据</span></span><br><span class="line">phone = session.query(Phone).filter_by(company_name=<span class="string">'Vivo'</span>).all()</span><br><span class="line"><span class="comment"># 调用delete方法删除</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> phone_list:</span><br><span class="line">    session.delete(i)</span><br><span class="line"><span class="comment"># 关闭当前数据库连接</span></span><br><span class="line">session.close()</span><br></pre></td></tr></table></figure>
+<h5 id="改-1"><a href="#改-1" class="headerlink" title="改"></a>改</h5><p>改，即修改数据。同样的需要查找到该数据，然后再进行修改。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建session对象</span></span><br><span class="line">session=DBSession()</span><br><span class="line"><span class="comment"># 创建公司对象</span></span><br><span class="line">sony=Company(name=<span class="string">'suoni'</span>,country=<span class="string">'Japan'</span>)</span><br><span class="line"><span class="comment"># 添加</span></span><br><span class="line">session.add(sony)</span><br><span class="line">session.commit()</span><br><span class="line"><span class="comment"># 查询数据,修改数据</span></span><br><span class="line">company=session.query(Company).filter(name==<span class="string">'suoni'</span>).first()</span><br><span class="line">company.name=<span class="string">'sony'</span></span><br><span class="line"><span class="comment"># 提交修改</span></span><br><span class="line">session.commit()</span><br></pre></td></tr></table></figure>
+<h5 id="查-1"><a href="#查-1" class="headerlink" title="查"></a>查</h5><p>查，即查询数据。</p>
+<p>查询数据过滤有两种方法，两者区别如下:</p>
+<ul>
+<li>filter_by()     column=数据，过滤，使用起来比较方便</li>
+<li>filter()           稍微复杂，但能实现更多复杂的查询操作</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建Query查询，filter是where条件，最后调用one()返回唯一行,Phone对象:</span></span><br><span class="line">phone1 = session.query(Phone).filter(Phone.id==<span class="string">'2'</span>).one()</span><br><span class="line">print(<span class="string">'type:'</span>,type(phone))</span><br><span class="line">print(<span class="string">'Phone Name:'</span>, phone.name)</span><br><span class="line"><span class="comment"># 调用all()返回所有行，此时返回数据为对象的list。</span></span><br><span class="line">phone_list = session.query(Phone).filter(Phone.company_name == <span class="string">'Apple'</span>).all()</span><br><span class="line">print(<span class="string">'type'</span>,type(phone_list))</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> phone_list:</span><br><span class="line">    print(<span class="string">'Apple品牌:'</span>, i.name)</span><br><span class="line"><span class="comment"># 根据id查询，查询id=2的数据记录</span></span><br><span class="line">phone2 = session.query(Phone).get(<span class="number">2</span>)</span><br><span class="line">print(phone2.name)</span><br><span class="line"><span class="comment"># 打印查询sql语句</span></span><br><span class="line">phone_sql = session.query(Phone).filter(Phone.id==<span class="string">'1'</span>)</span><br><span class="line">print(phone_sql)</span><br></pre></td></tr></table></figure>
+<p>filter()过滤几种方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># like查询</span></span><br><span class="line">phone_list1 = session.query(Phone).filter(Phone.name.like(<span class="string">"%Phone%"</span>)).all()</span><br><span class="line"><span class="comment"># not equals查询</span></span><br><span class="line">phone_list2 = session.query(Phone).filter(Phone.company_name != <span class="string">'Apple'</span>).all()</span><br><span class="line"><span class="comment"># in查询</span></span><br><span class="line">phone_list3 = session.query(Phone).filter(Phone.id.in_([<span class="string">'1'</span>, <span class="string">'2'</span>]))</span><br><span class="line"><span class="comment"># not in 查询</span></span><br><span class="line">phone_list4 = session.query(Phone).filter(~Phone.id.in_([<span class="string">'1'</span>, <span class="string">'2'</span>]))</span><br><span class="line"><span class="comment"># and查询</span></span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> and_</span><br><span class="line">phone_list5 = session.query(Phone).filter(and_(Phone.company_name==<span class="string">'Xiaomi'</span>, Phone.price==<span class="number">2999</span>)).all()</span><br><span class="line">phone_list5 = session.query(Phone).filter(Phone.company_name==<span class="string">'Xiaomi'</span>, Phone.price==<span class="number">2999</span>).all()</span><br><span class="line"><span class="comment"># or查询</span></span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> or_</span><br><span class="line">phone_list6 = session.query(Company).filter(or_(Company.country==<span class="string">'China'</span>, Company.country==<span class="string">'America'</span>)).all</span><br></pre></td></tr></table></figure>
+<p>计数方法:count()</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">num = session.query(Phone).filter(Phone.name.like(<span class="string">'%ed'</span>)).count()</span><br></pre></td></tr></table></figure>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>以上大致总结了一些比较常用的方法。如果你需要使用的方法，这里没有总结。可以去查看官方文档和其他博客文章。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2019/05/28/Ubuntu18设置网络服务总结/" data-toggle="tooltip" data-placement="top" title="Linux系统网络设置总结">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/04/01/部署Flask-web项目踩坑之旅/" data-toggle="tooltip" data-placement="top" title="部署Flask-Web项目踩坑之旅">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2019/04/18/操作MySQL的几种方法总结/";
+    var disqus_url = "https://alanfanh.github.io/2019/04/18/操作MySQL的几种方法总结/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Alan_Fan_H">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Alan Fan">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/alanfanh">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Fannnhao&#39;s blog 2019 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://alanfanh.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA';
+    var _gaDomain = 'test.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
