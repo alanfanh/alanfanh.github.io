@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          PyQt工具开发PyQt程序 - FanHao的博客 | Fanhao&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://alanfanh.github.io/2019/09/28/使用PyQt工具包开发PyQt程序总结/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Fannnhao&#39;s blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#PyQt" title="PyQt">PyQt</a>
+                        
+                    </div>
+                    <h1>PyQt工具开发PyQt程序</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2019-09-28
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="Python图形界面"><a href="#Python图形界面" class="headerlink" title="Python图形界面"></a>Python图形界面</h4><p>python支持多种图形界面的第三方库。包括:</p>
+<ul>
+<li>TK                  图形库,由Tcl语言开发的。python调用内置tkinter库。</li>
+<li>wxWidgets   图形库,由C++语言开发。Python第三方库wxPython封装了此图形库。</li>
+<li>Qt                  非常强大的应用程序开发框架,可开发GUI或非GUI程序。python第三方库PyQt。</li>
+<li>GTK               对应python的第三库为PyGTK。</li>
+</ul>
+<h4 id="Qt概念"><a href="#Qt概念" class="headerlink" title="Qt概念"></a>Qt概念</h4><p>Qt是一个由C++编写的跨平台的应用程序开发框架。可以用来开发GUI程序，也可以用来开发非GUI程序。目前Qt有两种版本，一种是商业版本（付费使用），另一种则是基于(L)GPL v3的开源版本。</p>
+<p>Qt具体在某些方面的应用，大家可以访问<a href="(https://www.qt.io/cn">Qt官网</a>)进行查看。</p>
+<h4 id="PyQt概念"><a href="#PyQt概念" class="headerlink" title="PyQt概念"></a>PyQt概念</h4><p>Qt和PyQt有什么区别？简而言之，PyQt是Qt的一个wrapper(封装)。PyQt为python开发GUI程序提供了解决方案，同样PyQt也是跨平台的，支持Linux、Windows、Mac OS。从PyQt4开始，所有平台上均支持GPL(General Public License)协议即开源协议。</p>
+<p>PyQt官方网站请<a href="https://riverbankcomputing.com/news" target="_blank" rel="noopener">点击</a>。PyQt4官方文档请<a href="https://www.riverbankcomputing.com/static/Docs/PyQt4/" target="_blank" rel="noopener">点击</a>。</p>
+<h5 id="版本"><a href="#版本" class="headerlink" title="版本"></a>版本</h5><p>目前有PyQt4和PyQt5两种版本，且两者不兼容。PyQt4在官网介绍说明中，未来将不会得到支持，所以PyQt5是未来的一个趋势。当然目前PyQt4使用最为广泛。</p>
+<p>本文主要以PyQt4进行介绍。</p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><p>PyQt安装这一块，可能比较复杂。需要下载包手动安装。工具包<a href="https://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.4/" target="_blank" rel="noopener">下载地址</a>。</p>
+<p>首先PyQt工具包版本需要与Python版本进行匹配。版本位数也必须要匹配，比如python解释器是32位，那么工具包也必须是32位的。这里推荐大家版本都采用64位。</p>
+<h4 id="组件模块"><a href="#组件模块" class="headerlink" title="组件模块"></a>组件模块</h4><p>PyQt4为跨平台的工具包，它包括了300多个类和6000多个方法。由于过多的类和方法，整个工具库被划分成了多个模块。不同模块主要实现不同的功能，这一部分大家主要了解以下模块的主要作用。并学习掌握几个关键模块。</p>
+<p>具体模块如下:</p>
+<ul>
+<li><strong>QtGui</strong>       模块包括图形化窗口组件和及相关类。包括如按钮、窗体、状态栏、滑块、位图、颜色、字体等等。</li>
+<li><strong>QtCore</strong>       模块包括了核心的非GUI功能，该模块用来对时间、文件、目录、各种数据类型、流、网址、媒体类型、线程或进程进行处理。</li>
+<li><strong>QtHelp</strong>            模块包含了用于创建和查看可查找的文档的类。</li>
+<li><strong>QtNetwork</strong>     模块包括网络编程的类。这些类可以用来编写TCP/IP和UDP的客户端和服务器。它们使得网络编程更容易和便捷。</li>
+<li><strong>QtOpenGL</strong>       模块使用OpenGL库来渲染3D和2D图形。该模块使得Qt GUI库和OpenGL库无缝集成。</li>
+<li><strong>QtScript</strong>            模块包含了使PyQt应用程序使用JavaScript解释器编写脚本的类。</li>
+<li><strong>QtSql</strong>                 模块提供操作数据库的类。</li>
+<li><strong>QtSvg</strong>                 模块提供了显示SVG文件内容的类。可缩放矢量图形(SVG)是一种用XML描述二维图形和图形应用的语言。</li>
+<li><strong>QtTest</strong>             模块包含了对PyQt应用程序进行单元测试的功能。（PyQt没有实现完全的Qt单元测试框架，相反，它假设使用标准的Python单元测试框架来实现模拟用户和GUI进行交互。）</li>
+<li><strong>QtWebKit</strong>         模块实现了基于开源浏览器引擎WebKit的浏览器引擎。</li>
+<li><strong>QtXml</strong>              包括处理XML文件的类，该模块提供了SAX和DOM  API的接口。</li>
+<li><strong>QtAssistant</strong>    模块包含的类允许集成 Qt Assistant到PyQt应用程序中，提供在线帮助。</li>
+<li><strong>QtDesigner</strong>     模块包含的类允许使用PyQt扩展 Qt Designer。</li>
+<li><strong>uic</strong>          模块包含的类用来处理.ui文件，该文件由Qt Designer创建，用于描述整个或者部分用户界面。它包含的加载.ui文件和直接渲染以及从.ui文件生成Python代码为以后执行的类。</li>
+</ul>
+<h5 id="常用组件"><a href="#常用组件" class="headerlink" title="常用组件"></a>常用组件</h5><p>以下描述组件均为GUI界面的组件，属于QtGui模块。重点关注几个常用组件的信号和方法。</p>
+<p><strong><em>1、按键QPushButton</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化button类，得到一个按键对象</span></span><br><span class="line">ok_button = QtGui.QPushButton(<span class="string">'OK'</span>, widget)</span><br></pre></td></tr></table></figure>
+<p>信号:</p>
+<ul>
+<li>clicked()：按键被点击后触发的信号；</li>
+<li>pressed()：按键倍按下触发的信号；</li>
+<li>released()：按键被释放（抬起）时触发的信号；</li>
+</ul>
+<p>构造方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加一个按键，并设置图标和文本</span></span><br><span class="line">__init__(self, QIcon, QString_text, QWidget parent = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p><strong><em>2、行编辑框QLineEdit</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化类，得到对象</span></span><br><span class="line">useredit = QtGui.QLineEdit(widget)</span><br></pre></td></tr></table></figure>
+<p>信号:</p>
+<ul>
+<li>cursorPositionChanged(int,int)：光标位置改变触发；</li>
+<li>editingFinished()：编辑完成后触发的信号（编辑框失去光标）；</li>
+<li>textChanged(const QString&amp;)：文本内容改变时触发的信号；</li>
+</ul>
+<p>构造方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个行编辑框</span></span><br><span class="line">__init__(self, QWidget parent = <span class="keyword">None</span>)</span><br><span class="line"><span class="comment"># 生成一个带初始值的行编辑框</span></span><br><span class="line">__init__(self, QString contents, QWidget parent = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>方法:</p>
+<ul>
+<li>clear(self)：清除编辑框内容；</li>
+<li>setText(self, QString)：设置编辑框的内容；</li>
+<li>text(self)：取编辑框内的文本内容；</li>
+<li>setMaxLength(self, int)：设置编辑框能够输入的最大长度</li>
+</ul>
+<p><strong><em>3、文本编辑框QTextEdit</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># QTextEdit类</span></span><br><span class="line">logedit = QtGui.QTextEdit(widget)</span><br></pre></td></tr></table></figure>
+<p>信号:</p>
+<ul>
+<li>cursorPositionChanged()：光标位置改变触发；</li>
+<li>textChanged(const QString&amp;)：文本内容改变时触发的信号；</li>
+</ul>
+<p>构造方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成一个文本编辑框</span></span><br><span class="line">__init__(self, QWidget parent = <span class="keyword">None</span>)</span><br><span class="line"><span class="comment"># 生成一个有初始文本的文本编辑框</span></span><br><span class="line">__init__(self, QString_text, QWidget parent = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>方法:</p>
+<ul>
+<li>clear(self)：清除编辑框内容；</li>
+<li>setText(self, QString)：设置编辑框的内容；</li>
+<li>toPlainText(self)：以文本的格式取编辑框内的文本内容；</li>
+<li>toHtml(self)：以HTML的格式取编辑框内的文本内容；</li>
+</ul>
+<p><strong><em>4、标签QLabel</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userlabel = QtGui.QLabel(<span class="string">'label'</span>, widget)</span><br></pre></td></tr></table></figure>
+<p>构造方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__init__(self, QWidget parent = <span class="keyword">None</span>, Qt.WindowFlags flags = <span class="number">0</span>)：</span><br><span class="line"><span class="comment"># 带值的标签</span></span><br><span class="line">__init__(self, QString_text, QWidget parent = <span class="keyword">None</span>, Qt.WindowFlags flags = <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<p>方法:</p>
+<ul>
+<li>clear(self)：清除编辑框内容；</li>
+<li>setText(self, QString)：设置编辑框的内容；</li>
+<li>text(self)：取编辑框内的文本内容；</li>
+</ul>
+<p><strong><em>5、下拉框QComboBox</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 得到下拉框对象</span></span><br><span class="line">select_box= QtGui.QComboBox(widget)</span><br></pre></td></tr></table></figure>
+<p>信号:</p>
+<ul>
+<li>currentIndexChanged(int)：选择项改变时触发，返回当前选项序号</li>
+<li>currentIndexChanged(const QString&amp;)：选择项改变时触发，返回当前选项文本</li>
+<li>activated(int)：当用户选择下拉列表的项时触发，即使选择项未改变</li>
+<li>activated(const QString&amp;)：当用户选择下拉列表的项时触发，即使选择项未改变</li>
+</ul>
+<p>构造方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__init__(self, QWidget parent = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>方法:</p>
+<ul>
+<li>addItem(self, QString text, QVariant userData = QVariant())：给下拉列表添加下拉项；</li>
+<li>addItems(self, QStringList texts)：给下拉列表添加多个下拉项；</li>
+<li>currentIndex(self)：返回当前下拉列表的下拉项序号；</li>
+<li>currentText(self)：返回当前下拉列表的下拉项文本；</li>
+<li>setItemText(self, int index, QString text)：设置下拉项的文本</li>
+</ul>
+<p><strong><em>6、树结构QTreeWidget</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 树结构对象</span></span><br><span class="line">casetree = QtGui.QTreeWidget(self.centralwidget)</span><br></pre></td></tr></table></figure>
+<p>信号:</p>
+<ul>
+<li>itemClicked(QTreeWidgetItem*,int)：选项被点击时触发</li>
+<li>itemCollapsed(QTreeWidgetItem*)：子选项被隐藏时触发</li>
+<li>itemDoubleClicked(QTreeWidgetItem*,int)：选项被双击时触发</li>
+<li>itemExpanded(QTreeWidgetItem*)：子选项被展示时触发</li>
+</ul>
+<p>构造方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__init__(self, QWidget parent = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>方法:</p>
+<ul>
+<li>setColumnCount(self, int columns)：设置树结构的列数；</li>
+<li>setHeaderLabels(self, QStringList labels)：设置列标签；</li>
+<li>headerItem(self)：返回用于树窗口小部件标题的项目；</li>
+</ul>
+<p><strong><em>7、树目录QTreeWidgetItem</em></strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root= QtGui.QTreeWidgetItem(self.casetree)</span><br></pre></td></tr></table></figure>
+<p>构造方法:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">__init__(self, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QStringList strings, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QTreeWidget parent, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QTreeWidget parent, QStringList strings, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QTreeWidget parent, QTreeWidgetItem preceding, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QTreeWidgetItem parent, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QTreeWidgetItem parent, QStringList strings, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QTreeWidgetItem parent, QTreeWidgetItem preceding, int type = QTreeWidgetItem.Type)</span><br><span class="line">__init__(self, QTreeWidgetItem other)</span><br></pre></td></tr></table></figure>
+<p>方法:</p>
+<ul>
+<li>addChild(self, QTreeWidgetItem child)：添加子节点；</li>
+<li>checkState(self, int column)：检查点击状态；</li>
+<li>setCheckState(self, int column, Qt.CheckState state)：设置选项的选中状态，第二个参数为QT.Checked表示选中，Qt.UnChecked表示未选中；</li>
+<li>setData(self, int column, int role, QVariant value)：设置选项的角色值；</li>
+<li>setText(self, int column, QString atext)：设置选项的文本内容</li>
+</ul>
+<h5 id="界面布局"><a href="#界面布局" class="headerlink" title="界面布局"></a>界面布局</h5><p>这一块大家了解一下即可。基本上GUI界面都是通过绘图得到的。</p>
+<p>1、绝对定位</p>
+<p>用像素(px)指定每个组件(控件)的大小和位置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用move方法确定组件的位置</span></span><br><span class="line">move(x, y)</span><br><span class="line"><span class="comment"># 开始的两个参数是窗体的x和y的位置，a、b为组件的宽度、高度</span></span><br><span class="line">setGeometry(x, y, a, b)</span><br></pre></td></tr></table></figure>
+<p>2、框布局</p>
+<p>基本的布局类是QHBoxLayout 和 QVBoxLayout ，它们可以横向和纵向排列窗口组件。QHBoxLayout布局类为水平布局类，在该布局中的组件呈水平排列。QVBoxLayout 布局类为垂直布局类，在该布局中的组件呈垂直排列。框布局就是结合水平布局与垂直布局，使组件能够二维分布</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line">    <span class="string">"""docstring for ClassName"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent=None)</span>:</span></span><br><span class="line">        super(MainWindow, self).__init__()</span><br><span class="line">        self.initUI()</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        okButton = QtGui.QPushButton(<span class="string">"OK"</span>)</span><br><span class="line">        cancelButton = QtGui.QPushButton(<span class="string">"Cancel"</span>)</span><br><span class="line">        hbox = QtGui.QHBoxLayout()</span><br><span class="line">        hbox.addStretch(<span class="number">1</span>)</span><br><span class="line">        hbox.addWidget(okButton)</span><br><span class="line">        hbox.addStretch(<span class="number">1</span>)</span><br><span class="line">        hbox.addWidget(cancelButton)</span><br><span class="line">        vbox = QtGui.QVBoxLayout()</span><br><span class="line">        vbox.addStretch(<span class="number">1</span>)</span><br><span class="line">        vbox.addLayout(hbox)</span><br><span class="line">        vbox.addStretch(<span class="number">1</span>)</span><br><span class="line">        self.setLayout(vbox)</span><br><span class="line">        self.setWindowTitle(<span class="string">'box layout'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    window = MainWindow()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<p>3、网格布局</p>
+<p>最常用的布局类是网格布局，网格布局把空间划分成行和列，一般使用 QGridLayout 类来创建网格布局。布局类型设置好以后使用addWidget() 方法来把窗口组件加到网格中，参数是部件（widget），行（row）和列（column）数字。</p>
+<ul>
+<li>addWidget(widget-obj)：给布局添加组件，将我们需要用到的控件加入到布局中；</li>
+<li>addLayout(Layout-obj)：给布局添加另一个布局，使用框布局通常需要用该方法将水平布局和垂直布局结合；</li>
+</ul>
+<p>代码实例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line">    <span class="string">"""docstring for ClassName"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent=None)</span>:</span></span><br><span class="line">        super(MainWindow, self).__init__()</span><br><span class="line">        self.initUI()</span><br><span class="line">        </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.setWindowTitle(<span class="string">'grid layout'</span>)</span><br><span class="line">        names = [<span class="string">'Cls'</span>, <span class="string">'Bck'</span>, <span class="string">''</span>, <span class="string">'Close'</span>, <span class="string">'7'</span>, <span class="string">'8'</span>, <span class="string">'9'</span>, <span class="string">'/'</span>,</span><br><span class="line">                 <span class="string">'4'</span>, <span class="string">'5'</span>, <span class="string">'6'</span>, <span class="string">'*'</span>, <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'-'</span>,</span><br><span class="line">                 <span class="string">'0'</span>, <span class="string">'.'</span>, <span class="string">'='</span>, <span class="string">'+'</span>]</span><br><span class="line">        grid = QtGui.QGridLayout()</span><br><span class="line">        j = <span class="number">0</span></span><br><span class="line">        pos = [(<span class="number">0</span>, <span class="number">0</span>), (<span class="number">0</span>, <span class="number">1</span>), (<span class="number">0</span>, <span class="number">2</span>), (<span class="number">0</span>, <span class="number">3</span>),</span><br><span class="line">               (<span class="number">1</span>, <span class="number">0</span>), (<span class="number">1</span>, <span class="number">1</span>), (<span class="number">1</span>, <span class="number">2</span>), (<span class="number">1</span>, <span class="number">3</span>),</span><br><span class="line">               (<span class="number">2</span>, <span class="number">0</span>), (<span class="number">2</span>, <span class="number">1</span>), (<span class="number">2</span>, <span class="number">2</span>), (<span class="number">2</span>, <span class="number">3</span>),</span><br><span class="line">               (<span class="number">3</span>, <span class="number">0</span>), (<span class="number">3</span>, <span class="number">1</span>), (<span class="number">3</span>, <span class="number">2</span>), (<span class="number">3</span>, <span class="number">3</span> ),</span><br><span class="line">               (<span class="number">4</span>, <span class="number">0</span>), (<span class="number">4</span>, <span class="number">1</span>), (<span class="number">4</span>, <span class="number">2</span>), (<span class="number">4</span>, <span class="number">3</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> names:</span><br><span class="line">            button = QtGui.QPushButton(i)</span><br><span class="line">            <span class="keyword">if</span> j == <span class="number">2</span>:</span><br><span class="line">                grid.addWidget(QtGui.QLabel(<span class="string">''</span>), <span class="number">0</span>, <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                grid.addWidget(button, pos[j][<span class="number">0</span>], pos[j][<span class="number">1</span>])</span><br><span class="line">            j = j + <span class="number">1</span></span><br><span class="line">        self.setLayout(grid)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    window = MainWindow()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<h5 id="GUI页面"><a href="#GUI页面" class="headerlink" title="GUI页面"></a>GUI页面</h5><p>我们将利用QtGui模块实现生成GUI界面，学习常用的几个类。</p>
+<p><em>实例一</em>：学习了解几个方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># 创建app对象，每个PyQt程序都必须创建一个Application对象</span></span><br><span class="line">    <span class="comment"># sys.argv获取参数列表</span></span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    <span class="comment"># w为QWidget类的对象,QWidget窗口组件是PyQt4所有用户界面的基类</span></span><br><span class="line">    w =QtGui.QWidget()</span><br><span class="line">    <span class="comment"># 初始化界面的大小，以下单位为像素(px)</span></span><br><span class="line">    w.resize(<span class="number">250</span>, <span class="number">150</span>)</span><br><span class="line">    <span class="comment"># 移动窗口的位置</span></span><br><span class="line">    w.move(<span class="number">300</span>, <span class="number">300</span>)</span><br><span class="line">    <span class="comment"># 设置界面标题</span></span><br><span class="line">    w.setWindowTitle(<span class="string">'Simple GUI'</span>)</span><br><span class="line">    <span class="comment"># 设置应用程序图标</span></span><br><span class="line">    w.setWindowIcon(QtGui.QIcon(<span class="string">'icons/web.png'</span>))</span><br><span class="line">    <span class="comment"># show()方法将GUI界面显示在屏幕上</span></span><br><span class="line">    w.show()</span><br><span class="line">    <span class="comment"># 退出循环时，调用exit()方法关闭</span></span><br><span class="line">    sys.exit(app.exec_())</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<p><em>实例二</em>：了解事件和QMessageBox</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line">    <span class="string">"""主GUI界面窗口"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent=None)</span>:</span></span><br><span class="line">        <span class="comment"># 继承父类的构造方法,也可称之为超类</span></span><br><span class="line">        super(MainWindow, self).__init__()</span><br><span class="line">        <span class="comment"># setGeometry()方法定义了窗体在屏幕上的位置,并设置窗体的大小。</span></span><br><span class="line">        <span class="comment"># 开始的两个参数是窗体的x和y的位置，后面两个为GUI界面的宽度、高度</span></span><br><span class="line">        self.setGeometry(<span class="number">200</span>,<span class="number">200</span>,<span class="number">600</span>,<span class="number">500</span>)</span><br><span class="line">        <span class="comment"># 设置标题</span></span><br><span class="line">        self.setWindowTitle(<span class="string">'test'</span>)</span><br><span class="line">        <span class="comment"># 气泡提示</span></span><br><span class="line">        self.setToolTip(<span class="string">'This is a &lt;b&gt;QWidget&lt;/b&gt; widget.'</span>)</span><br><span class="line">        <span class="comment"># 设置字体</span></span><br><span class="line">        <span class="comment"># QtGui.QToolTip.setFont(QtGui.QFont('OldEnglish', 10))</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">closeEvent</span><span class="params">(self, event)</span>:</span></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        关闭GUI界面时，将会产生一个 QCloseEvent事件。</span></span><br><span class="line"><span class="string">        这里重写了closeEvent方法，实现关闭窗口时需要确认。改变了组件的行为。</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line">        reply = QtGui.QMessageBox.question(self,<span class="string">'Message'</span>,<span class="string">'Are you sure to  quit?'</span>,QtGui.QMessageBox.Yes,QtGui.QMessageBox.No)</span><br><span class="line">        <span class="keyword">if</span> reply == QtGui.QMessageBox.Yes:</span><br><span class="line">            event.accept()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            event.ignore()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    window = MainWindow()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<p><em>实例三</em>：</p>
+<p>学习主GUI界面的状态栏、菜单栏、工具栏。工具栏一般不常用，常用的是另外两个。</p>
+<p>注意：QMainWindow类才有状态栏、菜单栏、工具栏。QWidget与QDialog类型的窗口都不能这样使用。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui, QtCore</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line">    <span class="string">"""主GUI界面窗口"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent=None)</span>:</span></span><br><span class="line">        <span class="comment"># 继承父类的构造方法</span></span><br><span class="line">        super(MainWindow, self).__init__()</span><br><span class="line">        self.resize(<span class="number">600</span>,<span class="number">500</span>)</span><br><span class="line">        self.setWindowTitle(<span class="string">'Test'</span>)</span><br><span class="line">        <span class="comment"># 调用QMainWindow的statusBar()方法得到状态栏</span></span><br><span class="line">        <span class="comment"># 调用showMessage()方法显示状态信息</span></span><br><span class="line">        self.statusBar().showMessage(<span class="string">'Ready'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义一个exit的动作，设置图标和名字</span></span><br><span class="line">        exit = QtGui.QAction(QtGui.QIcon(<span class="string">''</span>),<span class="string">'Exit'</span>,self) </span><br><span class="line">        <span class="comment"># 设置动作的快捷键</span></span><br><span class="line">        exit.setShortcut(<span class="string">'Ctrl+Q'</span>)</span><br><span class="line">        <span class="comment"># 状态栏显示exit动作提示信息</span></span><br><span class="line">        exit.setStatusTip(<span class="string">'Exit the Application'</span>) </span><br><span class="line">        <span class="comment"># connect()方法连接信号和槽函数</span></span><br><span class="line">        self.connect(exit, QtCore.SIGNAL(<span class="string">'triggered()'</span>), QtCore.SLOT(<span class="string">'close()'</span>))</span><br><span class="line">        <span class="comment"># 调用menuBar()方法得到菜单栏</span></span><br><span class="line">        menu = self.menuBar()</span><br><span class="line">        <span class="comment"># 调用addMenu()方法得到菜单项</span></span><br><span class="line">        tools = menu.addMenu(<span class="string">'&amp;Tools'</span>)</span><br><span class="line">        <span class="comment"># 添加动作到菜单</span></span><br><span class="line">        tools.addAction(exit)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 通过addToolBar()方法得到工具栏,工具栏一般不常用。</span></span><br><span class="line">        self.toolbar = self.addToolBar(<span class="string">'GoBack'</span>)</span><br><span class="line">        <span class="comment">#初始化一个动作</span></span><br><span class="line">        goback = QtGui.QAction(QtGui.QIcon(<span class="string">''</span>),<span class="string">'goback'</span>,self)</span><br><span class="line">        <span class="comment">#设置动作的快捷方式</span></span><br><span class="line">        goback.setShortcut(<span class="string">'Ctrl+D'</span>)</span><br><span class="line">        <span class="comment">#将动作添加到工具栏</span></span><br><span class="line">        self.toolbar.addAction(goback)   </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    window = MainWindow()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<h4 id="事件、信号与槽"><a href="#事件、信号与槽" class="headerlink" title="事件、信号与槽"></a>事件、信号与槽</h4><p>这部分是PyQt程序一个核心部分。开发PyQt程序必须要掌握理解以下概念</p>
+<h5 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h5><p>事件（Events）是 GUI 程序中很重要的一部分。它由用户或系统产生。当我们调用程序的 exec_()方法时，程序就会进入主循环中。主循环捕获事件并将它们发送给相应的对象进行处理，事件往往伴随着一个信号的发生，或一个信号的处理。</p>
+<p>这里事件（Events）包括鼠标点击、键盘按键输入等事件。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui, QtCore</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KeyExample</span><span class="params">(QtGui.QWidget)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(KeyExample, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.setWindowTitle(<span class="string">'Escape'</span>)</span><br><span class="line">        self.resize(<span class="number">500</span>, <span class="number">500</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">keyPressEvent</span><span class="params">(self, event)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> event.key() == QtCore.Qt.Key_Escape:</span><br><span class="line">            self.close()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    ex = KeyExample()</span><br><span class="line">    ex.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<h5 id="信号与槽"><a href="#信号与槽" class="headerlink" title="信号与槽"></a>信号与槽</h5><p>当用户单击一个按钮，拖动一个滑块或进行其它动作时，相应的信号就会被触发。除此之外，信号还可以因为环境的变化而被发射。比如一个运行的时钟将会发射时间信号等。而所谓的槽则是一个方法(函数)，该方法将会响应它所连接的信号。在 Python 中，槽可以是任何可以被调用的对象。槽一般为事件处理函数，专门用于处理某个信号。</p>
+<p>在PyQt中，通过connect()方法连接信号与槽函数。此方法一般传入的参数为发送信号的对象、信号、对信号作出反应的方法(槽函数)。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">connect(sender, QtCore.SIGNAL(<span class="string">'clicked()'</span>), revicer, QtCore.SLOT())</span><br></pre></td></tr></table></figure>
+<p>我们来看一个信号与槽的代码实例，目前我们用的最多就是button按钮的信号（clicked()）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui, QtCore</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ButtonExample</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(ButtonExample, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.initUI()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initUI</span><span class="params">(self)</span>:</span></span><br><span class="line">        button1 = QtGui.QPushButton(<span class="string">"Button 1"</span>, self)</span><br><span class="line">        button1.move(<span class="number">30</span>, <span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">        button2 = QtGui.QPushButton(<span class="string">"Button 2"</span>, self)</span><br><span class="line">        button2.move(<span class="number">150</span>, <span class="number">50</span>)</span><br><span class="line">		<span class="comment"># 连接信号与槽函数</span></span><br><span class="line">        self.connect(button1, QtCore.SIGNAL(<span class="string">'clicked()'</span>),</span><br><span class="line">            self.buttonClicked)</span><br><span class="line">		</span><br><span class="line">        self.connect(button2, QtCore.SIGNAL(<span class="string">'clicked()'</span>),</span><br><span class="line">            self.buttonClicked)</span><br><span class="line"></span><br><span class="line">        self.statusBar().showMessage(<span class="string">'Ready'</span>)</span><br><span class="line">        self.setWindowTitle(<span class="string">'Event sender'</span>)</span><br><span class="line">        self.resize(<span class="number">290</span>, <span class="number">150</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">buttonClicked</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""自定义槽函数，对信号作出反应"""</span></span><br><span class="line">        <span class="comment"># sender()方法获取产生信号的对象</span></span><br><span class="line">        sender = self.sender()</span><br><span class="line">        self.statusBar().showMessage(sender.text() + <span class="string">' was pressed'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    button = ButtonExample()</span><br><span class="line">    button.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<h5 id="自定义信号"><a href="#自定义信号" class="headerlink" title="自定义信号"></a>自定义信号</h5><p>当然，我们也可以自定义信号。自定义信号不仅可以用于改变页面的显示状态，还可用于GUI线程与逻辑线程之间的数据传递。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建一个不传递参数的信号</span></span><br><span class="line">self.mysignal = QtCore.SIGNAL(<span class="string">'bigthan10()'</span>)   </span><br><span class="line"><span class="comment"># 使用emit()方法发送信号</span></span><br><span class="line">self.emit(self.mysignal)                                         </span><br><span class="line"><span class="comment"># 创建一个传递参数的信号，参数类型为int</span></span><br><span class="line">self.mysignal = QtCore.pyqtSignal(int)</span><br><span class="line"><span class="comment"># 发送信号</span></span><br><span class="line">self.mysignal.emit(<span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>:使用自定义的槽函数处理<em>自定义带传递参数</em>的信号时，槽函数的参数与信号的参数必须保持一致（参数类型、参数个数、参数顺序）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui, QtCore</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindow</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line">    <span class="comment"># 定义一个信号，信号不能定义在构造函数中，否则会报错</span></span><br><span class="line">    mysignal = QtCore.pyqtSignal(str)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        </span><br><span class="line">        super(MainWindow,self).__init__()</span><br><span class="line">        self.setGeometry(<span class="number">100</span>,<span class="number">100</span>,<span class="number">500</span>,<span class="number">500</span>)</span><br><span class="line">        self.setWindowTitle(<span class="string">'test'</span>)</span><br><span class="line">        <span class="comment">#self.setWindowIcon(QtGui.QIcon('C:\Users\Administrator\cut.png'))</span></span><br><span class="line">        self.statusbar =self.statusBar()     <span class="comment">#创建一个状态栏</span></span><br><span class="line">        self.mysignal.connect(self.statusMessage)   <span class="comment">#连接信号与槽函数</span></span><br><span class="line">        date =time.ctime()    </span><br><span class="line">        self.mysignal.emit(str(date))    <span class="comment">#发射信号</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">statusMessage</span><span class="params">(self,date)</span>:</span></span><br><span class="line">        <span class="comment"># 自定义槽函数  </span></span><br><span class="line">        self.statusbar.showMessage(<span class="string">"now is %s!"</span>%date)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    window = MainWindow()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<h4 id="画图"><a href="#画图" class="headerlink" title="画图"></a>画图</h4><p>此部分为开发PyQt程序的核心部分。</p>
+<p>前面我们介绍了GUI界面的相关组件、以及如何通过代码实现得到一个GUI界面。对于简单的图形界面，我们可以通过编写源码实现。但是如果图形界面过于复杂时，此时通过编码方式生成图形界面，工作量是非常巨大。此时我们可以通过PyQt工具包的Designer工具设计图形界面，保存得到.ui文件，然后通过命令得到此GUI界面的python源码。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyuic4 gui.ui &gt; gui.py</span><br></pre></td></tr></table></figure>
+<p>现场演示如何使用此工具。</p>
+<h5 id="Designer工具"><a href="#Designer工具" class="headerlink" title="Designer工具"></a>Designer工具</h5><p>1、组件栏：显示组件，供用户选择</p>
+<p>2、主界面栏：显示主界面，相当与一个画布，可以在上面设计我们需要的页面</p>
+<p>3、对象编辑栏：包括几个部分</p>
+<ul>
+<li>对象查看器：查看当前页面上存在的对象以及层次结构，显示对象名与对象类型，我们可以在这里修改对象名；</li>
+<li>属性编辑器：用于编辑对象的属性信息，在页面或对象查看器上选择对象，然后在属性编辑器上就能查看或修改到该对象所拥有的属性；</li>
+<li>资源浏览器：查看可用资源；</li>
+<li>信号/槽编辑器：创建信号与槽的关系，可以指定到某个对象</li>
+<li>动作编辑器：编辑动作，可添加到菜单栏或工具栏</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui,QtCore</span><br><span class="line"><span class="keyword">from</span> gui <span class="keyword">import</span> Ui_MainWindow</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainWindoW</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line">    <span class="string">"""导入gui.py得到图形界面"""</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(MainWindoW, self).__init__()</span><br><span class="line">        self.ui = Ui_MainWindow()</span><br><span class="line">        self.ui.setupUi(self)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    wm = MainWindoW()</span><br><span class="line">    wm.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><p>此部分为图形化编程核心部分。</p>
+<p>在GUI编程中，由于主界面是一个无限循环，且一直监听事务的发生，所以如果在主UI线程中做一些耗时的操作，会导致线程阻塞卡死，所以PyQt编程需要将主UI线程与逻辑线程分离，将一些耗时的操作都放在子线程里执行，主线程与子线程之间的数据传递通过自定义信号实现，PyQt中定义的线程管理类为位于QtCore包的QThread类。</p>
+<h5 id="线程管理类QThread"><a href="#线程管理类QThread" class="headerlink" title="线程管理类QThread"></a>线程管理类QThread</h5><p>首先我们先学习QThread类有哪些方法。</p>
+<p>1、信号</p>
+<ul>
+<li>finished()          当线程执行完成触发该信号</li>
+<li>started()            当线程开始时触发该信号</li>
+<li>terminated()     当线程被中断停止时触发该信号</li>
+</ul>
+<p>2、方法</p>
+<ul>
+<li>__init__(self, QObject parent = None)     parent参数为父类线程的窗口类</li>
+<li>quit(self)                    终止线程执行</li>
+<li>terminate(self)         终止线程，可能立即终止，也不能不会立即终止。</li>
+<li>wait(self, int msecs = ULONG_MAX)               线程睡眠，等待</li>
+<li>start(self)                   拉起线程，并执行。</li>
+<li>run(self)                     线程主体函数，调用start()方法后，便会执行run()方法中的代码。一般逻辑处理代码均写在run()函数中</li>
+<li>currentThread()         返回当前的线程对象</li>
+<li>currentThreadId()      返回当前线程Id</li>
+</ul>
+<h5 id="线程之间数据传递"><a href="#线程之间数据传递" class="headerlink" title="线程之间数据传递"></a>线程之间数据传递</h5><p>1、通过PyQt中信号与槽的机制传递数据。</p>
+<p>2、通过自定义的公共配置文件传递数据（如config.ini）。</p>
+<h5 id="编写一个子线程"><a href="#编写一个子线程" class="headerlink" title="编写一个子线程"></a>编写一个子线程</h5><p>继承QThread类，重写run方法。</p>
+<p>代码实例如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> sys, time</span><br><span class="line"><span class="keyword">from</span> PyQt4 <span class="keyword">import</span> QtGui, QtCore</span><br><span class="line"><span class="keyword">from</span> PyQt4.QtGui <span class="keyword">import</span> QPushButton, QLineEdit</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimeThread</span><span class="params">(QtCore.QThread)</span>:</span></span><br><span class="line">    <span class="string">"""工作线程"""</span></span><br><span class="line">    <span class="comment"># 自定义信号，指定参数类型为str</span></span><br><span class="line">    signal_time = QtCore.pyqtSignal(str) </span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, parent=None)</span>:</span></span><br><span class="line">        super(TimeThread, self).__init__(parent)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">start_timer</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.start()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">stop_timer</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.terminate()</span><br><span class="line">        self.wait()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            print(<span class="string">"Working"</span>, self.thread())</span><br><span class="line">            print(time.ctime(),type(time.ctime()))</span><br><span class="line">            <span class="comment"># 发送信号,并携带参数值</span></span><br><span class="line">            self.signal_time.emit(time.ctime())</span><br><span class="line">            self.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimeWindow</span><span class="params">(QtGui.QMainWindow)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        super(TimeWindow, self).__init__()</span><br><span class="line"></span><br><span class="line">        self.init_ui()</span><br><span class="line">        <span class="comment"># 实例化子线程</span></span><br><span class="line">        self.timer_t = TimeThread()</span><br><span class="line">        <span class="comment"># 信号连接槽函数</span></span><br><span class="line">        self.timer_t.signal_time.connect(self.update_timer_tv)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">init_ui</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""生成GUI界面"""</span></span><br><span class="line">        self.resize(<span class="number">300</span>, <span class="number">300</span>)</span><br><span class="line">        self.setWindowTitle(<span class="string">'Time Clock'</span>)</span><br><span class="line">        self.statusBar().showMessage(<span class="string">'Ready'</span>)</span><br><span class="line">        <span class="comment"># 初始化行标签对象</span></span><br><span class="line">        self.timer_tv = QLineEdit(self)</span><br><span class="line">        self.timer_tv.setText(<span class="string">"Wait"</span>)</span><br><span class="line">        self.timer_tv.setGeometry(<span class="number">15</span>, <span class="number">15</span>, <span class="number">270</span>, <span class="number">25</span>)</span><br><span class="line">        <span class="comment"># self.timer_tv.move(15, 15)</span></span><br><span class="line"></span><br><span class="line">        lable1 = QtGui.QLabel(<span class="string">'Current Time'</span>,self)</span><br><span class="line">        lable1.move(<span class="number">150</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化设置Quit按键对象</span></span><br><span class="line">        stop_btn = QPushButton(<span class="string">'Stop'</span>, self)</span><br><span class="line">        stop_btn.setToolTip(<span class="string">'Click to Stop'</span>)</span><br><span class="line">        stop_btn.move(<span class="number">150</span>, <span class="number">150</span>)</span><br><span class="line">        <span class="comment"># 连接clicked信号和槽函数</span></span><br><span class="line">        self.connect(stop_btn, QtCore.SIGNAL(<span class="string">"clicked()"</span>), self.click_stop_button)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化设置start按键对象</span></span><br><span class="line">        start_btn = QPushButton(<span class="string">'Start'</span>, self)</span><br><span class="line">        start_btn.setToolTip(<span class="string">"Click to start"</span>)</span><br><span class="line">        start_btn.move(<span class="number">50</span>, <span class="number">150</span>)</span><br><span class="line">        <span class="comment"># 连接clicked信号和槽函数</span></span><br><span class="line">        self.connect(start_btn, QtCore.SIGNAL(<span class="string">"clicked()"</span>), self.click_start_button)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">click_start_button</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""槽函数拉起执行子线程"""</span></span><br><span class="line">        self.timer_t.start_timer()</span><br><span class="line">        self.statusBar().showMessage(<span class="string">'Go'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">click_stop_button</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">"""槽函数终止子线程"""</span></span><br><span class="line">        self.timer_t.stop_timer()</span><br><span class="line">        self.statusBar().showMessage(<span class="string">'Ready'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_timer_tv</span><span class="params">(self, text)</span>:</span></span><br><span class="line">        <span class="comment"># 槽函数</span></span><br><span class="line">        self.timer_tv.setText(text)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    app = QtGui.QApplication(sys.argv)</span><br><span class="line">    window = TimeWindow()</span><br><span class="line">    window.show()</span><br><span class="line">    sys.exit(app.exec_())</span><br></pre></td></tr></table></figure>
+<h4 id="开发PyQt程序"><a href="#开发PyQt程序" class="headerlink" title="开发PyQt程序"></a>开发PyQt程序</h4><h5 id="开发过程"><a href="#开发过程" class="headerlink" title="开发过程"></a>开发过程</h5><ol>
+<li>确认需求</li>
+<li>画图得到gui.ui文件，通过命令转换为python源码</li>
+<li>编写主界面源码，得到界面</li>
+<li>定义config.ini文件用来保存GUI界面的参数信息</li>
+<li>编写后端代码（线程类）</li>
+<li>连接信号和槽函数</li>
+<li>调试运行</li>
+</ol>
+<h5 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h5><ol>
+<li><p>安装PyQt时，注意版本之间的对应关系(包括位版本，如32位、64位)。</p>
+</li>
+<li><p>编写线程代码时，注意线程卡死问题。</p>
+</li>
+<li><p>GUI界面参数传递到后台，注意参数的类型和值。一般的，都需要对参数进行处理。</p>
+<p>（这里推荐python内置函数eval()）</p>
+</li>
+</ol>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/08/12/requests包总结/" data-toggle="tooltip" data-placement="top" title="requests模块方法总结">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#PyQt" title="PyQt">PyQt</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
+                    
+                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2019/09/28/使用PyQt工具包开发PyQt程序总结/";
+    var disqus_url = "https://alanfanh.github.io/2019/09/28/使用PyQt工具包开发PyQt程序总结/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/Alan_Fan_H">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/Alan Fan">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/alanfanh">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Fannnhao&#39;s blog 2019 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://alanfanh.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA';
+    var _gaDomain = 'test.me';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
