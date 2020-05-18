@@ -184,6 +184,34 @@
 
 <div class="post-preview">
 
+    <a href="/2019/03/18/Linux下shell编程相关总结/">
+        <h2 class="post-title">
+            shell编程的一些Tips
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前言本文主要总结编写shelll脚本时会遇到的一些坑，另外总结shell编程中如何实现外部传参。
+shell编程注意事项.sh文件头部需要添加如下信息，笔者曾因为漏写了bin前面的/，执行时出现各种未知问题。
+1#!/bin/bash
+注意.sh文件的编码格式，打开.sh文件
+1vim example.sh
+不进入.sh文件的编辑模式，输入如下命令然后回车查看文件格式
+1:set ff
+文件......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2019-03-18
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2019/03/08/scapy包学习总结/">
         <h2 class="post-title">
             scapy包总结
@@ -393,29 +421,6 @@ py2exepy2exe是一个将python脚本转换成windows上的可独立执行的可�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/06/28/paramiko包简单学习/">
-        <h2 class="post-title">
-            paramiko包学习及简单应用
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            在我们的PyAuto的自动化平台有用到这个包模块，这是一个第三方包。拥有很强大的功能，可以通过SSH连接远程主机，实现执行命令、文件传输、SSH代理等功能。甚至你可以利用这个包，写一个SSH登录工具。目前在自动化平台主要用来连接Centos系统，发送并执行linux命令。
-安装1pip install paramiko
-源码分析12345678910111213141516171819#!/......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-06-28
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -455,13 +460,17 @@ py2exepy2exe是一个将python脚本转换成windows上的可独立执行的可�
                     <div class="tags">
                         
                             
-                            <a href="/tags/#python" title="python" rel="9">python</a>
-                            
-                        
-                            
                         
                             
                             <a href="/tags/#Linux" title="Linux" rel="2">Linux</a>
+                            
+                        
+                            
+                        
+                            
+                            <a href="/tags/#python" title="python" rel="9">python</a>
+                            
+                        
                             
                         
                             
@@ -469,11 +478,9 @@ py2exepy2exe是一个将python脚本转换成windows上的可独立执行的可�
                             
                         
                             
-                        
-                            
-                        
-                            
                             <a href="/tags/#Python" title="Python" rel="6">Python</a>
+                            
+                        
                             
                         
                             

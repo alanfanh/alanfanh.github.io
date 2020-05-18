@@ -13,11 +13,11 @@
 
     <title>
         
-          FanHao的博客 | Fanhao&#39;s Blog
+          Django项目部署注意点 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/page/3/">
+    <link rel="canonical" href="https://alanfanh.github.io/2020/05/08/Django项目部署注意点/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,335 +147,114 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Fannnhao&#39;s blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">To be A coder!</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Django" title="Django">Django</a>
+                        
+                    </div>
+                    <h1>Django项目部署注意点</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2020-05-08
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <!-- Main Content -->
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-
-<div class="post-preview">
-
-    <a href="/2018/06/28/paramiko包简单学习/">
-        <h2 class="post-title">
-            paramiko包学习及简单应用
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            在我们的PyAuto的自动化平台有用到这个包模块，这是一个第三方包。拥有很强大的功能，可以通过SSH连接远程主机，实现执行命令、文件传输、SSH代理等功能。甚至你可以利用这个包，写一个SSH登录工具。目前在自动化平台主要用来连接Centos系统，发送并执行linux命令。
-安装1pip install paramiko
-源码分析12345678910111213141516171819#!/......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-06-28
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/06/20/getopt模块用法/">
-        <h2 class="post-title">
-            getopt模块用法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            &emsp;&emsp;因为需要通过外部传参来执行python代码，查阅资料，了解到python自带的getopt模块能够实现我的需求。此篇文章主要记录getopt模块的相关用法。
-getopt简述&emsp;&emsp;getopt模块专门用来处理命令行参数。具体用法我们通过代码实例进行验证。&emsp;&emsp;如果你想直接一步到位，不想阅读我后面的文章，你也可以输入以下代码查看相关帮......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-06-20
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/05/10/python+selenium技术/">
-        <h2 class="post-title">
-            python+selenium技术
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            &emsp;&emsp;这两天软件的一位同学，让我用python给他写一个挂机脚本。具体需求是：登录设备管理页面，进入指定页面，等待页面超时，再进行点击页面操作;之前这一块技术，自己学习过。但是坑爹的是，很长一段时间没使用，对于定位标签，竟然还需要去查找资料。此篇文章主要记录selenium相关技术，包括关于如何定位页面标签。省去以后查找资料的时间。
-什么是selenium？&emsp;&e......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-05-10
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/05/02/Sublime Text3快捷编译python程序/">
-        <h2 class="post-title">
-            MacOS平台在Sublime Text3中快速运行python代码
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            公司电脑是window系统，写python代码一直默认用的是notepad++。后面为了在自己的Macbook练习python程序，了解到了有一款神器—Sublime Text3。以下主要记录如何配置Sublime Text3使其快捷运行python代码。
-配置过程tab键设置python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。1、菜单栏打开Pre......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-05-02
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/04/30/macOS平台安装使用虚拟机实践/">
-        <h2 class="post-title">
-            macOS平台虚拟机安装使用实践
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            应用场景因为女朋友周末在家工作需要用到windows系统，而家里只有一台macbook pro。博主之前读书时用到的windows笔记本，因为体验太差，被博主彻底抛弃，放在老家吃灰。因为只是简单的办公需求，重新购置一台新的windows笔记本也不够划算。所以考虑以上种种。博主考虑到使用parallels Desktop+win7的一个解决方案。当然还有其他的解决方法，比如说安装双系统、直接安......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-04-30
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/04/20/hexo+github搭建个人专属博客/">
-        <h2 class="post-title">
-            hexo+github搭建个人专属博客
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            &emsp;&emsp;一直以来想搭建属于自己的博客，终于前段时间集中精力与时间去做了这件事情。  
-什么是hexo？&emsp;&emsp;Hexo是一个快速，简洁且高效的博客框架，并且免费。
-安装软件环境安装node.js&emsp;&emsp;访问node.js官网，根据自己计算机的操作系统选择相应的安装版本。然后再选择stable版本点击下载。双击下载的安装包，点击安装。注意：win......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-04-20
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/04/17/hello-world/">
-        <h2 class="post-title">
-            Hello Hexo
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Qu......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-04-17
-    </p>
-
-</div>
-<hr>
-
-
-
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/page/2/">&larr; Newer Posts</a>
-        </li>
-    
-    
+                <p>之前部署django项目到生产环境中时，遇到几个问题。现在将问题总结一下，django版本如下</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">django</span>=<span class="number">2.2</span>.<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>关闭调试模式</strong></li>
 </ul>
+<p>创建django项目时，项目的setting.py中的DEBUG默认为True。此参数代表web项目处于开发模式中。django项目部署到生产环境中时，需要关闭此选项。如下</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DEBUG</span> = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>设置允许访问的hosts</strong></li>
+</ul>
+<p>项目setting.py中的ALLOWED_HOSTS选项默认为空，如下。当项目处于开发模式时，此选项不生效，也就不需要关注此选项。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = []</span><br></pre></td></tr></table></figure>
+<p>当项目部署在生产环境下，并且关闭DEBUG模式时。此时该选项功能将生效，如果一直默认为空，将导致客户端无法正常访问服务。如果没有特殊要求，直接设置允许所有主机访问Web服务即可，即如下所示。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = [<span class="string">"*"</span>]</span><br></pre></td></tr></table></figure>
+<p>如果不想允许所有主机访问Web服务，则可以设置此字段选项。</p>
 
 
+                <hr>
 
-                <!-- 如果开启评论功能 -->
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2019/09/28/使用PyQt工具包开发PyQt程序总结/" data-toggle="tooltip" data-placement="top" title="PyQt工具开发PyQt程序">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Linux" title="Linux" rel="2">Linux</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#python" title="python" rel="9">python</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Hexo" title="Hexo" rel="2">Hexo</a>
-                            
-                        
-                            
-                            <a href="/tags/#Python" title="Python" rel="6">Python</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
+                       
+                          <a class="tag" href="/tags/#Django" title="Django">Django</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar.jpg">
-                        
-
-                        
-                            <p>我要成为code的魔法师!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://twitter.com/Alan_Fan_H">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.facebook.com/Alan Fan">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://github.com/alanfanh">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -494,9 +273,32 @@ Qu......
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2020/05/08/Django项目部署注意点/";
+    var disqus_url = "https://alanfanh.github.io/2020/05/08/Django项目部署注意点/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
 
 
     <!-- Footer -->
