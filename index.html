@@ -184,6 +184,31 @@
 
 <div class="post-preview">
 
+    <a href="/2020/05/24/Centos安装pcie网卡驱动/">
+        <h2 class="post-title">
+            Centos安装拓展PCIe网卡驱动
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            记录一次在centos7.7中安装拓展PCIe网卡的驱动的过程。
+查询网卡安装完PCIe网卡后，首先查询网卡是否能被系统正常识别。其次查询扩展网卡的型号，一般指网卡的芯片。
+1lspci | grep Ethernet
+输出结果如下
+186:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 ......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-05-24
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2020/05/08/Django项目部署注意点/">
         <h2 class="post-title">
             Django项目部署注意点
@@ -421,28 +446,6 @@ PyMySQL模块首先总结pymysql模块所常用到的一些方法，它主要用
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2019/04/01/部署Flask-web项目踩坑之旅/">
-        <h2 class="post-title">
-            部署Flask-Web项目踩坑之旅
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言献给那些和我一样懵懂中不断汲取知识，进步的人们。
-部署目标web项目基于python3+flask+MySQL进行开发。项目为实验室资产管理平台，面向用户为实验室管理员提供管理权限，为其他同事提供查询权限。项目准备部署在本地虚拟机系统上（Linux），采用服务器组件为nginx+uWSGI+MySQL，至于为什么选择这些组件，因为是行业标准。刚开始部署的时候采用的是centos系统，部署......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-04-01
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -478,15 +481,17 @@ PyMySQL模块首先总结pymysql模块所常用到的一些方法，它主要用
                     <div class="tags">
                         
                             
+                            <a href="/tags/#Centos" title="Centos" rel="2">Centos</a>
+                            
                         
                             
                             <a href="/tags/#python" title="python" rel="9">python</a>
                             
                         
                             
-                            <a href="/tags/#Linux" title="Linux" rel="2">Linux</a>
-                            
                         
+                            
+                            <a href="/tags/#Linux" title="Linux" rel="3">Linux</a>
                             
                         
                             
@@ -498,7 +503,7 @@ PyMySQL模块首先总结pymysql模块所常用到的一些方法，它主要用
                             
                         
                             
-                            <a href="/tags/#Python" title="Python" rel="7">Python</a>
+                            <a href="/tags/#Python" title="Python" rel="8">Python</a>
                             
                         
                             

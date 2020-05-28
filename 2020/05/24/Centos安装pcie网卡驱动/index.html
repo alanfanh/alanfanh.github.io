@@ -13,11 +13,11 @@
 
     <title>
         
-          About - FanHao的博客 | Fanhao&#39;s Blog
+          Centos安装拓展PCIe网卡驱动 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/about/">
+    <link rel="canonical" href="https://alanfanh.github.io/2020/05/24/Centos安装pcie网卡驱动/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,204 +147,125 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg-o.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>About</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Alan</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Centos" title="Centos">Centos</a>
+                        
+                    </div>
+                    <h1>Centos安装拓展PCIe网卡驱动</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2020-05-24
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <p>Hello,I’m Alan.<br>Welcome to my personal blog.I’m going to record my technical knowledge in my blog. Hope to help you.</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>记录一次在centos7.7中安装拓展PCIe网卡的驱动的过程。</p>
+<h4 id="查询网卡"><a href="#查询网卡" class="headerlink" title="查询网卡"></a>查询网卡</h4><p>安装完PCIe网卡后，首先查询网卡是否能被系统正常识别。其次查询扩展网卡的型号，一般指网卡的芯片。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lspci | grep Ethernet</span><br></pre></td></tr></table></figure>
+<p>输出结果如下</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">86:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet controller (rev 06)</span><br></pre></td></tr></table></figure>
+<p>从以上输出结果可知，系统已经识别到了PCIe网卡，并且网卡型号为Realtek 8111/8168/8411。</p>
+<h4 id="安装驱动"><a href="#安装驱动" class="headerlink" title="安装驱动"></a>安装驱动</h4><p>安装网卡驱动有两种方式，第一种根据网卡型号去厂商的官网下载对应的驱动文件。第二种则是下载centos的rpm包。</p>
+<h5 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h5><p>首先进入<a href="https://www.realtek.com" target="_blank" rel="noopener">Realtek官网</a>，主菜单选择下载中心-通讯网络ICs，进入驱动下载页面。页面产品线选项依次选择Network Interface Controllers、Gigabit Ethernet、PCI Express；即可筛选出RTL8111型号的网卡驱动。</p>
+<p>下载Linux驱动，下载地址<a href="https://www.realtek.com/zh-tw/component/zoo/category/network-interface-controllers-10-100-1000m-gigabit-ethernet-pci-express-software" target="_blank" rel="noopener">请点</a>。</p>
+<p>下载成功后，得到tar.bz2压缩包。通过rz命令将此压缩包导入centos系统中。使用如下命令解压压缩包。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xjvf r8168-8.048.02.tar.bz2</span><br></pre></td></tr></table></figure>
+<p>进入解压目录，查看readme文件。根据readme提示操作，执行以下脚本即可安装网卡驱动。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./autorun.sh</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：我在centos7.7下，执行上述命令安装驱动时，出现了报错。确认过Linux内核版本符合驱动要求，而且尝试了很多解决办法，但此问题一直没有解决。如果有读者解决了这个问题，希望能通过邮件的方式将解决方案发送给我。</p>
+<h5 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h5><p>因为第一种方法无法成功安装驱动，于是只有找第二种安装驱动的方法。去centos的pkg网站找，是否有根据原厂网卡驱动制作的rpm包。rpm包网站<a href="https://centos.pkgs.org/7" target="_blank" rel="noopener">地址</a>。</p>
+<p>这里我找到了centos7.7下的r8168网卡驱动的<a href="https://centos.pkgs.org/7/elrepo-x86_64/kmod-r8168-8.048.00-1.el7_7.elrepo.x86_64.rpm.html" target="_blank" rel="noopener">第三方包</a>。</p>
+<p>通过wget命令下载rpm包，注意包模块以rpm结尾，而不是html结尾。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirror.rackspace.com/elrepo/elrepo/el7/x86_64/kmod-r8168-8.048.00-1.el7_7.elrepo.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>解压并安装rpm包</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -ivb kmod-r8168-8.048.00-1.el7_7.elrepo.x86_64.rpm</span><br></pre></td></tr></table></figure>
+<p>查询rpm包是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpm -qa | grep r8168</span><br></pre></td></tr></table></figure>
+<p>安装成功后，通过以上命令查询会回显rpm包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kmod-r8168-8.048.00-1.el7_7.elrepo.x86_64</span><br></pre></td></tr></table></figure>
+<p>在通过命令查询r8168驱动是否安装成功，预期能输出r8168</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod <span class="string">| grep r8168</span></span><br></pre></td></tr></table></figure>
 
 
-                <!-- 如果开启评论功能 -->
+                <hr>
+
                 
-                    <hr>
 
+                <ul class="pager">
                     
-
                     
-                    <!-- disqus 评论框 start -->
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                    <!-- disqus 评论框 end -->
+                        <li class="next">
+                            <a href="/2020/05/08/Django项目部署注意点/" data-toggle="tooltip" data-placement="top" title="Django项目部署注意点">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
 
+                
 
-                    
-
-                    
-                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = "hexo-theme-huxblog";
-                        var disqus_identifier = "https://alanfanh.github.io/about/index.html";
-                        var disqus_url = "https://alanfanh.github.io/about/index.html";
-
-                        (function() {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-
-                        
-                    </script>
-                    <!-- disqus 公共JS代码 end -->
-                    
-
-
-
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                            <a href="/tags/#Centos" title="Centos" rel="2">Centos</a>
-                            
-                        
-                            
-                            <a href="/tags/#python" title="python" rel="9">python</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Linux" title="Linux" rel="3">Linux</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Hexo" title="Hexo" rel="2">Hexo</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Python" title="Python" rel="8">Python</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
+                       
+                          <a class="tag" href="/tags/#Centos" title="Centos">Centos</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar.jpg">
-                        
-
-                        
-                            <p>我要成为code的魔法师!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://twitter.com/Alan_Fan_H">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.facebook.com/Alan Fan">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://github.com/alanfanh">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -363,9 +284,32 @@
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2020/05/24/Centos安装pcie网卡驱动/";
+    var disqus_url = "https://alanfanh.github.io/2020/05/24/Centos安装pcie网卡驱动/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
 
 
     <!-- Footer -->
