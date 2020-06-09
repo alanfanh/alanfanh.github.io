@@ -13,11 +13,11 @@
 
     <title>
         
-          Linux系统网络设置总结 - FanHao的博客 | Fanhao&#39;s Blog
+          Centos中安装telnet服务 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2019/05/28/Ubuntu18设置网络服务总结/">
+    <link rel="canonical" href="https://alanfanh.github.io/2020/06/02/centos中安装telnet服务/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                          <a class="tag" href="/tags/#Centos" title="Centos">Centos</a>
                         
                     </div>
-                    <h1>Linux系统网络设置总结</h1>
+                    <h1>Centos中安装telnet服务</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by FanHao on
-                        2019-05-28
+                        2020-06-02
                     </span>
                 </div>
             </div>
@@ -191,45 +191,51 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h4><h5 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h5><p>Ubuntu/Debian比较类似，本文操作的系统是ubuntu-18.04.2-LTS 64位系统。</p>
-<p>首先需要更新apt-get包管理工具，然后安装net-tools工具</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install net-tools</span><br></pre></td></tr></table></figure>
-<h5 id="绑定域名和IP地址"><a href="#绑定域名和IP地址" class="headerlink" title="绑定域名和IP地址"></a>绑定域名和IP地址</h5><p>打开/etc/host文件。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br></pre></td></tr></table></figure>
-<p>按i进入编辑模式，输入以下内容，绑定IP地址和域名。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">172<span class="selector-class">.16</span><span class="selector-class">.105</span><span class="selector-class">.207</span>  <span class="selector-tag">smtp</span><span class="selector-class">.xxxx</span><span class="selector-class">.cn</span></span><br></pre></td></tr></table></figure>
-<p>按Esc键，再输入:wq进行保存。</p>
-<h5 id="开机自动加载路由"><a href="#开机自动加载路由" class="headerlink" title="开机自动加载路由"></a>开机自动加载路由</h5><p>打开/etc/network/interfaces，网络接口配置。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/network/interfaces</span><br></pre></td></tr></table></figure>
-<p>按i进入编辑模式，输入以下内容，设置网卡接口为静态IP，并自动加载路由。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto ens38</span><br><span class="line">iface ens38 inet static</span><br><span class="line">address 192.168.97.64</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">up route add -net 172.16.105.0 netmask 255.255.255.0 gw 192.168.97.1 ens38</span><br></pre></td></tr></table></figure>
-<p>按Esc键，再输入:wq进行保存。</p>
-<h5 id="静态DNS设置"><a href="#静态DNS设置" class="headerlink" title="静态DNS设置"></a>静态DNS设置</h5><p>使用以下命令可以查看各网络接口的DNS以及全局DNS。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-resolve  --status</span><br></pre></td></tr></table></figure>
-<p>修改/etc/resolv.conf文件，添加DNS。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/resolv.conf</span><br></pre></td></tr></table></figure>
-<p>添加全局DNS信息，修改以下文件。（如无必要，不建议修改）</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/resolved.conf</span><br></pre></td></tr></table></figure>
-<h5 id="开机自动运行"><a href="#开机自动运行" class="headerlink" title="开机自动运行"></a>开机自动运行</h5><p>一般Linux系统启动，初始化加载initd，但ubuntu18.04改用了systemd管理。systemd 默认会读取 /etc/systemd/system下的文件。执行以下命令，可以查看到该路径下存在很多指向/lib/systemd/system目录文件的软连接。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/systemd/system</span><br></pre></td></tr></table></figure>
-<p>执行以下命令。你可以看到有很多启动脚本，其中就有我们需要的rc.local.service。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /lib/systemd/system</span><br></pre></td></tr></table></figure>
-<p>编辑打开rc.local.service</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim etc/rc.local.service</span><br></pre></td></tr></table></figure>
-<p>在文件中添加如下内容</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">Alias=rc-local.service</span><br></pre></td></tr></table></figure>
-<p>创建软连接至/etc/systemd/system路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /lib/systemd/system/rc.local.service  /etc/systemd/system/rc.local.service</span><br></pre></td></tr></table></figure>
-<p>编辑文件/etc/rc.local</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
-<p>添加如下内容，注意执行脚本命令必须放在exit 0前面。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!bin/sh</span></span><br><span class="line"><span class="comment">#rc.local</span></span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">echo</span> <span class="string">"this is a test"</span> &gt; /usr/<span class="built_in">local</span>/test.log</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
-<p>赋予可执行权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 /etc/rc.local</span><br></pre></td></tr></table></figure>
-<p>重启系统</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo shutdown -r now</span><br></pre></td></tr></table></figure>
-<p>查看/usr/local目录，存在该文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+                <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>系统为Centos7.7 64bit，非mini版本。默认安装有rpm和yum工具。</p>
+<h4 id="安装telnet"><a href="#安装telnet" class="headerlink" title="安装telnet"></a>安装telnet</h4><p>首先可以检查系统是否已经安装telnet</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># rpm -qa | grep telnet</span></span><br><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta">#</span></span><br></pre></td></tr></table></figure>
+<p>内容回显为空，表明当前没有安装telnet相关服务</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum search telnet</span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading<span class="built_in"> mirror </span>speeds <span class="keyword">from</span> cached hostfile</span><br><span class="line"> * base: mirrors.aliyun.com</span><br><span class="line"> * extras: mirrors.aliyun.com</span><br><span class="line"> * updates: mirrors.163.com</span><br><span class="line">======================================= N/S matched: telnet =========================</span><br><span class="line">perl-Net-Telnet.noarch : Net-Telnet Perl module</span><br><span class="line">telnet.x86_64 : The<span class="built_in"> client </span>program <span class="keyword">for</span> the Telnet remote login protocol</span><br><span class="line">telnet-server.x86_64 : The<span class="built_in"> server </span>program <span class="keyword">for</span> the Telnet remote login protocol</span><br><span class="line">tn5250.i686 : 5250 Telnet protocol <span class="keyword">and</span> Terminal</span><br><span class="line">tn5250.x86_64 : 5250 Telnet protocol <span class="keyword">and</span> Terminal</span><br><span class="line"></span><br><span class="line">  Name <span class="keyword">and</span> summary matches only, use <span class="string">"search all"</span> <span class="keyword">for</span> everything.</span><br></pre></td></tr></table></figure>
+<p>通过yum包管理工具，安装telnet客户端和telnet服务</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># yum -y install telnet</span></span><br><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># yum -y install telnet-server</span></span><br></pre></td></tr></table></figure>
+<p>安装完成后，可以查询包是否安装成功</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm  -qa | grep telnet</span><br><span class="line">telnet<span class="number">-0.17</span><span class="number">-65.</span>el7_8.x86_64</span><br><span class="line">telnet-server<span class="number">-0.17</span><span class="number">-65.</span>el7_8.x86_64</span><br></pre></td></tr></table></figure>
+<h4 id="安装xinetd"><a href="#安装xinetd" class="headerlink" title="安装xinetd"></a>安装xinetd</h4><p>xinetd主要用来管理telnet服务进程。在Linux系统中，进程分为三类。</p>
+<ul>
+<li>独立守护进程：</li>
+</ul>
+<p>大多数服务的进程都是独立守护进程，他们一启动都会监听在某个套接字上等待请求报文的到来。如：  httpd(tcp/80)https(tcp/443)mysql(tcp/3306)php(tcp/9000)ssh(tcp/22)</p>
+<p>独立守护进程一般都可以用chkconfig –list +服务名 显示其运行级别</p>
+<p>独立守护进程都可以用 service 服务名 start|stop|restart|status</p>
+<ul>
+<li>非独立守护进程</li>
+</ul>
+<p>非独立守护进程都没有运行级别，所有的非独立守护进程都由xinetd进程进行控制，xinetd一启动,这些非独立进程才会启动;</p>
+<ul>
+<li>超级守护进程</li>
+</ul>
+<p>Xinetd作为一个超级守护进程它可以代理那些不常用的非独立守护进程监听在相应的端口，如Telnet(tcp/23) Swap(tcp/901)。swap是Samba的图形配置软件;</p>
+<p>这些服务平时很少用，为了节省资源，就由xinetd代理监听在相应端口如telnet tcp/23，一旦有请求到来，会先到达xinetd，xinetd再根据请求报文的端口号是23，临时启telnet服务进程，请求响应完毕又会继续关闭进程，继续让xinetd监听。所有非独立守护进程的配置文件在/etc/xinetd.d/目录下。</p>
+<p>首先检查系统是否安装xinetd</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># rpm -qa | grep xinetd</span></span><br><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta">#</span></span><br></pre></td></tr></table></figure>
+<p>通过yum进行安装</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># yum install xinetd</span></span><br></pre></td></tr></table></figure>
+<p>启用xinetd服务</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># systemctl restart xinetd.service</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>配置telnet服务，进入xinetd.d目录下配置telnet服务配置。如果没有telnet文件则手动创建</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># cd /etc/xinetd.d</span></span><br><span class="line">[root<span class="symbol">@localhost</span> xinetd.d]<span class="meta"># vim telnet</span></span><br></pre></td></tr></table></figure>
+<p>在telnet文件中添加如下配置</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost xinetd.d] cat telnet</span><br><span class="line">service telnet</span><br><span class="line">&#123;</span><br><span class="line">  flags = REUSE</span><br><span class="line">  socket_type = stream</span><br><span class="line">  wait = <span class="literal">no</span></span><br><span class="line"> <span class="built_in"> user </span>= root</span><br><span class="line"> <span class="built_in"> server </span>= /usr/sbin/<span class="keyword">in</span>.telnetd</span><br><span class="line">  log_on_failure += USERID</span><br><span class="line">  <span class="builtin-name">disable</span> = <span class="literal">no</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>启用xinet服务</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[root@localhost xinetd.d]</span> <span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">xinetd</span><span class="selector-class">.service</span></span><br></pre></td></tr></table></figure>
+<p>查询xinet服务是否监听23端口</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="variable">@localhost</span> xinetd.d] netstat -anltp | grep xinet</span><br><span class="line">tcp6       <span class="number">0</span>      <span class="number">0</span> ::<span class="symbol">:</span><span class="number">23</span>                   ::<span class="symbol">:*</span>              LISTEN      <span class="number">4754</span>/xinetd</span><br></pre></td></tr></table></figure>
+<p>此时还无法通过telnet登录，还需设置防火墙。查看防火墙添加的服务。防火墙允许的服务中，并不包含telnet。</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># firewall-cmd --list-services</span></span><br><span class="line">dhcpv6-client ssh</span><br></pre></td></tr></table></figure>
+<p>将telnet添加到防火墙服务中，此时即可通过telnet远程登录centos。</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># firewall-cmd --add-service=telnet</span></span><br></pre></td></tr></table></figure>
+<p>设置xinetd服务和telnet服务开机自启动</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># systemctl enable xinetd.service</span></span><br><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># systemctl enable telnet.socket</span></span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -238,13 +244,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2019/06/28/任务调度模块APScheduler总结/" data-toggle="tooltip" data-placement="top" title="任务调度模块APScheduler总结">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2019/04/18/操作MySQL的几种方法总结/" data-toggle="tooltip" data-placement="top" title="操作MySQL数据库的几种方法">Next Post &rarr;</a>
+                            <a href="/2020/05/24/Centos安装pcie网卡驱动/" data-toggle="tooltip" data-placement="top" title="Centos安装拓展PCIe网卡驱动">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -277,7 +279,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                          <a class="tag" href="/tags/#Centos" title="Centos">Centos</a>
                         
                     </div>
                 </section>
@@ -313,8 +315,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2019/05/28/Ubuntu18设置网络服务总结/";
-    var disqus_url = "https://alanfanh.github.io/2019/05/28/Ubuntu18设置网络服务总结/";
+    var disqus_identifier = "https://alanfanh.github.io/2020/06/02/centos中安装telnet服务/";
+    var disqus_url = "https://alanfanh.github.io/2020/06/02/centos中安装telnet服务/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
