@@ -90,6 +90,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -98,13 +105,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -184,6 +184,36 @@
 
 <div class="post-preview">
 
+    <a href="/2020/10/10/搭建dhcp服务器/">
+        <h2 class="post-title">
+            在Centos中搭建DHCP服务器
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            系统平台系统为Centos7.7 x86_64，已安装rpm和yum等工具
+安装查询是否已安装软件包，已安装可以跳过此步骤
+1rpm -q dhcp
+如果未安装则通过yum安装
+1yum install -y dhcp
+也可以搜索安装其他dhcp服务器软件包
+1yum search all dhcp
+配置配置网卡接口为静态ip
+1ifconfig eth1 192.168.11.1
+或者编辑......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-10-10
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2020/06/02/centos中安装telnet服务/">
         <h2 class="post-title">
             Centos中安装telnet服务
@@ -227,6 +257,32 @@
     <p class="post-meta">
         Posted by FanHao on
         2020-05-24
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/10/判断变量是否存在的方法/">
+        <h2 class="post-title">
+            python判断变量是否存在的几种方法
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            以下方法在python3.6中测试OK。
+####方法一：
+使用try: … except NameError: …
+1234567# var未定义try：		varexcept NameError：		var_exists = Falseelse:  	var_exists = True
+方法二：使用内置函数locals()，获取已定义对象字典。
+1234567# testvar 未定义&......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-05-10
     </p>
 
 </div>
@@ -397,55 +453,6 @@ pip国内常用镜像源如下：
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2019/06/28/任务调度模块APScheduler总结/">
-        <h2 class="post-title">
-            任务调度模块APScheduler总结
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言首先学习该模块之前，需要了解进程和操作系统的相关知识。
-什么是任务调度？任务调度是指基于给定的时间点，给定的时间间隔或者给定的执行次数自动的执行任务。任务调度是操作系统的重要组成部分，而对于实时的操作系统，任务调度直接影响着操作系统的实时性能。任务调度涉及到多线程并发、运行时间规则定制及解析、线程池的维护等诸多方面的工作。 
-APScheduler介绍APScheduler是一个Pyth......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-06-28
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2019/05/28/Ubuntu18设置网络服务总结/">
-        <h2 class="post-title">
-            Linux系统网络设置总结
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Ubuntu系统系统版本Ubuntu/Debian比较类似，本文操作的系统是ubuntu-18.04.2-LTS 64位系统。
-首先需要更新apt-get包管理工具，然后安装net-tools工具
-1sudo apt-get install net-tools
-绑定域名和IP地址打开/etc/host文件。
-1sudo vim /etc/hosts
-按i进入编辑模式，输入以下内容，绑定IP地......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-05-28
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -485,15 +492,13 @@ APScheduler介绍APScheduler是一个Pyth......
                             
                         
                             
-                            <a href="/tags/#Centos" title="Centos" rel="3">Centos</a>
-                            
-                        
-                            
-                        
+                            <a href="/tags/#Centos" title="Centos" rel="4">Centos</a>
                             
                         
                             
                             <a href="/tags/#python" title="python" rel="9">python</a>
+                            
+                        
                             
                         
                             
@@ -505,7 +510,11 @@ APScheduler介绍APScheduler是一个Pyth......
                             
                         
                             
-                            <a href="/tags/#Python" title="Python" rel="8">Python</a>
+                        
+                            
+                        
+                            
+                            <a href="/tags/#Python" title="Python" rel="9">Python</a>
                             
                         
                             
