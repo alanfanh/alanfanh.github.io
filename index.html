@@ -97,14 +97,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -207,6 +207,33 @@
     <p class="post-meta">
         Posted by FanHao on
         2020-10-10
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/09/28/Centos配置PPPoE服务器/">
+        <h2 class="post-title">
+            Centos配置PPPoE服务器
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            说明Centos7.7  x86_64,已安装yum和rpm工具
+安装服务器yum搜索rp-pppoe，并安装。
+1yum install -y rp-pppoe
+检查是否安装成功
+12rpm -q rp-pppoe# rp-pppoe-3.11-7.el7.x86_64
+配置启用以下配置仅支持IPv4，不包含IPv6的相关配置。
+12345678910# 编辑PPPoE服务配置文件vi /......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-09-28
     </p>
 
 </div>
@@ -428,31 +455,6 @@ MySQL数据库以下将主要涉及安装、数......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2019/08/12/requests包总结/">
-        <h2 class="post-title">
-            requests模块方法总结
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言使用这个库之前，最好能掌握http协议相关知识。本文总结requests库常用的一些方法，以及我在实际开发相关工具时遇到的问题。
-Requests库介绍如果需要了解更多详细内容和用法，请点击这里，查看官方API文档。
-Requests是一个非常强大的基于http协议的python库（package）。到目前为止，主要应用在以下几个方面:
-
-简单爬虫工具，构造http  get报文向指定网......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-08-12
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -488,7 +490,7 @@ Requests是一个非常强大的基于http协议的python库（package）。到�
                     <div class="tags">
                         
                             
-                            <a href="/tags/#Centos" title="Centos" rel="5">Centos</a>
+                            <a href="/tags/#Centos" title="Centos" rel="6">Centos</a>
                             
                         
                             
@@ -498,9 +500,9 @@ Requests是一个非常强大的基于http协议的python库（package）。到�
                             
                         
                             
-                        
-                            
                             <a href="/tags/#Linux" title="Linux" rel="3">Linux</a>
+                            
+                        
                             
                         
                             
@@ -510,9 +512,9 @@ Requests是一个非常强大的基于http协议的python库（package）。到�
                             
                         
                             
-                        
-                            
                             <a href="/tags/#Python" title="Python" rel="9">Python</a>
+                            
+                        
                             
                         
                             

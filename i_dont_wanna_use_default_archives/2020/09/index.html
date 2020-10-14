@@ -13,11 +13,11 @@
 
     <title>
         
-          python判断变量是否存在的几种方法 - FanHao的博客 | Fanhao&#39;s Blog
+          FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2020/05/10/判断变量是否存在的方法/">
+    <link rel="canonical" href="https://alanfanh.github.io/i_dont_wanna_use_default_archives/2020/09/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,158 +147,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
-                        
-                    </div>
-                    <h1>python判断变量是否存在的几种方法</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by FanHao on
-                        2020-05-10
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>以下方法在python3.6中测试OK。</p>
-<p>####方法一：</p>
-<p>使用try: … except NameError: …</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># var未定义</span></span><br><span class="line"><span class="keyword">try</span>：</span><br><span class="line">		var</span><br><span class="line"><span class="keyword">except</span> NameError：</span><br><span class="line">		var_exists = <span class="keyword">False</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  	var_exists = <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用内置函数locals()，获取已定义对象字典。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> locals().keys()</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">'a'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> locals().keys()</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h4><p>使用内置函数dir()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> dir()</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">'a'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> dir()</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法四："><a href="#方法四：" class="headerlink" title="方法四："></a>方法四：</h4><p>使用内置函数vars()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> vars()</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">'a'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> vars()</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2020/05/24/Centos安装pcie网卡驱动/" data-toggle="tooltip" data-placement="top" title="Centos安装拓展PCIe网卡驱动">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2020/05/08/Django项目部署注意点/" data-toggle="tooltip" data-placement="top" title="Django项目部署注意点">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
-                    
-                        <li><a href="#" target="_blank">Foo</a></li>
-                    
-                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
-                    
-                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
-                    
-                </ul>
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2020/05/10/判断变量是否存在的方法/";
-    var disqus_url = "https://alanfanh.github.io/2020/05/10/判断变量是否存在的方法/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-<!-- disqus 公共JS代码 end -->
-
-
-
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->

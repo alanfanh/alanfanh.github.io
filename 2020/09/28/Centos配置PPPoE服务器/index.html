@@ -13,11 +13,11 @@
 
     <title>
         
-          python判断变量是否存在的几种方法 - FanHao的博客 | Fanhao&#39;s Blog
+          Centos配置PPPoE服务器 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2020/05/10/判断变量是否存在的方法/">
+    <link rel="canonical" href="https://alanfanh.github.io/2020/09/28/Centos配置PPPoE服务器/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -165,14 +165,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                          <a class="tag" href="/tags/#Centos" title="Centos">Centos</a>
                         
                     </div>
-                    <h1>python判断变量是否存在的几种方法</h1>
+                    <h1>Centos配置PPPoE服务器</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by FanHao on
-                        2020-05-10
+                        2020-09-28
                     </span>
                 </div>
             </div>
@@ -191,16 +191,21 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>以下方法在python3.6中测试OK。</p>
-<p>####方法一：</p>
-<p>使用try: … except NameError: …</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># var未定义</span></span><br><span class="line"><span class="keyword">try</span>：</span><br><span class="line">		var</span><br><span class="line"><span class="keyword">except</span> NameError：</span><br><span class="line">		var_exists = <span class="keyword">False</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  	var_exists = <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用内置函数locals()，获取已定义对象字典。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> locals().keys()</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">'a'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> locals().keys()</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h4><p>使用内置函数dir()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> dir()</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">'a'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> dir()</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法四："><a href="#方法四：" class="headerlink" title="方法四："></a>方法四：</h4><p>使用内置函数vars()</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> vars()</span><br><span class="line"><span class="keyword">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">'a'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">'testvar'</span> <span class="keyword">in</span> vars()</span><br><span class="line"><span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+                <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p><code>Centos7.7  x86_64,已安装yum和rpm工具</code></p>
+<h4 id="安装服务器"><a href="#安装服务器" class="headerlink" title="安装服务器"></a>安装服务器</h4><p>yum搜索rp-pppoe，并安装。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y rp-pppoe</span><br></pre></td></tr></table></figure>
+<p>检查是否安装成功</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -q rp-pppoe</span><br><span class="line"><span class="meta">#</span><span class="bash"> rp-pppoe-3.11-7.el7.x86_64</span></span><br></pre></td></tr></table></figure>
+<h4 id="配置启用"><a href="#配置启用" class="headerlink" title="配置启用"></a>配置启用</h4><p><em>以下配置仅支持IPv4，不包含IPv6的相关配置。</em></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 编辑PPPoE服务配置文件</span></span><br><span class="line">vi /etc/ppp/pppoe-server-options</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加如下配置</span></span><br><span class="line">require-chap</span><br><span class="line">require-pap</span><br><span class="line">login</span><br><span class="line">lcp-echo-interval 10</span><br><span class="line">lcp-echo-failure 2</span><br><span class="line">ms-dns 114.114.114.114</span><br><span class="line">ms-dns 8.8.8.8</span><br></pre></td></tr></table></figure>
+<p>编辑认证options文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ppp/options</span><br><span class="line"><span class="comment"># 添加如下内容</span></span><br><span class="line">auth</span><br><span class="line">lock</span><br></pre></td></tr></table></figure>
+<p>添加chap认证方式拨号用户名及密码。添加pap认证，编辑pap-secrets文件参考如下添加</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ppp/chap-secrets</span><br><span class="line"><span class="comment"># Secrets for authentication using CHAP</span></span><br><span class="line"><span class="comment"># client        server  secret                  IP addresses</span></span><br><span class="line"><span class="string">"test"</span>            *      <span class="string">"test"</span>       *</span><br></pre></td></tr></table></figure>
+<p>设置IPv4地址转发功能</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br><span class="line"><span class="comment"># 添加如下配置</span></span><br></pre></td></tr></table></figure>
+<p>启用PPPoE服务器</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -I 指定接口 -L 指定虚拟接口地址 -R指定地址池起始地址 -N 指定地址数量 -F 前台显示</span></span><br><span class="line"><span class="comment"># -F不指定时默认生成进程后台运行</span></span><br><span class="line">pppoe-server -I eth1 -L 10.10.10.1 -R 10.10.10.10 -N 10 -F</span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -210,12 +215,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2020/05/24/Centos安装pcie网卡驱动/" data-toggle="tooltip" data-placement="top" title="Centos安装拓展PCIe网卡驱动">&larr; Previous Post</a>
+                            <a href="/2020/10/10/搭建dhcp服务器/" data-toggle="tooltip" data-placement="top" title="在Centos中搭建DHCP服务器">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2020/05/08/Django项目部署注意点/" data-toggle="tooltip" data-placement="top" title="Django项目部署注意点">Next Post &rarr;</a>
+                            <a href="/2020/08/20/Centos安装软件工具包的几种方式/" data-toggle="tooltip" data-placement="top" title="Centos安装软件工具包的几种方式">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -248,7 +253,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                          <a class="tag" href="/tags/#Centos" title="Centos">Centos</a>
                         
                     </div>
                 </section>
@@ -284,8 +289,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2020/05/10/判断变量是否存在的方法/";
-    var disqus_url = "https://alanfanh.github.io/2020/05/10/判断变量是否存在的方法/";
+    var disqus_identifier = "https://alanfanh.github.io/2020/09/28/Centos配置PPPoE服务器/";
+    var disqus_url = "https://alanfanh.github.io/2020/09/28/Centos配置PPPoE服务器/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
