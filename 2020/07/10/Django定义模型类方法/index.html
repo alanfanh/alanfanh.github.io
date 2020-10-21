@@ -13,11 +13,11 @@
 
     <title>
         
-          About - FanHao的博客 | Fanhao&#39;s Blog
+          Django定义模型类方法 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/about/">
+    <link rel="canonical" href="https://alanfanh.github.io/2020/07/10/Django定义模型类方法/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -147,210 +147,112 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg-o.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>About</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Alan</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Django" title="Django">Django</a>
+                        
+                    </div>
+                    <h1>Django定义模型类方法</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2020-07-10
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <p>Hello,I’m Alan.<br>Welcome to my personal blog.I’m going to record my technical knowledge in my blog. Hope to help you.</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><p>以下在<code>python3.6  Django2.2.10</code>测试通过</p>
+<h4 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h4><p><code>orm模型全称对象关系映射模型，能够将数据库中的表映射成类，记录（行数据）映射成对象，字段映射成对象的属性。</code></p>
+<p><code>定义数据类模型能够帮助我们在更上层设计业务逻辑，将复杂的业务逻辑与数据逻辑分离。</code></p>
+<p><code>对重复的业务逻辑代码或者数据查询代码，可封装成类方法，实现复用。</code></p>
+<p>以下定义了用户信息的模型代码。<code>UserInfo</code>类实例化后为用户对象，用户对象具备了用户名、工号等属性信息，同时具备<code>get_joined_ponits()</code>等方法。</p>
+<p>类方法也可以传递参数，以下代码类方法没有参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> training.models <span class="keyword">import</span> Course</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    用户详细信息表</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    id = models.AutoField(primary_key=<span class="keyword">True</span>)</span><br><span class="line">    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=<span class="keyword">True</span>)</span><br><span class="line">    job_num = models.CharField(verbose_name=<span class="string">"工号"</span>, max_length=<span class="number">8</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">    realname = models.CharField(verbose_name=<span class="string">"真实姓名"</span>, max_length=<span class="number">10</span>)</span><br><span class="line">    email = models.EmailField(verbose_name=<span class="string">"邮箱"</span>, max_length=<span class="number">32</span>)</span><br><span class="line">    phone = models.CharField(verbose_name=<span class="string">"手机号"</span>, max_length=<span class="number">11</span>)</span><br><span class="line">    group = models.ForeignKey(Group, related_name=<span class="string">'user_group'</span>, verbose_name=<span class="string">"用户所属组"</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    rank = models.ForeignKey(Rank, related_name=<span class="string">"user_rank"</span>, verbose_name=<span class="string">"用户职级"</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    role = models.ForeignKey(Role, related_name=<span class="string">'user_role'</span>, verbose_name=<span class="string">"用户角色"</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    education = models.CharField(verbose_name=<span class="string">"学历"</span>, max_length=<span class="number">20</span>)</span><br><span class="line">    pre_job = models.CharField(verbose_name=<span class="string">"上一份工作"</span>, max_length=<span class="number">20</span>)</span><br><span class="line">    entry_time = models.DateField(verbose_name=<span class="string">"入职时间"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name = <span class="string">"用户信息"</span></span><br><span class="line">        verbose_name_plural = <span class="string">"用户信息"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.user.username</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_joined_points</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 类方法，返回该User参加的培训的积分</span></span><br><span class="line">        course = Course.objects.filter(student=self.user.userinfo).exclude(teacher_id=self.id)</span><br><span class="line">        point = course.count() * <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> point</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_group_points</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 类方法，返回该User主持小组的培训的积分</span></span><br><span class="line">        course = Course.objects.filter(teacher_id=self.id).exclude(range=<span class="string">"测试部"</span>)</span><br><span class="line">        <span class="keyword">return</span> course.count() * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_department_points</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 类方法，返回该user主持部门的培训的积分</span></span><br><span class="line">        course = Course.objects.filter(teacher_id=self.id, range=<span class="string">"测试部"</span>)</span><br><span class="line">        <span class="keyword">return</span> course.count() * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>类方法在实例化后，可通过如下方式进行调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xiaoming = UserInfo.objects.get(id=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 返回xiaoming参加培训的积分</span></span><br><span class="line">xiaoming.get_joined_points()</span><br></pre></td></tr></table></figure>
 
 
-                <!-- 如果开启评论功能 -->
+                <hr>
+
                 
-                    <hr>
 
+                <ul class="pager">
                     
-
+                        <li class="previous">
+                            <a href="/2020/08/20/Centos安装软件工具包的几种方式/" data-toggle="tooltip" data-placement="top" title="Centos安装软件工具包的几种方式">&larr; Previous Post</a>
+                        </li>
                     
-                    <!-- disqus 评论框 start -->
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                    <!-- disqus 评论框 end -->
                     
-
-
+                        <li class="next">
+                            <a href="/2020/06/02/centos中安装telnet服务/" data-toggle="tooltip" data-placement="top" title="Centos中安装telnet服务">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
 
-                    
-                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        /* * * CONFIGURATION VARIABLES * * */
-                        var disqus_shortname = "hexo-theme-huxblog";
-                        var disqus_identifier = "https://alanfanh.github.io/about/index.html";
-                        var disqus_url = "https://alanfanh.github.io/about/index.html";
+                
 
-                        (function() {
-                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                        })();
-
-                        
-                    </script>
-                    <!-- disqus 公共JS代码 end -->
-                    
-
-
-
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                            <a href="/tags/#Centos" title="Centos" rel="6">Centos</a>
-                            
-                        
-                            
-                            <a href="/tags/#Django" title="Django" rel="2">Django</a>
-                            
-                        
-                            
-                            <a href="/tags/#python" title="python" rel="9">python</a>
-                            
-                        
-                            
-                            <a href="/tags/#Linux" title="Linux" rel="3">Linux</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Hexo" title="Hexo" rel="2">Hexo</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Python" title="Python" rel="9">Python</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
+                       
+                          <a class="tag" href="/tags/#Django" title="Django">Django</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar.jpg">
-                        
-
-                        
-                            <p>我要成为code的魔法师!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://twitter.com/Alan_Fan_H">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/alan.fan.h">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.facebook.com/Alan Fan">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="https://github.com/alanfanh">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -369,9 +271,32 @@
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://alanfanh.github.io/2020/07/10/Django定义模型类方法/";
+    var disqus_url = "https://alanfanh.github.io/2020/07/10/Django定义模型类方法/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
 
 
     <!-- Footer -->
