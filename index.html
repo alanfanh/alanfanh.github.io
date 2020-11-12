@@ -184,6 +184,60 @@
 
 <div class="post-preview">
 
+    <a href="/2020/11/08/Appium问题汇总/">
+        <h2 class="post-title">
+            Appium报错问题汇总
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            说明App自动化环境安装的系统平台为Windows，使用Appium，驱动安卓真机；脚本开发使用Python3
+以下总结此过程遇到一些问题及最终解决方案.
+
+问题持续更新中…
+
+问题汇总问题1，报错信息如下
+1error: Failed to start an Appium session, err was: Error: &apos;java - version&apos; failed.......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-11-08
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/11/07/获取Package和appActivity/">
+        <h2 class="post-title">
+            获取APP的Package和Activity
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            环境说明以下环境安装的系统平台为Windows，驱动安卓真机；脚本开发使用Python3
+
+获取Package和Activity前，需要确保App自动化测试环境搭建成功
+
+获取Package下面以speedtest App为例，其他安卓App获取方式同理
+方法一：通过adb命令获取
+12345# 查看当前device中所有apk对应的package name和pathadb shell pm......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-11-07
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2020/10/22/算法复杂度/">
         <h2 class="post-title">
             算法复杂度
@@ -381,57 +435,6 @@ django通过ORM定义模型类，以下为Person，Book模型代码
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2020/05/24/Centos安装pcie网卡驱动/">
-        <h2 class="post-title">
-            Centos安装拓展PCIe网卡驱动
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            记录一次在centos7.7中安装拓展PCIe网卡的驱动的过程。
-查询网卡安装完PCIe网卡后，首先查询网卡是否能被系统正常识别。其次查询扩展网卡的型号，一般指网卡的芯片。
-1lspci | grep Ethernet
-输出结果如下
-186:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-05-24
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/05/10/判断变量是否存在的方法/">
-        <h2 class="post-title">
-            python判断变量是否存在的几种方法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            以下方法在python3.6中测试OK。
-####方法一：
-使用try: … except NameError: …
-1234567# var未定义try：		varexcept NameError：		var_exists = Falseelse:  	var_exists = True
-方法二：使用内置函数locals()，获取已定义对象字典。
-1234567# testvar 未定义&......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-05-10
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -467,6 +470,10 @@ django通过ORM定义模型类，以下为Person，Book模型代码
                     <div class="tags">
                         
                             
+                            <a href="/tags/#Appium" title="Appium" rel="2">Appium</a>
+                            
+                        
+                            
                             <a href="/tags/#Centos" title="Centos" rel="6">Centos</a>
                             
                         
@@ -493,9 +500,9 @@ django通过ORM定义模型类，以下为Person，Book模型代码
                             
                         
                             
-                        
-                            
                             <a href="/tags/#Python" title="Python" rel="9">Python</a>
+                            
+                        
                             
                         
                             
