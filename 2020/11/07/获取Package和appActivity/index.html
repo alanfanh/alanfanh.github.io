@@ -2,13 +2,13 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -20,13 +20,19 @@
     <link rel="canonical" href="https://alanfanh.github.io/2020/11/07/获取Package和appActivity/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
 
     <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -50,7 +56,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -86,9 +92,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -99,6 +102,9 @@
                         <li>
                             <a href="/archives/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -158,7 +164,7 @@
         background-image: url('/img/home-bg.jpg')
     }
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -215,9 +221,9 @@
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb logcat &gt;D:/log.txt</span><br></pre></td></tr></table></figure>
 <p>然后打开Speedtest App，操作几次，并在终端关闭日志写入。</p>
 <p>打开log.txt文件，搜索<code>Package Name:org.zwanoo.android.speedtest</code>；以下为log.txt中的部分日志</p>
-<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.731</span>  <span class="number">3260</span> <span class="number">15780</span> D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, EGLBoolean) returns <span class="number">0</span>x3000</span><br><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.732</span>  <span class="number">3625</span> <span class="number">13833</span> I AppLifeChangeSensor:  CAWARENESS: activityResumed componentName = ComponentInfo&#123;org.zwanoo.android.speedtest/<span class="keyword">com</span>.ookla.mobile4.screens.main.MainActivity&#125;</span><br><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.732</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEActivityMonitor: handleActivityChange,  curPackage:org.zwanoo.android.speedtest, curClass:<span class="keyword">com</span>.ookla.mobile4.screens.main.MainActivity</span><br><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.733</span> <span class="number">31522</span> <span class="number">31522</span> I ViewRootImpl: jank_<span class="comment">removeInvalidNode all the node in jank list is out of time</span></span><br><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.732</span>  <span class="number">1252</span>  <span class="number">1357</span> I StatusBarDisable: setFlags what=<span class="number">0</span> which=<span class="number">1</span> pkg=<span class="keyword">Window</span>&#123;d43dea6 u0 org.zwanoo.android.speedtest/<span class="keyword">com</span>.ookla.mobile4.screens.welcome.WelcomeActivity&#125;</span><br><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.733</span>  <span class="number">1252</span>  <span class="number">1354</span> W HwActivityManagerServiceEx: HwActivityNotifier <span class="keyword">end</span> <span class="keyword">call</span> <span class="keyword">for</span> activityLifeState under user <span class="number">0</span> cost <span class="number">1</span></span><br><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.733</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence <span class="keyword">input</span> :org.zwanoo.android.speedtest,<span class="keyword">com</span>.ookla.mobile4.screens.main.MainActivity</span><br><span class="line"><span class="number">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37.733</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence <span class="keyword">input</span> :org.zwanoo.android.speedtest,null</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">731</span>  <span class="number">3260</span> <span class="number">15780</span> D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, EGLBoolean) returns <span class="number">0</span>x3000</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">732</span>  <span class="number">3625</span> <span class="number">13833</span> I AppLifeChangeSensor:  CAWARENESS: activityResumed componentName = ComponentInfo&#123;org.zwanoo.android.speedtest/com.ookla.mobile4.screens.main.MainActivity&#125;</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">732</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEActivityMonitor: handleActivityChange,  curPackage:org.zwanoo.android.speedtest, curClass:com.ookla.mobile4.screens.main.MainActivity</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span> <span class="number">31522</span> <span class="number">31522</span> I ViewRootImpl: jank_removeInvalidNode <span class="literal">all</span> the node in jank list is out of time</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">732</span>  <span class="number">1252</span>  <span class="number">1357</span> I StatusBarDisable: setFlags what=<span class="number">0</span> which=<span class="number">1</span> pkg=Window&#123;d43dea6 u0 org.zwanoo.android.speedtest/com.ookla.mobile4.screens.welcome.WelcomeActivity&#125;</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span>  <span class="number">1252</span>  <span class="number">1354</span> W HwActivityManagerServiceEx: HwActivityNotifier end call for activityLifeState under user <span class="number">0</span> cost <span class="number">1</span></span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence input :org.zwanoo.android.speedtest,com.ookla.mobile4.screens.main.MainActivity</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence input :org.zwanoo.android.speedtest,null</span><br></pre></td></tr></table></figure>
 <p>根据搜索结果，并排除不正确的Activity后，可得到下面正确的appActivity</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org<span class="selector-class">.zwanoo</span><span class="selector-class">.android</span><span class="selector-class">.speedtest</span>/com<span class="selector-class">.ookla</span><span class="selector-class">.mobile4</span><span class="selector-class">.screens</span><span class="selector-class">.main</span><span class="selector-class">.MainActivity</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org<span class="selector-class">.zwanoo</span><span class="selector-class">.android</span>.speedtest/com<span class="selector-class">.ookla</span><span class="selector-class">.mobile4</span><span class="selector-class">.screens</span><span class="selector-class">.main</span>.MainActivity</span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -301,8 +307,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2020/11/07/获取Package和appActivity/";
-    var disqus_url = "https://alanfanh.github.io/2020/11/07/获取Package和appActivity/";
+    var disqus_identifier = "https://alanfanh.github.io/2020/11/07/%E8%8E%B7%E5%8F%96Package%E5%92%8CappActivity/";
+    var disqus_url = "https://alanfanh.github.io/2020/11/07/%E8%8E%B7%E5%8F%96Package%E5%92%8CappActivity/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -361,7 +367,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/alanfanh">
+                        <a target="_blank"  href="https://github.com/alanfanh">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -374,7 +380,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Fannnhao&#39;s blog 2021 
+                    Copyright &copy; Fannnhao&#39;s blog 2026 
                 </p>
             </div>
         </div>
@@ -382,13 +388,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/hux-blog.min.js"></script>
+
 
 
 <!-- async load function -->

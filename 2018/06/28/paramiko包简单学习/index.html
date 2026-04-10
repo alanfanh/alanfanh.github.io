@@ -2,13 +2,13 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -20,13 +20,19 @@
     <link rel="canonical" href="https://alanfanh.github.io/2018/06/28/paramiko包简单学习/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
 
     <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -50,7 +56,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -86,9 +92,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -99,6 +102,9 @@
                         <li>
                             <a href="/archives/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -158,7 +164,7 @@
         background-image: url('/img/home-bg.jpg')
     }
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -193,7 +199,7 @@
 
                 <p>在我们的PyAuto的自动化平台有用到这个包模块，这是一个第三方包。拥有很强大的功能，可以通过SSH连接远程主机，实现执行命令、文件传输、SSH代理等功能。甚至你可以利用这个包，写一个SSH登录工具。目前在自动化平台主要用来连接Centos系统，发送并执行linux命令。</p>
 <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install paramiko</span><br></pre></td></tr></table></figure>
-<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="comment">#初始化对象s</span></span><br><span class="line">s=paramiko.SSHClient()</span><br><span class="line"><span class="comment">#调用方法，使能连接不在host文件中的主机</span></span><br><span class="line">s.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line"><span class="comment">#调用connect方法连接主机</span></span><br><span class="line">s.connect(hostname=<span class="string">'192.168.1.1'</span>,port=<span class="number">22</span>,username=<span class="string">'admin'</span>,password=<span class="string">'admin'</span>,timeout=<span class="number">10</span>)</span><br><span class="line"><span class="comment">#发送并执行命令</span></span><br><span class="line">stdin, stdout, stderr = s.exec_command(<span class="string">'ifconfig wlan0'</span>)</span><br><span class="line"><span class="comment">#decode()方法，使输出结果排列整齐</span></span><br><span class="line">Result=stdout.read().decode()</span><br><span class="line">Err=stderr.read()</span><br><span class="line"><span class="comment">#打印结果</span></span><br><span class="line">print(Result)</span><br><span class="line">print(Err)</span><br><span class="line"><span class="comment">#关闭ssh连接</span></span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="comment">#初始化对象s</span></span><br><span class="line">s=paramiko.SSHClient()</span><br><span class="line"><span class="comment">#调用方法，使能连接不在host文件中的主机</span></span><br><span class="line">s.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line"><span class="comment">#调用connect方法连接主机</span></span><br><span class="line">s.connect(hostname=<span class="string">&#x27;192.168.1.1&#x27;</span>,port=<span class="number">22</span>,username=<span class="string">&#x27;admin&#x27;</span>,password=<span class="string">&#x27;admin&#x27;</span>,timeout=<span class="number">10</span>)</span><br><span class="line"><span class="comment">#发送并执行命令</span></span><br><span class="line">stdin, stdout, stderr = s.exec_command(<span class="string">&#x27;ifconfig wlan0&#x27;</span>)</span><br><span class="line"><span class="comment">#decode()方法，使输出结果排列整齐</span></span><br><span class="line">Result=stdout.read().decode()</span><br><span class="line">Err=stderr.read()</span><br><span class="line"><span class="comment">#打印结果</span></span><br><span class="line"><span class="built_in">print</span>(Result)</span><br><span class="line"><span class="built_in">print</span>(Err)</span><br><span class="line"><span class="comment">#关闭ssh连接</span></span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
 <h3 id="包源码"><a href="#包源码" class="headerlink" title="包源码"></a>包源码</h3><p>paramiko包下的client.py文件中包含了SSHClient类</p>
 
 
@@ -278,8 +284,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2018/06/28/paramiko包简单学习/";
-    var disqus_url = "https://alanfanh.github.io/2018/06/28/paramiko包简单学习/";
+    var disqus_identifier = "https://alanfanh.github.io/2018/06/28/paramiko%E5%8C%85%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/";
+    var disqus_url = "https://alanfanh.github.io/2018/06/28/paramiko%E5%8C%85%E7%AE%80%E5%8D%95%E5%AD%A6%E4%B9%A0/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -338,7 +344,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/alanfanh">
+                        <a target="_blank"  href="https://github.com/alanfanh">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -351,7 +357,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Fannnhao&#39;s blog 2021 
+                    Copyright &copy; Fannnhao&#39;s blog 2026 
                 </p>
             </div>
         </div>
@@ -359,13 +365,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/hux-blog.min.js"></script>
+
 
 
 <!-- async load function -->

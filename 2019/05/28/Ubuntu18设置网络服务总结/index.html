@@ -2,13 +2,13 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -20,13 +20,19 @@
     <link rel="canonical" href="https://alanfanh.github.io/2019/05/28/Ubuntu18设置网络服务总结/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
 
     <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -50,7 +56,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -86,9 +92,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -99,6 +102,9 @@
                         <li>
                             <a href="/archives/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -158,7 +164,7 @@
         background-image: url('/img/home-bg.jpg')
     }
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -193,43 +199,43 @@
 
                 <h4 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h4><h5 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h5><p>Ubuntu/Debian比较类似，本文操作的系统是ubuntu-18.04.2-LTS 64位系统。</p>
 <p>首先需要更新apt-get包管理工具，然后安装net-tools工具</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install net-tools</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install net-tools</span><br></pre></td></tr></table></figure>
 <h5 id="绑定域名和IP地址"><a href="#绑定域名和IP地址" class="headerlink" title="绑定域名和IP地址"></a>绑定域名和IP地址</h5><p>打开/etc/host文件。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/hosts</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/hosts</span><br></pre></td></tr></table></figure>
 <p>按i进入编辑模式，输入以下内容，绑定IP地址和域名。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">172<span class="selector-class">.16</span><span class="selector-class">.105</span><span class="selector-class">.207</span>  <span class="selector-tag">smtp</span><span class="selector-class">.xxxx</span><span class="selector-class">.cn</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">172.16.105.207</span>  smtp.xxxx.cn</span><br></pre></td></tr></table></figure>
 <p>按Esc键，再输入:wq进行保存。</p>
 <h5 id="开机自动加载路由"><a href="#开机自动加载路由" class="headerlink" title="开机自动加载路由"></a>开机自动加载路由</h5><p>打开/etc/network/interfaces，网络接口配置。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/network/interfaces</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/network/interfaces</span><br></pre></td></tr></table></figure>
 <p>按i进入编辑模式，输入以下内容，设置网卡接口为静态IP，并自动加载路由。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto ens38</span><br><span class="line">iface ens38 inet static</span><br><span class="line">address 192.168.97.64</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">up route add -net 172.16.105.0 netmask 255.255.255.0 gw 192.168.97.1 ens38</span><br></pre></td></tr></table></figure>
 <p>按Esc键，再输入:wq进行保存。</p>
 <h5 id="静态DNS设置"><a href="#静态DNS设置" class="headerlink" title="静态DNS设置"></a>静态DNS设置</h5><p>使用以下命令可以查看各网络接口的DNS以及全局DNS。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-resolve  --status</span><br></pre></td></tr></table></figure>
 <p>修改/etc/resolv.conf文件，添加DNS。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/resolv.conf</span><br></pre></td></tr></table></figure>
 <p>添加全局DNS信息，修改以下文件。（如无必要，不建议修改）</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/systemd/resolved.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/systemd/resolved.conf</span><br></pre></td></tr></table></figure>
 <h5 id="开机自动运行"><a href="#开机自动运行" class="headerlink" title="开机自动运行"></a>开机自动运行</h5><p>一般Linux系统启动，初始化加载initd，但ubuntu18.04改用了systemd管理。systemd 默认会读取 /etc/systemd/system下的文件。执行以下命令，可以查看到该路径下存在很多指向/lib/systemd/system目录文件的软连接。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /etc/systemd/system</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /etc/systemd/system</span><br></pre></td></tr></table></figure>
 <p>执行以下命令。你可以看到有很多启动脚本，其中就有我们需要的rc.local.service。</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls /lib/systemd/system</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /lib/systemd/system</span><br></pre></td></tr></table></figure>
 <p>编辑打开rc.local.service</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim etc/rc.local.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim etc/rc.local.service</span><br></pre></td></tr></table></figure>
 <p>在文件中添加如下内容</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br><span class="line">Alias=rc-local.service</span><br></pre></td></tr></table></figure>
 <p>创建软连接至/etc/systemd/system路径</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /lib/systemd/system/rc.local.service  /etc/systemd/system/rc.local.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /lib/systemd/system/rc.local.service  /etc/systemd/system/rc.local.service</span><br></pre></td></tr></table></figure>
 <p>编辑文件/etc/rc.local</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/rc.local</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/rc.local</span><br></pre></td></tr></table></figure>
 <p>添加如下内容，注意执行脚本命令必须放在exit 0前面。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!bin/sh</span></span><br><span class="line"><span class="comment">#rc.local</span></span><br><span class="line"></span><br><span class="line">sudo <span class="built_in">echo</span> <span class="string">"this is a test"</span> &gt; /usr/<span class="built_in">local</span>/test.log</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!bin/sh</span></span><br><span class="line"><span class="comment">#rc.local</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">echo</span> <span class="string">&quot;this is a test&quot;</span> &gt; /usr/local/test.log</span><br><span class="line"></span><br><span class="line"><span class="built_in">exit</span> 0</span><br></pre></td></tr></table></figure>
 <p>赋予可执行权限</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod 755 /etc/rc.local</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 755 /etc/rc.local</span><br></pre></td></tr></table></figure>
 <p>重启系统</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo shutdown -r now</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> shutdown -r now</span><br></pre></td></tr></table></figure>
 <p>查看/usr/local目录，存在该文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls -l /usr/<span class="built_in">local</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /usr/local</span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -313,8 +319,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2019/05/28/Ubuntu18设置网络服务总结/";
-    var disqus_url = "https://alanfanh.github.io/2019/05/28/Ubuntu18设置网络服务总结/";
+    var disqus_identifier = "https://alanfanh.github.io/2019/05/28/Ubuntu18%E8%AE%BE%E7%BD%AE%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/";
+    var disqus_url = "https://alanfanh.github.io/2019/05/28/Ubuntu18%E8%AE%BE%E7%BD%AE%E7%BD%91%E7%BB%9C%E6%9C%8D%E5%8A%A1%E6%80%BB%E7%BB%93/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -373,7 +379,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/alanfanh">
+                        <a target="_blank"  href="https://github.com/alanfanh">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -386,7 +392,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Fannnhao&#39;s blog 2021 
+                    Copyright &copy; Fannnhao&#39;s blog 2026 
                 </p>
             </div>
         </div>
@@ -394,13 +400,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/hux-blog.min.js"></script>
+
 
 
 <!-- async load function -->

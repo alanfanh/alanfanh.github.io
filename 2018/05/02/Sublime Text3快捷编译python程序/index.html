@@ -2,13 +2,13 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -20,13 +20,19 @@
     <link rel="canonical" href="https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
 
     <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -50,7 +56,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -86,9 +92,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -99,6 +102,9 @@
                         <li>
                             <a href="/archives/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -158,7 +164,7 @@
         background-image: url('/img/home-bg.jpg')
     }
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -192,12 +198,9 @@
                 post-container">
 
                 <p>公司电脑是window系统，写python代码一直默认用的是notepad++。后面为了在自己的Macbook练习python程序，了解到了有一款神器—Sublime Text3。以下主要记录如何配置Sublime Text3使其快捷运行python代码。</p>
-<h3 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h3><h4 id="tab键设置"><a href="#tab键设置" class="headerlink" title="tab键设置"></a>tab键设置</h4><p>python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。<br>1、菜单栏打开Preferences-Settings，在新打开的窗口Preferences.sublime-settings–User中添加如下字段，tab键将默认转换为4个空格键。<br><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">"tab_size":</span> <span class="number">4</span><span class="string">,</span></span><br><span class="line"><span class="attr">"translate_tabs_to_spaces":</span> <span class="literal">true</span><span class="string">,</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h3><h4 id="tab键设置"><a href="#tab键设置" class="headerlink" title="tab键设置"></a>tab键设置</h4><p>python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。<br>1、菜单栏打开Preferences-Settings，在新打开的窗口Preferences.sublime-settings–User中添加如下字段，tab键将默认转换为4个空格键。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;tab_size&quot;</span><span class="punctuation">:</span> <span class="number">4</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;translate_tabs_to_spaces&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure></p>
 <h4 id="sublime插件包"><a href="#sublime插件包" class="headerlink" title="sublime插件包"></a>sublime插件包</h4><p>sublime提供了很多插件包，但是需要自己手动下载安装。推荐安装python语法提示的相关插件，能够在你编码的时候的进行提示，大大提升你的编码速率。第二推荐安装你喜爱的主题插件，毕竟一个让你赏心悦目的界面能够让你眼睛不会那么疲劳。</p>
-<h4 id="快捷执行python代码设置"><a href="#快捷执行python代码设置" class="headerlink" title="快捷执行python代码设置"></a>快捷执行python代码设置</h4><p>首先打开终端，输入以下命令。因为我常用python3<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> -a python3</span><br></pre></td></tr></table></figure></p>
-<p>此时得到返回结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 is /Library/Frameworks/Python.framework/Versions/3.6/bin/python3</span><br><span class="line">python3 is /usr/<span class="built_in">local</span>/bin/python3</span><br></pre></td></tr></table></figure></p>
-<p>然后进入sublime的菜单栏，点击tools-Bulid System-New Bulid System，此时将会打开一个新窗口，修改如下<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"shell_cmd"</span>: [<span class="string">"/usr/local/bin/python3"</span>,<span class="string">"-u"</span>,<span class="string">"$file"</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>保存为python3.sublime-build。进入tools-Bulid System，选择python3即可。</p>
+<h4 id="快捷执行python代码设置"><a href="#快捷执行python代码设置" class="headerlink" title="快捷执行python代码设置"></a>快捷执行python代码设置</h4><p>首先打开终端，输入以下命令。因为我常用python3<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> -a python3</span><br></pre></td></tr></table></figure><br>此时得到返回结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 is /Library/Frameworks/Python.framework/Versions/3.6/bin/python3</span><br><span class="line">python3 is /usr/local/bin/python3</span><br></pre></td></tr></table></figure><br>然后进入sublime的菜单栏，点击tools-Bulid System-New Bulid System，此时将会打开一个新窗口，修改如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;shell_cmd&quot;</span>: [<span class="string">&quot;/usr/local/bin/python3&quot;</span>,<span class="string">&quot;-u&quot;</span>,<span class="string">&quot;<span class="variable">$file</span>&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>保存为python3.sublime-build。进入tools-Bulid System，选择python3即可。</p>
 
 
                 <hr>
@@ -281,8 +284,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/";
-    var disqus_url = "https://alanfanh.github.io/2018/05/02/Sublime Text3快捷编译python程序/";
+    var disqus_identifier = "https://alanfanh.github.io/2018/05/02/Sublime%20Text3%E5%BF%AB%E6%8D%B7%E7%BC%96%E8%AF%91python%E7%A8%8B%E5%BA%8F/";
+    var disqus_url = "https://alanfanh.github.io/2018/05/02/Sublime%20Text3%E5%BF%AB%E6%8D%B7%E7%BC%96%E8%AF%91python%E7%A8%8B%E5%BA%8F/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -341,7 +344,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/alanfanh">
+                        <a target="_blank"  href="https://github.com/alanfanh">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -354,7 +357,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Fannnhao&#39;s blog 2021 
+                    Copyright &copy; Fannnhao&#39;s blog 2026 
                 </p>
             </div>
         </div>
@@ -362,13 +365,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/hux-blog.min.js"></script>
+
 
 
 <!-- async load function -->

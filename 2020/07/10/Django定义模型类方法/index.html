@@ -2,13 +2,13 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -20,13 +20,19 @@
     <link rel="canonical" href="https://alanfanh.github.io/2020/07/10/Django定义模型类方法/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
 
     <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -50,7 +56,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -86,9 +92,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -99,6 +102,9 @@
                         <li>
                             <a href="/archives/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -158,7 +164,7 @@
         background-image: url('/img/home-bg.jpg')
     }
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -197,9 +203,9 @@
 <p><code>对重复的业务逻辑代码或者数据查询代码，可封装成类方法，实现复用。</code></p>
 <p>以下定义了用户信息的模型代码。<code>UserInfo</code>类实例化后为用户对象，用户对象具备了用户名、工号等属性信息，同时具备<code>get_joined_ponits()</code>等方法。</p>
 <p>类方法也可以传递参数，以下代码类方法没有参数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> training.models <span class="keyword">import</span> Course</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UserInfo</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    用户详细信息表</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    id = models.AutoField(primary_key=<span class="keyword">True</span>)</span><br><span class="line">    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=<span class="keyword">True</span>)</span><br><span class="line">    job_num = models.CharField(verbose_name=<span class="string">"工号"</span>, max_length=<span class="number">8</span>, blank=<span class="keyword">True</span>)</span><br><span class="line">    realname = models.CharField(verbose_name=<span class="string">"真实姓名"</span>, max_length=<span class="number">10</span>)</span><br><span class="line">    email = models.EmailField(verbose_name=<span class="string">"邮箱"</span>, max_length=<span class="number">32</span>)</span><br><span class="line">    phone = models.CharField(verbose_name=<span class="string">"手机号"</span>, max_length=<span class="number">11</span>)</span><br><span class="line">    group = models.ForeignKey(Group, related_name=<span class="string">'user_group'</span>, verbose_name=<span class="string">"用户所属组"</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    rank = models.ForeignKey(Rank, related_name=<span class="string">"user_rank"</span>, verbose_name=<span class="string">"用户职级"</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    role = models.ForeignKey(Role, related_name=<span class="string">'user_role'</span>, verbose_name=<span class="string">"用户角色"</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    education = models.CharField(verbose_name=<span class="string">"学历"</span>, max_length=<span class="number">20</span>)</span><br><span class="line">    pre_job = models.CharField(verbose_name=<span class="string">"上一份工作"</span>, max_length=<span class="number">20</span>)</span><br><span class="line">    entry_time = models.DateField(verbose_name=<span class="string">"入职时间"</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        verbose_name = <span class="string">"用户信息"</span></span><br><span class="line">        verbose_name_plural = <span class="string">"用户信息"</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.user.username</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_joined_points</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 类方法，返回该User参加的培训的积分</span></span><br><span class="line">        course = Course.objects.filter(student=self.user.userinfo).exclude(teacher_id=self.id)</span><br><span class="line">        point = course.count() * <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> point</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_group_points</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 类方法，返回该User主持小组的培训的积分</span></span><br><span class="line">        course = Course.objects.filter(teacher_id=self.id).exclude(range=<span class="string">"测试部"</span>)</span><br><span class="line">        <span class="keyword">return</span> course.count() * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_department_points</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 类方法，返回该user主持部门的培训的积分</span></span><br><span class="line">        course = Course.objects.filter(teacher_id=self.id, range=<span class="string">"测试部"</span>)</span><br><span class="line">        <span class="keyword">return</span> course.count() * <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> training.models <span class="keyword">import</span> Course</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserInfo</span>(models.Model):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    用户详细信息表</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="built_in">id</span> = models.AutoField(primary_key=<span class="literal">True</span>)</span><br><span class="line">    user = models.OneToOneField(User, on_delete=models.CASCADE, unique=<span class="literal">True</span>)</span><br><span class="line">    job_num = models.CharField(verbose_name=<span class="string">&quot;工号&quot;</span>, max_length=<span class="number">8</span>, blank=<span class="literal">True</span>)</span><br><span class="line">    realname = models.CharField(verbose_name=<span class="string">&quot;真实姓名&quot;</span>, max_length=<span class="number">10</span>)</span><br><span class="line">    email = models.EmailField(verbose_name=<span class="string">&quot;邮箱&quot;</span>, max_length=<span class="number">32</span>)</span><br><span class="line">    phone = models.CharField(verbose_name=<span class="string">&quot;手机号&quot;</span>, max_length=<span class="number">11</span>)</span><br><span class="line">    group = models.ForeignKey(Group, related_name=<span class="string">&#x27;user_group&#x27;</span>, verbose_name=<span class="string">&quot;用户所属组&quot;</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    rank = models.ForeignKey(Rank, related_name=<span class="string">&quot;user_rank&quot;</span>, verbose_name=<span class="string">&quot;用户职级&quot;</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    role = models.ForeignKey(Role, related_name=<span class="string">&#x27;user_role&#x27;</span>, verbose_name=<span class="string">&quot;用户角色&quot;</span>, on_delete=models.DO_NOTHING)</span><br><span class="line">    education = models.CharField(verbose_name=<span class="string">&quot;学历&quot;</span>, max_length=<span class="number">20</span>)</span><br><span class="line">    pre_job = models.CharField(verbose_name=<span class="string">&quot;上一份工作&quot;</span>, max_length=<span class="number">20</span>)</span><br><span class="line">    entry_time = models.DateField(verbose_name=<span class="string">&quot;入职时间&quot;</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">Meta</span>:</span><br><span class="line">        verbose_name = <span class="string">&quot;用户信息&quot;</span></span><br><span class="line">        verbose_name_plural = <span class="string">&quot;用户信息&quot;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__str__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.user.username</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_joined_points</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 类方法，返回该User参加的培训的积分</span></span><br><span class="line">        course = Course.objects.<span class="built_in">filter</span>(student=<span class="variable language_">self</span>.user.userinfo).exclude(teacher_id=<span class="variable language_">self</span>.<span class="built_in">id</span>)</span><br><span class="line">        point = course.count() * <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> point</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_group_points</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 类方法，返回该User主持小组的培训的积分</span></span><br><span class="line">        course = Course.objects.<span class="built_in">filter</span>(teacher_id=<span class="variable language_">self</span>.<span class="built_in">id</span>).exclude(<span class="built_in">range</span>=<span class="string">&quot;测试部&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> course.count() * <span class="number">2</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_department_points</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 类方法，返回该user主持部门的培训的积分</span></span><br><span class="line">        course = Course.objects.<span class="built_in">filter</span>(teacher_id=<span class="variable language_">self</span>.<span class="built_in">id</span>, <span class="built_in">range</span>=<span class="string">&quot;测试部&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> course.count() * <span class="number">2</span></span><br></pre></td></tr></table></figure>
 <p>类方法在实例化后，可通过如下方式进行调用</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xiaoming = UserInfo.objects.get(id=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 返回xiaoming参加培训的积分</span></span><br><span class="line">xiaoming.get_joined_points()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xiaoming = UserInfo.objects.get(<span class="built_in">id</span>=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># 返回xiaoming参加培训的积分</span></span><br><span class="line">xiaoming.get_joined_points()</span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -283,8 +289,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2020/07/10/Django定义模型类方法/";
-    var disqus_url = "https://alanfanh.github.io/2020/07/10/Django定义模型类方法/";
+    var disqus_identifier = "https://alanfanh.github.io/2020/07/10/Django%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E7%B1%BB%E6%96%B9%E6%B3%95/";
+    var disqus_url = "https://alanfanh.github.io/2020/07/10/Django%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9E%8B%E7%B1%BB%E6%96%B9%E6%B3%95/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -343,7 +349,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/alanfanh">
+                        <a target="_blank"  href="https://github.com/alanfanh">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -356,7 +362,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Fannnhao&#39;s blog 2021 
+                    Copyright &copy; Fannnhao&#39;s blog 2026 
                 </p>
             </div>
         </div>
@@ -364,13 +370,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/hux-blog.min.js"></script>
+
 
 
 <!-- async load function -->

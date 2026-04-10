@@ -2,13 +2,13 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -20,13 +20,19 @@
     <link rel="canonical" href="https://alanfanh.github.io/2020/06/02/centos中安装telnet服务/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
 
     <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -50,7 +56,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -86,9 +92,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -99,6 +102,9 @@
                         <li>
                             <a href="/archives/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -158,7 +164,7 @@
         background-image: url('/img/home-bg.jpg')
     }
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -195,11 +201,11 @@
 <h4 id="安装telnet"><a href="#安装telnet" class="headerlink" title="安装telnet"></a>安装telnet</h4><p>首先可以检查系统是否已经安装telnet</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># rpm -qa | grep telnet</span></span><br><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta">#</span></span><br></pre></td></tr></table></figure>
 <p>内容回显为空，表明当前没有安装telnet相关服务</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum search telnet</span><br><span class="line">Loaded plugins: fastestmirror, langpacks</span><br><span class="line">Loading<span class="built_in"> mirror </span>speeds <span class="keyword">from</span> cached hostfile</span><br><span class="line"> * base: mirrors.aliyun.com</span><br><span class="line"> * extras: mirrors.aliyun.com</span><br><span class="line"> * updates: mirrors.163.com</span><br><span class="line">======================================= N/S matched: telnet =========================</span><br><span class="line">perl-Net-Telnet.noarch : Net-Telnet Perl module</span><br><span class="line">telnet.x86_64 : The<span class="built_in"> client </span>program <span class="keyword">for</span> the Telnet remote login protocol</span><br><span class="line">telnet-server.x86_64 : The<span class="built_in"> server </span>program <span class="keyword">for</span> the Telnet remote login protocol</span><br><span class="line">tn5250.i686 : 5250 Telnet protocol <span class="keyword">and</span> Terminal</span><br><span class="line">tn5250.x86_64 : 5250 Telnet protocol <span class="keyword">and</span> Terminal</span><br><span class="line"></span><br><span class="line">  Name <span class="keyword">and</span> summary matches only, use <span class="string">"search all"</span> <span class="keyword">for</span> everything.</span><br></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum search telnet</span></span><br><span class="line">Loaded <span class="params">plugins:</span> fastestmirror, langpacks</span><br><span class="line">Loading mirror speeds from cached hostfile</span><br><span class="line"> <span class="operator">*</span> <span class="params">base:</span> mirrors.aliyun.com</span><br><span class="line"> <span class="operator">*</span> <span class="params">extras:</span> mirrors.aliyun.com</span><br><span class="line"> <span class="operator">*</span> <span class="params">updates:</span> mirrors.<span class="number">163</span>.com</span><br><span class="line"><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">=</span> N<span class="symbol">/S</span> <span class="params">matched:</span> telnet <span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">==</span><span class="operator">=</span></span><br><span class="line">perl-Net-Telnet.<span class="params">noarch :</span> Net-Telnet Perl module</span><br><span class="line">telnet.<span class="params">x86_64 :</span> The client program for the Telnet remote login protocol</span><br><span class="line">telnet-server.<span class="params">x86_64 :</span> The server program for the Telnet remote login protocol</span><br><span class="line">tn5250.<span class="params">i686 :</span> <span class="number">5250</span> Telnet protocol and Terminal</span><br><span class="line">tn5250.<span class="params">x86_64 :</span> <span class="number">5250</span> Telnet protocol and Terminal</span><br><span class="line"></span><br><span class="line">  Name and summary matches only, use <span class="string">&quot;search all&quot;</span> for everything.</span><br></pre></td></tr></table></figure>
 <p>通过yum包管理工具，安装telnet客户端和telnet服务</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># yum -y install telnet</span></span><br><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># yum -y install telnet-server</span></span><br></pre></td></tr></table></figure>
 <p>安装完成后，可以查询包是否安装成功</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm  -qa | grep telnet</span><br><span class="line">telnet<span class="number">-0.17</span><span class="number">-65.</span>el7_8.x86_64</span><br><span class="line">telnet-server<span class="number">-0.17</span><span class="number">-65.</span>el7_8.x86_64</span><br></pre></td></tr></table></figure>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# rpm  -qa | grep telnet</span><br><span class="line">telnet<span class="string">-0</span>.17<span class="string">-65</span>.el7_8.x86_64</span><br><span class="line">telnet-server<span class="string">-0</span>.17<span class="string">-65</span>.el7_8.x86_64</span><br></pre></td></tr></table></figure>
 <h4 id="安装xinetd"><a href="#安装xinetd" class="headerlink" title="安装xinetd"></a>安装xinetd</h4><p>xinetd主要用来管理telnet服务进程。在Linux系统中，进程分为三类。</p>
 <ul>
 <li>独立守护进程：</li>
@@ -221,15 +227,15 @@
 <p>通过yum进行安装</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># yum install xinetd</span></span><br></pre></td></tr></table></figure>
 <p>启用xinetd服务</p>
-<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># systemctl restart xinetd.service</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># systemctl restart xinetd.service </span></span><br></pre></td></tr></table></figure>
 <h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>配置telnet服务，进入xinetd.d目录下配置telnet服务配置。如果没有telnet文件则手动创建</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># cd /etc/xinetd.d</span></span><br><span class="line">[root<span class="symbol">@localhost</span> xinetd.d]<span class="meta"># vim telnet</span></span><br></pre></td></tr></table></figure>
 <p>在telnet文件中添加如下配置</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost xinetd.d] cat telnet</span><br><span class="line">service telnet</span><br><span class="line">&#123;</span><br><span class="line">  flags = REUSE</span><br><span class="line">  socket_type = stream</span><br><span class="line">  wait = <span class="literal">no</span></span><br><span class="line"> <span class="built_in"> user </span>= root</span><br><span class="line"> <span class="built_in"> server </span>= /usr/sbin/<span class="keyword">in</span>.telnetd</span><br><span class="line">  log_on_failure += USERID</span><br><span class="line">  <span class="builtin-name">disable</span> = <span class="literal">no</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost xinetd.d] cat telnet<span class="built_in"></span></span><br><span class="line"><span class="built_in">service </span>telnet</span><br><span class="line">&#123;</span><br><span class="line">  flags = REUSE</span><br><span class="line">  socket_type = stream</span><br><span class="line">  wait = <span class="literal">no</span></span><br><span class="line"> <span class="built_in"> user </span>= root</span><br><span class="line"> <span class="built_in"> server </span>= /usr/sbin/<span class="keyword">in</span>.telnetd</span><br><span class="line">  log_on_failure += USERID</span><br><span class="line">  <span class="built_in">disable</span> = <span class="literal">no</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>启用xinet服务</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[root@localhost xinetd.d]</span> <span class="selector-tag">systemctl</span> <span class="selector-tag">restart</span> <span class="selector-tag">xinetd</span><span class="selector-class">.service</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[root@localhost xinetd.d]</span> systemctl restart xinetd.service</span><br></pre></td></tr></table></figure>
 <p>查询xinet服务是否监听23端口</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="variable">@localhost</span> xinetd.d] netstat -anltp | grep xinet</span><br><span class="line">tcp6       <span class="number">0</span>      <span class="number">0</span> ::<span class="symbol">:</span><span class="number">23</span>                   ::<span class="symbol">:*</span>              LISTEN      <span class="number">4754</span>/xinetd</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="variable">@localhost</span> xinetd.d] netstat -anltp | grep xinet</span><br><span class="line">tcp6       <span class="number">0</span>      <span class="number">0</span> ::<span class="symbol">:</span><span class="number">23</span>                   ::<span class="symbol">:*</span>              <span class="title class_">LISTEN</span>      <span class="number">4754</span>/xinetd</span><br></pre></td></tr></table></figure>
 <p>此时还无法通过telnet登录，还需设置防火墙。查看防火墙添加的服务。防火墙允许的服务中，并不包含telnet。</p>
 <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root<span class="symbol">@localhost</span> ~]<span class="meta"># firewall-cmd --list-services</span></span><br><span class="line">dhcpv6-client ssh</span><br></pre></td></tr></table></figure>
 <p>将telnet添加到防火墙服务中，此时即可通过telnet远程登录centos。</p>
@@ -319,8 +325,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2020/06/02/centos中安装telnet服务/";
-    var disqus_url = "https://alanfanh.github.io/2020/06/02/centos中安装telnet服务/";
+    var disqus_identifier = "https://alanfanh.github.io/2020/06/02/centos%E4%B8%AD%E5%AE%89%E8%A3%85telnet%E6%9C%8D%E5%8A%A1/";
+    var disqus_url = "https://alanfanh.github.io/2020/06/02/centos%E4%B8%AD%E5%AE%89%E8%A3%85telnet%E6%9C%8D%E5%8A%A1/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -379,7 +385,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/alanfanh">
+                        <a target="_blank"  href="https://github.com/alanfanh">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -392,7 +398,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Fannnhao&#39;s blog 2021 
+                    Copyright &copy; Fannnhao&#39;s blog 2026 
                 </p>
             </div>
         </div>
@@ -400,13 +406,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/hux-blog.min.js"></script>
+
 
 
 <!-- async load function -->

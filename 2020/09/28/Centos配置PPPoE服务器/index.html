@@ -2,13 +2,13 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="keyword" content="">
+    <meta name="keyword"  content="">
     <link rel="shortcut icon" href="/img/favicon.ico">
 
     <title>
@@ -20,13 +20,19 @@
     <link rel="canonical" href="https://alanfanh.github.io/2020/09/28/Centos配置PPPoE服务器/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/hux-blog.min.css">
+    
+<link rel="stylesheet" href="/css/hux-blog.min.css">
+
 
     <!-- Pygments Highlight CSS -->
-    <link rel="stylesheet" href="/css/highlight.css">
+    
+<link rel="stylesheet" href="/css/highlight.css">
+
 
     <!-- Custom Fonts -->
     <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
@@ -50,7 +56,7 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
-</head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 
 <!-- hack iOS CSS :active style -->
@@ -86,9 +92,6 @@
                     
 
                         
-                    
-
-                        
                         <li>
                             <a href="/about/">About</a>
                         </li>
@@ -99,6 +102,9 @@
                         <li>
                             <a href="/archives/">Archives</a>
                         </li>
+                        
+                    
+
                         
                     
 
@@ -158,7 +164,7 @@
         background-image: url('/img/home-bg.jpg')
     }
 </style>
-<header class="intro-header">
+<header class="intro-header" >
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -195,13 +201,13 @@
 <h4 id="安装服务器"><a href="#安装服务器" class="headerlink" title="安装服务器"></a>安装服务器</h4><p>yum搜索rp-pppoe，并安装。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y rp-pppoe</span><br></pre></td></tr></table></figure>
 <p>检查是否安装成功</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -q rp-pppoe</span><br><span class="line"><span class="meta">#</span><span class="bash"> rp-pppoe-3.11-7.el7.x86_64</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpm -q rp-pppoe</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rp-pppoe-3.11-7.el7.x86_64</span></span><br></pre></td></tr></table></figure>
 <h4 id="配置启用"><a href="#配置启用" class="headerlink" title="配置启用"></a>配置启用</h4><p><em>以下配置仅支持IPv4，不包含IPv6的相关配置。</em></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 编辑PPPoE服务配置文件</span></span><br><span class="line">vi /etc/ppp/pppoe-server-options</span><br><span class="line"><span class="meta">#</span><span class="bash"> 添加如下配置</span></span><br><span class="line">require-chap</span><br><span class="line">require-pap</span><br><span class="line">login</span><br><span class="line">lcp-echo-interval 10</span><br><span class="line">lcp-echo-failure 2</span><br><span class="line">ms-dns 114.114.114.114</span><br><span class="line">ms-dns 8.8.8.8</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">编辑PPPoE服务配置文件</span></span><br><span class="line">vi /etc/ppp/pppoe-server-options</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">添加如下配置</span></span><br><span class="line">require-chap</span><br><span class="line">require-pap</span><br><span class="line">login</span><br><span class="line">lcp-echo-interval 10</span><br><span class="line">lcp-echo-failure 2</span><br><span class="line">ms-dns 114.114.114.114</span><br><span class="line">ms-dns 8.8.8.8</span><br></pre></td></tr></table></figure>
 <p>编辑认证options文件</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ppp/options</span><br><span class="line"><span class="comment"># 添加如下内容</span></span><br><span class="line">auth</span><br><span class="line">lock</span><br></pre></td></tr></table></figure>
 <p>添加chap认证方式拨号用户名及密码。添加pap认证，编辑pap-secrets文件参考如下添加</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ppp/chap-secrets</span><br><span class="line"><span class="comment"># Secrets for authentication using CHAP</span></span><br><span class="line"><span class="comment"># client        server  secret                  IP addresses</span></span><br><span class="line"><span class="string">"test"</span>            *      <span class="string">"test"</span>       *</span><br></pre></td></tr></table></figure>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/ppp/chap-secrets</span><br><span class="line"><span class="comment"># Secrets for authentication using CHAP</span></span><br><span class="line"><span class="comment"># client        server  secret                  IP addresses</span></span><br><span class="line"><span class="string">&quot;test&quot;</span>            *      <span class="string">&quot;test&quot;</span>       *</span><br></pre></td></tr></table></figure>
 <p>设置IPv4地址转发功能</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysctl.conf</span><br><span class="line"><span class="comment"># 添加如下配置</span></span><br></pre></td></tr></table></figure>
 <p>启用PPPoE服务器</p>
@@ -289,8 +295,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "hexo-theme-huxblog";
-    var disqus_identifier = "https://alanfanh.github.io/2020/09/28/Centos配置PPPoE服务器/";
-    var disqus_url = "https://alanfanh.github.io/2020/09/28/Centos配置PPPoE服务器/";
+    var disqus_identifier = "https://alanfanh.github.io/2020/09/28/Centos%E9%85%8D%E7%BD%AEPPPoE%E6%9C%8D%E5%8A%A1%E5%99%A8/";
+    var disqus_url = "https://alanfanh.github.io/2020/09/28/Centos%E9%85%8D%E7%BD%AEPPPoE%E6%9C%8D%E5%8A%A1%E5%99%A8/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -349,7 +355,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/alanfanh">
+                        <a target="_blank"  href="https://github.com/alanfanh">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -362,7 +368,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Fannnhao&#39;s blog 2021 
+                    Copyright &copy; Fannnhao&#39;s blog 2026 
                 </p>
             </div>
         </div>
@@ -370,13 +376,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/hux-blog.min.js"></script>
+
 
 
 <!-- async load function -->
