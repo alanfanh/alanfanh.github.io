@@ -103,14 +103,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -187,6 +187,58 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2021/09/21/Centos配置DHCPv6服务/">
+        <h2 class="post-title">
+            Centos配置DHCPv6服务
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            安装
+yum无法搜索到dibbler-serverCentos7.9默认带yum源（软件仓库）没有包含dibbler-server的软件包，需要新增repo源库。
+1[root@Server ~]# cd /etc/yum.repos.d
+新建repo文件
+1234567891011121314151617181920212223242526272829[root@Server ~]# vi......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2021-09-21
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2021/06/24/Centos配置radvd服务/">
+        <h2 class="post-title">
+            Centos配置radvd服务
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            RA协议总结
+radvd服务主要组播RA报文，RA报文的目的地址为所有节点的组播地址；
+RA报文携带了M、O位信息，以及ipv6前缀信息
+所有节点根据收到的RA报文，进行IPv6地址配置或者获取 
+
+
+M=0，O=0且RA携带前缀的A位为1；节点根据RA下发的前缀自动配置IPv6地址；此时称之为无状态地址自动配置SLAAC；但节点不会发送dhcpv6报文请求其他网络信息；ipv6 dns可以......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2021-06-24
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -391,56 +443,6 @@ django通过ORM定义模型类，以下为Person，Book模型代码
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2020/07/10/Django定义模型类方法/">
-        <h2 class="post-title">
-            Django定义模型类方法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            说明以下在python3.6  Django2.2.10测试通过
-实例orm模型全称对象关系映射模型，能够将数据库中的表映射成类，记录（行数据）映射成对象，字段映射成对象的属性。
-定义数据类模型能够帮助我们在更上层设计业务逻辑，将复杂的业务逻辑与数据逻辑分离。
-对重复的业务逻辑代码或者数据查询代码，可封装成类方法，实现复用。
-以下定义了用户信息的模型代码。UserInfo类实例化后为用户对象......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-07-10
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/06/02/Centos中安装Telnet服务/">
-        <h2 class="post-title">
-            Centos中安装Telnet服务
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            说明系统为Centos7.7 64bit，非mini版本。默认安装有rpm和yum工具。
-安装telnet首先可以检查系统是否已经安装telnet
-12[root@localhost ~]# rpm -qa | grep telnet[root@localhost ~]#
-内容回显为空，表明当前没有安装telnet相关服务
-1234567891011121314[root@localhost......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-06-02
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -480,15 +482,15 @@ django通过ORM定义模型类，以下为Person，Book模型代码
                     <div class="tags">
                         
                             
+                            <a href="/tags/#Django" title="Django" rel="4">Django</a>
+                            
+                        
+                            
+                            <a href="/tags/#Centos" title="Centos" rel="13">Centos</a>
+                            
+                        
+                            
                             <a href="/tags/#Appium" title="Appium" rel="2">Appium</a>
-                            
-                        
-                            
-                            <a href="/tags/#Centos" title="Centos" rel="12">Centos</a>
-                            
-                        
-                            
-                            <a href="/tags/#Django" title="Django" rel="3">Django</a>
                             
                         
                             
@@ -496,17 +498,19 @@ django通过ORM定义模型类，以下为Person，Book模型代码
                             
                         
                             
+                            <a href="/tags/#Python" title="Python" rel="24">Python</a>
+                            
                         
                             
-                            <a href="/tags/#Python" title="Python" rel="23">Python</a>
+                        
+                            
+                            <a href="/tags/#PyQt" title="PyQt" rel="2">PyQt</a>
                             
                         
                             
                         
                             
                             <a href="/tags/#Hexo" title="Hexo" rel="2">Hexo</a>
-                            
-                        
                             
                         
                             

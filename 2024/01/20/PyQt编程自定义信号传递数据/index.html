@@ -13,11 +13,11 @@
 
     <title>
         
-          Python应用程序打包体积过大问题解决办法 - FanHao的博客 | Fanhao&#39;s Blog
+          PyQt编程自定义信号传递数据 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2024/01/15/Python应用程序打包体积过大问题解决办法/">
+    <link rel="canonical" href="https://alanfanh.github.io/2024/01/20/PyQt编程自定义信号传递数据/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -103,14 +103,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -173,12 +173,14 @@
                         
                           <a class="tag" href="/tags/#Python" title="Python">Python</a>
                         
+                          <a class="tag" href="/tags/#PyQt" title="PyQt">PyQt</a>
+                        
                     </div>
-                    <h1>Python应用程序打包体积过大问题解决办法</h1>
+                    <h1>PyQt编程自定义信号传递数据</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by FanHao on
-                        2024-01-15
+                        2024-01-20
                     </span>
                 </div>
             </div>
@@ -197,21 +199,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="主要原因"><a href="#主要原因" class="headerlink" title="主要原因"></a>主要原因</h4><p>python作为解释性语言，打包体积相较于编译型语言，打包程序体积大。如果需要追求程序体积小，程序运行速度快，只能用编译型语言解决。</p>
-<h4 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h4><p>实测在自己电脑python开发环境下打包，程序体积高达几百MB。为什么出现如此情况？<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">推测原因：python开发环境有很多其他第三模块包，不够干净，打包时同时将那些非必须第三包程序也打包进去。</span><br><span class="line">解决方案：使用python虚环境，只安装程序运行所必须的包解决程序体积过大问题</span><br></pre></td></tr></table></figure></p>
-<h4 id="实际应用验证"><a href="#实际应用验证" class="headerlink" title="实际应用验证"></a>实际应用验证</h4><p>以打包pdu控制程序为例进行验证<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此程序第三方包为pyside6、pyserial包</span><br></pre></td></tr></table></figure></p>
-<ol>
-<li>终端切换目录，当前目录创建新的python虚环境env<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv env</span><br></pre></td></tr></table></figure></li>
-<li>如下命令切换到虚环境<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env\Scripts\activate</span><br></pre></td></tr></table></figure></li>
-<li>查看虚环境包<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(env) C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool&gt;pip3 list</span><br><span class="line">Package    Version</span><br><span class="line">---------- -------</span><br><span class="line">pip        <span class="number">20</span>.<span class="number">2</span>.<span class="number">3</span></span><br><span class="line">setuptools <span class="number">49</span>.<span class="number">2</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure></li>
-<li>虚环境下安装程序所需的第三包<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyside6</span><br><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyserial</span><br><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure>
-因网络问题导致包下载速度慢，可以参考上面使用国内源</li>
-<li>虚环境下使用pyinstaller进行打包<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F -p C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool&gt; scriptname  C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool\main.py</span><br></pre></td></tr></table></figure>
-在dist路径下查看最终的程序体积，大约40MB大小。</li>
-</ol>
-<ul>
-<li>以上实例可验证推测原因符合验证结果</li>
-</ul>
+                <h4 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h4><p>1.如何生成子窗口<br>2.控件信号与槽函数绑定<br>3.自定义信号传递数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> PySide6.QtCore <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> PySide6.QtWidgets <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MainWin</span>(<span class="title class_ inherited__">QWidget</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, parent=<span class="literal">None</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">super</span>(MainWin,<span class="variable language_">self</span>).__init__(parent)</span><br><span class="line">        <span class="variable language_">self</span>.setWindowTitle(<span class="string">&quot;主窗口&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.resize(<span class="number">400</span>,<span class="number">300</span>)</span><br><span class="line">        <span class="variable language_">self</span>.btn = QPushButton(<span class="string">&quot;打开子窗口&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.default_text = QLabel(<span class="string">&quot;默认文本&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.box = QHBoxLayout()</span><br><span class="line">        <span class="variable language_">self</span>.box.addWidget(<span class="variable language_">self</span>.btn)</span><br><span class="line">        <span class="variable language_">self</span>.box.addWidget(<span class="variable language_">self</span>.default_text)</span><br><span class="line">        <span class="variable language_">self</span>.setLayout(<span class="variable language_">self</span>.box)</span><br><span class="line">        <span class="variable language_">self</span>.connect(<span class="variable language_">self</span>.btn, SIGNAL(<span class="string">&quot;clicked()&quot;</span>), <span class="variable language_">self</span>.get_text)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_text</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 槽函数</span></span><br><span class="line">        child = ChildWin()</span><br><span class="line">        child.name_singal.connect(<span class="variable language_">self</span>.set_text)</span><br><span class="line">        <span class="comment"># 启用窗口</span></span><br><span class="line">        child.<span class="built_in">exec</span>()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_text</span>(<span class="params">self,name,passwd</span>):</span><br><span class="line">        <span class="variable language_">self</span>.default_text.setText(<span class="string">&quot;用户名：&#123;&#125;，密码：&#123;&#125;&quot;</span>.<span class="built_in">format</span>(name,passwd))</span><br><span class="line">       </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ChildWin</span>(<span class="title class_ inherited__">QDialog</span>):</span><br><span class="line">    <span class="comment"># 子窗口弹窗</span></span><br><span class="line">    name_singal = Signal(<span class="built_in">str</span>,<span class="built_in">str</span>) <span class="comment"># 自定义信号，类属性</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, parent=<span class="literal">None</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">super</span>(ChildWin, <span class="variable language_">self</span>).__init__(parent)</span><br><span class="line">        <span class="variable language_">self</span>.setWindowTitle(<span class="string">&quot;子窗口&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.resize(<span class="number">300</span>,<span class="number">200</span>)</span><br><span class="line">        <span class="variable language_">self</span>.box = QHBoxLayout()</span><br><span class="line">        <span class="variable language_">self</span>.user_label = QLabel(<span class="string">&quot;用户名&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.pwd_label = QLabel(<span class="string">&quot;密码&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.user_line = QLineEdit()</span><br><span class="line">        <span class="variable language_">self</span>.pwd_line = QLineEdit()</span><br><span class="line">        <span class="variable language_">self</span>.commit = QPushButton(<span class="string">&quot;提交&quot;</span>)</span><br><span class="line">        <span class="variable language_">self</span>.box.addWidget(<span class="variable language_">self</span>.user_label)</span><br><span class="line">        <span class="variable language_">self</span>.box.addWidget(<span class="variable language_">self</span>.user_line)</span><br><span class="line">        <span class="variable language_">self</span>.box.addWidget(<span class="variable language_">self</span>.pwd_label)</span><br><span class="line">        <span class="variable language_">self</span>.box.addWidget(<span class="variable language_">self</span>.pwd_line)</span><br><span class="line">        <span class="variable language_">self</span>.box.addWidget(<span class="variable language_">self</span>.commit)</span><br><span class="line">        <span class="variable language_">self</span>.setLayout(<span class="variable language_">self</span>.box)</span><br><span class="line">        <span class="comment"># 新方法传递clicked信号</span></span><br><span class="line">        <span class="variable language_">self</span>.commit.clicked.connect(<span class="variable language_">self</span>.set_text)</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">set_text</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># 槽函数</span></span><br><span class="line">        user=<span class="variable language_">self</span>.user_line.text()</span><br><span class="line">        passwd=<span class="variable language_">self</span>.pwd_line.text()</span><br><span class="line">        <span class="variable language_">self</span>.name_singal.emit(user,passwd) <span class="comment"># 发射信号</span></span><br><span class="line">        <span class="variable language_">self</span>.close() <span class="comment"># 关闭窗口</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app = QApplication(sys.argv)</span><br><span class="line">    form = MainWin()</span><br><span class="line">    form.show()</span><br><span class="line">    sys.exit(app.<span class="built_in">exec</span>())</span><br></pre></td></tr></table></figure>
 
 
                 <hr>
@@ -221,7 +210,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2025/07/12/PyQt编程界面无响应状态问题总结/" data-toggle="tooltip" data-placement="top" title="PyQt程序界面无响应状态问题总结">&larr; Previous Post</a>
+                            <a href="/2024/02/15/Python应用程序打包体积过大问题解决办法/" data-toggle="tooltip" data-placement="top" title="Python应用程序打包体积过大问题解决办法">&larr; Previous Post</a>
                         </li>
                     
                     
@@ -254,6 +243,8 @@
                     <div class="tags">
                        
                           <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                          <a class="tag" href="/tags/#PyQt" title="PyQt">PyQt</a>
                         
                     </div>
                 </section>
