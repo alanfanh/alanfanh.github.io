@@ -13,11 +13,11 @@
 
     <title>
         
-          Django项目部署注意点 - FanHao的博客 | Fanhao&#39;s Blog
+          FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2020/05/08/Django项目部署注意点/">
+    <link rel="canonical" href="https://alanfanh.github.io/tags/Python/page/3/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -153,142 +153,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#Django" title="Django">Django</a>
-                        
-                    </div>
-                    <h1>Django项目部署注意点</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by FanHao on
-                        2020-05-08
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <p>之前部署django项目到生产环境中时，遇到几个问题。现在将问题总结一下，django版本如下</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">django</span>=<span class="number">2</span>.<span class="number">2</span>.<span class="number">10</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>关闭调试模式</strong></li>
-</ul>
-<p>创建django项目时，项目的setting.py中的DEBUG默认为True。此参数代表web项目处于开发模式中。django项目部署到生产环境中时，需要关闭此选项。如下</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DEBUG</span> = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
-<ul>
-<li><strong>设置允许访问的hosts</strong></li>
-</ul>
-<p>项目setting.py中的ALLOWED_HOSTS选项默认为空，如下。当项目处于开发模式时，此选项不生效，也就不需要关注此选项。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = []</span><br></pre></td></tr></table></figure>
-<p>当项目部署在生产环境下，并且关闭DEBUG模式时。此时该选项功能将生效，如果一直默认为空，将导致客户端无法正常访问服务。如果没有特殊要求，直接设置允许所有主机访问Web服务即可，即如下所示。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALLOWED_HOSTS = [<span class="string">&quot;*&quot;</span>]</span><br></pre></td></tr></table></figure>
-<p>如果不想允许所有主机访问Web服务，则可以设置此字段选项。</p>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2020/05/10/判断变量是否存在的方法/" data-toggle="tooltip" data-placement="top" title="python判断变量是否存在的几种方法">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2019/11/20/Tim斯坦福毕业致辞/" data-toggle="tooltip" data-placement="top" title="Stanford-2019">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Django" title="Django">Django</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
-                    
-                        <li><a href="#" target="_blank">Foo</a></li>
-                    
-                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
-                    
-                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
-                    
-                </ul>
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-
-
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->
