@@ -96,6 +96,13 @@
 
                         
                         <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/tags/">Tags</a>
                         </li>
                         
@@ -104,13 +111,6 @@
                         
                         <li>
                             <a href="/archives/">Archives</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -161,7 +161,7 @@
                 <div class="site-heading">
                     <h1>Fannnhao&#39;s blog</h1>
                     <!--<hr class="small">-->
-                    <span class="subheading">To be A coder!</span>
+                    <span class="subheading">用技术和代码创造价值</span>
                 </div>
             </div>
         </div>
@@ -187,6 +187,82 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2020/05/24/Centos安装pcie网卡驱动/">
+        <h2 class="post-title">
+            Centos安装拓展PCIe网卡驱动
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            记录一次在centos7.7中安装拓展PCIe网卡的驱动的过程。
+查询网卡安装完PCIe网卡后，首先查询网卡是否能被系统正常识别。其次查询扩展网卡的型号，一般指网卡的芯片。
+1lspci | grep Ethernet
+输出结果如下
+186:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 ......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-05-24
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/15/常见的数据转换/">
+        <h2 class="post-title">
+            常见的数据类型转换
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+以下代码均在python3.6下验证通过；
+因工作需要，使用scapy解析和构造网络数据包时，需要对解包后得到的字节流数据进行处理，同时需要处理数据转换，以下作为一个记录总结。
+
+一、进制转换1234567891011# 10进制转换成16进制&gt;&gt;&gt; hex(16)&#x27;0x10&#x27;&gt;&gt;&gt; hex(11)&#x27;0xa&#x27;# 1......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-05-15
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2020/05/10/判断变量是否存在的方法/">
+        <h2 class="post-title">
+            python判断变量是否存在的几种方法
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            以下方法在python3.6中测试OK。
+####方法一：
+使用try: … except NameError: …
+1234567# var未定义try：		varexcept NameError：		var_exists = Falseelse:  	var_exists = True
+方法二：使用内置函数locals()，获取已定义对象字典。
+1234567# testvar 未定义&......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-05-10
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -376,79 +452,6 @@ APScheduler介绍APScheduler是一个Pyth......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2019/05/28/Ubuntu18设置网络服务总结/">
-        <h2 class="post-title">
-            Linux系统网络设置总结
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Ubuntu系统系统版本Ubuntu/Debian比较类似，本文操作的系统是ubuntu-18.04.2-LTS 64位系统。
-首先需要更新apt-get包管理工具，然后安装net-tools工具
-1sudo apt-get install net-tools
-绑定域名和IP地址打开/etc/host文件。
-1sudo vim /etc/hosts
-按i进入编辑模式，输入以下内容，绑定IP地......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-05-28
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2019/04/18/操作MySQL的几种方法总结/">
-        <h2 class="post-title">
-            操作MySQL数据库的几种方法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言本文主要总结我实际使用python操作MySQL数据库用到的几种方法，希望能对你有所帮助。在学习后面实例代码前。首先对数据库需要有一定的了解，而且本地需要安装MySQL数据库，并设置好MySQL账户和密码。
-数据库主要分为关系型和非关系型数据库。MySQL属于关系型数据库库。
-PyMySQL模块首先总结pymysql模块所常用到的一些方法，它主要用来操作MySQL数据库。如需查看官方文档......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-04-18
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2019/04/12/python代码规范和命名规范说明/">
-        <h2 class="post-title">
-            python代码规范和命名规范说明
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言之前一直使用sublime编辑器编写python代码，后面使用vs code编辑器打开项目文件时，发现有很多规范上的问题。特地总结一下编写python代码规范，编写代码时还是需要严格遵守代码规范。
-参考若需要阅读Google官方python代码风格指导文档，请点击这里。
-对于以下文档中没有提到规范，你可以使用python模块pylint检查你的python代码是否符合规范。
-1pip3 ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-04-12
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -510,9 +513,9 @@ PyMySQL模块首先总结pymysql模块所常用到的一些方法，它主要用
                             
                         
                             
-                        
+                            <a href="/tags/#Python" title="Python" rel="13">Python</a>
                             
-                            <a href="/tags/#Linux, Centos" title="Linux, Centos" rel="2">Linux, Centos</a>
+                        
                             
                         
                             
@@ -520,9 +523,9 @@ PyMySQL模块首先总结pymysql模块所常用到的一些方法，它主要用
                             
                         
                             
-                        
+                            <a href="/tags/#Linux, Centos" title="Linux, Centos" rel="2">Linux, Centos</a>
                             
-                            <a href="/tags/#Python" title="Python" rel="10">Python</a>
+                        
                             
                         
                             
