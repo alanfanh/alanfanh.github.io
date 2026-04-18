@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -197,23 +197,29 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="RA协议总结"><a href="#RA协议总结" class="headerlink" title="RA协议总结"></a>RA协议总结</h4><ol>
+                <h4 id="RA协议总结">RA协议总结</h4>
+<ol>
 <li>radvd服务主要组播RA报文，RA报文的目的地址为所有节点的组播地址；</li>
 <li>RA报文携带了M、O位信息，以及ipv6前缀信息</li>
-<li>所有节点根据收到的RA报文，进行IPv6地址配置或者获取 </li>
+<li>所有节点根据收到的RA报文，进行IPv6地址配置或者获取</li>
 </ol>
 <ul>
-<li>M=0，O=0且RA携带前缀的A位为1；节点根据RA下发的前缀自动配置IPv6地址；此时称之为无状态地址自动配置SLAAC；<br>但节点不会发送dhcpv6报文请求其他网络信息；ipv6 dns可以通过手动配置；</li>
-<li>M=0，O=1且RA携带前缀的A位为1；节点根据RA下发的前缀自动配置IPv6地址；<br>之后节点向dhcpv6服务器发送information-request报文，请求除IPv6地址外dhs、ntp等其他网络信息；dhcpv6无状态</li>
+<li>M=0，O=0且RA携带前缀的A位为1；节点根据RA下发的前缀自动配置IPv6地址；此时称之为无状态地址自动配置SLAAC；<br>
+但节点不会发送dhcpv6报文请求其他网络信息；ipv6 dns可以通过手动配置；</li>
+<li>M=0，O=1且RA携带前缀的A位为1；节点根据RA下发的前缀自动配置IPv6地址；<br>
+之后节点向dhcpv6服务器发送information-request报文，请求除IPv6地址外dhs、ntp等其他网络信息；dhcpv6无状态</li>
 <li>M=1，O=1；节点通过DHCPv6向DHCPv6服务器获取地址及dns、ntp等其他网络信息。dhcpv6有状态</li>
 </ul>
 <ol start="4">
 <li>RA报文中携带的前缀信息中，flag标志位A位为0时；即使ipv6节点收到此RA报文的前缀信息时，也不会跟据此前缀自动化配置IPv6地址；</li>
-<li>注意：RA报文中的M=1，O=1时，客户端节点会通过DHCPv6有状态向DHCPv6服务器获取IP地址；<br>但同时客户端节点也会根据RA报文中携带的前缀信息生成无状态地址（前缀标志位A位为1）</li>
+<li>注意：RA报文中的M=1，O=1时，客户端节点会通过DHCPv6有状态向DHCPv6服务器获取IP地址；<br>
+但同时客户端节点也会根据RA报文中携带的前缀信息生成无状态地址（前缀标志位A位为1）</li>
 </ol>
-<h4 id="安装服务器"><a href="#安装服务器" class="headerlink" title="安装服务器"></a>安装服务器</h4><p>centos7下使用包管理器安装radvd</p>
+<h4 id="安装服务器">安装服务器</h4>
+<p>centos7下使用包管理器安装radvd</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y radvd</span><br></pre></td></tr></table></figure>
-<h4 id="配置启用"><a href="#配置启用" class="headerlink" title="配置启用"></a>配置启用</h4><p><em>配置文件如下</em></p>
+<h4 id="配置启用">配置启用</h4>
+<p><em>配置文件如下</em></p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[root@Server ~]# cat /etc/radvd.conf</span><br><span class="line">interface eth1</span><br><span class="line">&#123;</span><br><span class="line">      AdvSendAdvert on;</span><br><span class="line">      MinRtrAdvInterval 30;</span><br><span class="line">      MaxRtrAdvInterval 100;</span><br><span class="line">      AdvDefaultPreference high;</span><br><span class="line">      AdvHomeAgentFlag off;</span><br><span class="line">      AdvManagedFlag on;</span><br><span class="line">      AdvOtherConfigFlag on;</span><br><span class="line">   prefix 2008:530::/64</span><br><span class="line">   &#123;</span><br><span class="line">         AdvOnLink on;</span><br><span class="line">         AdvAutonomous off;</span><br><span class="line">         AdvRouterAddr off;</span><br><span class="line">   &#125;;</span><br><span class="line">   RDNSS 2001::1 2001::2</span><br><span class="line">   &#123;</span><br><span class="line">        AdvRDNSSPreference 8;</span><br><span class="line">        AdvRDNSSLifetime 180;</span><br><span class="line">   &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>临时启用radvd服务</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[root@Server ~]# /usr/sbin/radvd  -d  -C  /etc/radvd.conf</span><br></pre></td></tr></table></figure>

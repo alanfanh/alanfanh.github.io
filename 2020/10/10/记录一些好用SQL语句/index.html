@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -197,7 +197,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><blockquote>
+                <h4 id="说明">说明</h4>
+<blockquote>
 <p>总结统计查询Bugfree上bug相关信息的SQL语句</p>
 </blockquote>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 按产品分类，查询创建时间<span class="number">2019</span><span class="number">-01</span><span class="number">-01</span><span class="operator">~</span><span class="number">2019</span><span class="number">-12</span><span class="number">-19</span>内的bug并且解决方案为<span class="keyword">External</span>的bug数</span><br><span class="line"><span class="keyword">select</span> (<span class="keyword">select</span> name <span class="keyword">from</span> bf_product  <span class="keyword">where</span> t.product_id  <span class="operator">=</span> id ),product_id,<span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">from</span>  bf_bug_info t <span class="keyword">WHERE</span> created_at <span class="operator">&gt;</span> <span class="string">&#x27;2019-01-01 00:00:01&#x27;</span> <span class="keyword">and</span> created_at <span class="operator">&lt;</span> <span class="string">&#x27;2019-12-19 18:59:00&#x27;</span> <span class="keyword">and</span> solution <span class="operator">=</span> &quot;External&quot; <span class="keyword">group</span> <span class="keyword">by</span>  product_id ;</span><br></pre></td></tr></table></figure>

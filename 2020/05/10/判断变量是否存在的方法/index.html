@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -201,11 +201,14 @@
 <p>####方法一：</p>
 <p>使用try: … except NameError: …</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># var未定义</span></span><br><span class="line"><span class="keyword">try</span>：</span><br><span class="line">		var</span><br><span class="line"><span class="keyword">except</span> NameError：</span><br><span class="line">		var_exists = <span class="literal">False</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">  	var_exists = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>使用内置函数locals()，获取已定义对象字典。</p>
+<h4 id="方法二：">方法二：</h4>
+<p>使用内置函数locals()，获取已定义对象字典。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;testvar&#x27;</span> <span class="keyword">in</span> <span class="built_in">locals</span>().keys()</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;testvar&#x27;</span> <span class="keyword">in</span> <span class="built_in">locals</span>().keys()</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法三："><a href="#方法三：" class="headerlink" title="方法三："></a>方法三：</h4><p>使用内置函数dir()</p>
+<h4 id="方法三：">方法三：</h4>
+<p>使用内置函数dir()</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;testvar&#x27;</span> <span class="keyword">in</span> <span class="built_in">dir</span>()</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;testvar&#x27;</span> <span class="keyword">in</span> <span class="built_in">dir</span>()</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
-<h4 id="方法四："><a href="#方法四：" class="headerlink" title="方法四："></a>方法四：</h4><p>使用内置函数vars()</p>
+<h4 id="方法四：">方法四：</h4>
+<p>使用内置函数vars()</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># testvar 未定义</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;testvar&#x27;</span> <span class="keyword">in</span> <span class="built_in">vars</span>()</span><br><span class="line"><span class="literal">False</span></span><br><span class="line"><span class="comment"># 定义testvar</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>testvar = <span class="string">&#x27;a&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;testvar&#x27;</span> <span class="keyword">in</span> <span class="built_in">vars</span>()</span><br><span class="line"><span class="literal">True</span></span><br></pre></td></tr></table></figure>
 
 

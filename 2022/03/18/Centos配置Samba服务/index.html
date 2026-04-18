@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -197,35 +197,58 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="搭建Samba服务"><a href="#搭建Samba服务" class="headerlink" title="搭建Samba服务"></a>搭建Samba服务</h4><ol>
-<li>安装服务组件<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install samba samba-client samba-common</span><br></pre></td></tr></table></figure></li>
-<li><p>配置<br>查看smb.conf配置文件帮助信息</p>
+                <h4 id="搭建Samba服务">搭建Samba服务</h4>
+<ol>
+<li>安装服务组件</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install samba samba-client samba-common</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>配置<br>
+查看smb.conf配置文件帮助信息</li>
+</ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man smb.conf</span><br></pre></td></tr></table></figure>
 <p>编辑文件添加如下内容；配置数据存放路径</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@master ~]# vi /etc/samba/smb.conf</span><br><span class="line">[myshare]</span><br><span class="line">        comment = files</span><br><span class="line">        path = /data</span><br><span class="line">        writable = <span class="built_in">yes</span></span><br><span class="line">        create mask = 1774</span><br><span class="line">        directory mask = 1777</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加用户，并设置用户密码</p>
-<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd  <span class="built_in">test</span></span><br><span class="line">smbpasswd -a <span class="built_in">test</span></span><br></pre></td></tr></table></figure></li>
-<li>永久启用<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">system</span>ctl start smb.service</span><br><span class="line"><span class="params">system</span>ctl enable smb.service</span><br></pre></td></tr></table></figure></li>
-<li><p>注意要关闭selinux，否则无法往samba服务中写入文件</p>
+<ol start="3">
+<li>添加用户，并设置用户密码</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">useradd  <span class="built_in">test</span></span><br><span class="line">smbpasswd -a <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>永久启用</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl start smb.service</span><br><span class="line">systemctl enable smb.service</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>注意要关闭selinux，否则无法往samba服务中写入文件</li>
+</ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setenforce 0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>Centos下连接Samba服务<br>测试smb服务是否连通</p>
+<ol start="6">
+<li>Centos下连接Samba服务<br>
+测试smb服务是否连通</li>
+</ol>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smbclient -L 192.168.97.109 -U <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
 <p>输入以下命令，将samba共享挂载到/mnt路径下使用，然后根据提示输入samba服务器test账户的密码</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -t cifs //192.168.97.109/share /mnt -o username=<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h4 id="负责权限控制与群组设置"><a href="#负责权限控制与群组设置" class="headerlink" title="负责权限控制与群组设置"></a>负责权限控制与群组设置</h4><p>samba服务用的是系统用户，给用户添加samba密码时，用户必须已经是系统用户。</p>
+<h4 id="负责权限控制与群组设置">负责权限控制与群组设置</h4>
+<p>samba服务用的是系统用户，给用户添加samba密码时，用户必须已经是系统用户。</p>
 <ol>
-<li>添加群组<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加iot组</span></span><br><span class="line">groupadd iot</span><br><span class="line"><span class="comment"># 查看添加group</span></span><br><span class="line"><span class="built_in">cat</span> /etc/group</span><br></pre></td></tr></table></figure></li>
-<li>添加用户<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看帮助信息,</span></span><br><span class="line">useradd -h</span><br><span class="line"><span class="comment">#  为iot组添加一个用户test，且不创建用户主目录</span></span><br><span class="line">useradd  -M -g iot  -s /sbin/nologin  <span class="built_in">test</span></span><br></pre></td></tr></table></figure></li>
-<li>查看用户<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如下表示有两个smb用户</span></span><br><span class="line">[root@localhost samba]# pdbedit -L</span><br><span class="line">iot:1002:</span><br><span class="line"><span class="built_in">test</span>:1001:</span><br></pre></td></tr></table></figure></li>
-<li>删除用户<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两种方式删除用户名iot的用户</span></span><br><span class="line">pdbedit -x -u iot</span><br><span class="line">smbpasswd -x iot</span><br></pre></td></tr></table></figure>
-</li>
+<li>添加群组</li>
 </ol>
-<h4 id="其他文档参考"><a href="#其他文档参考" class="headerlink" title="其他文档参考"></a>其他文档参考</h4><p>给整个部门不同组设置不同文件夹访问权限，参考如下链接文档<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://www.cnblogs.com/liuquan/p/5644760.html</span><br><span class="line"></span><br><span class="line">https://www.cnblogs.com/muscleape/p/6385583.html</span><br></pre></td></tr></table></figure></p>
-
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加iot组</span></span><br><span class="line">groupadd iot</span><br><span class="line"><span class="comment"># 查看添加group</span></span><br><span class="line"><span class="built_in">cat</span> /etc/group</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>添加用户</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看帮助信息,</span></span><br><span class="line">useradd -h</span><br><span class="line"><span class="comment">#  为iot组添加一个用户test，且不创建用户主目录</span></span><br><span class="line">useradd  -M -g iot  -s /sbin/nologin  <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>查看用户</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 如下表示有两个smb用户</span></span><br><span class="line">[root@localhost samba]# pdbedit -L</span><br><span class="line">iot:1002:</span><br><span class="line"><span class="built_in">test</span>:1001:</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>删除用户</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两种方式删除用户名iot的用户</span></span><br><span class="line">pdbedit -x -u iot</span><br><span class="line">smbpasswd -x iot</span><br></pre></td></tr></table></figure>
+<h4 id="其他文档参考">其他文档参考</h4>
+<p>给整个部门不同组设置不同文件夹访问权限，参考如下链接文档</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://www.cnblogs.com/liuquan/p/5644760.html</span><br><span class="line"></span><br><span class="line">https://www.cnblogs.com/muscleape/p/6385583.html</span><br></pre></td></tr></table></figure>
 
                 <hr>
 

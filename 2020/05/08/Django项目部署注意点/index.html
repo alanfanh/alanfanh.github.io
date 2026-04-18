@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -198,12 +198,12 @@
                 post-container">
 
                 <p>之前部署django项目到生产环境中时，遇到几个问题。现在将问题总结一下，django版本如下</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">django</span>=<span class="number">2</span>.<span class="number">2</span>.<span class="number">10</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django=2.2.10</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>关闭调试模式</strong></li>
 </ul>
 <p>创建django项目时，项目的setting.py中的DEBUG默认为True。此参数代表web项目处于开发模式中。django项目部署到生产环境中时，需要关闭此选项。如下</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">DEBUG</span> = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DEBUG = False</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>设置允许访问的hosts</strong></li>
 </ul>

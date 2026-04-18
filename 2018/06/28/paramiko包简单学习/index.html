@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -198,9 +198,12 @@
                 post-container">
 
                 <p>在我们的PyAuto的自动化平台有用到这个包模块，这是一个第三方包。拥有很强大的功能，可以通过SSH连接远程主机，实现执行命令、文件传输、SSH代理等功能。甚至你可以利用这个包，写一个SSH登录工具。目前在自动化平台主要用来连接Centos系统，发送并执行linux命令。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install paramiko</span><br></pre></td></tr></table></figure>
-<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="comment">#初始化对象s</span></span><br><span class="line">s=paramiko.SSHClient()</span><br><span class="line"><span class="comment">#调用方法，使能连接不在host文件中的主机</span></span><br><span class="line">s.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line"><span class="comment">#调用connect方法连接主机</span></span><br><span class="line">s.connect(hostname=<span class="string">&#x27;192.168.1.1&#x27;</span>,port=<span class="number">22</span>,username=<span class="string">&#x27;admin&#x27;</span>,password=<span class="string">&#x27;admin&#x27;</span>,timeout=<span class="number">10</span>)</span><br><span class="line"><span class="comment">#发送并执行命令</span></span><br><span class="line">stdin, stdout, stderr = s.exec_command(<span class="string">&#x27;ifconfig wlan0&#x27;</span>)</span><br><span class="line"><span class="comment">#decode()方法，使输出结果排列整齐</span></span><br><span class="line">Result=stdout.read().decode()</span><br><span class="line">Err=stderr.read()</span><br><span class="line"><span class="comment">#打印结果</span></span><br><span class="line"><span class="built_in">print</span>(Result)</span><br><span class="line"><span class="built_in">print</span>(Err)</span><br><span class="line"><span class="comment">#关闭ssh连接</span></span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
-<h3 id="包源码"><a href="#包源码" class="headerlink" title="包源码"></a>包源码</h3><p>paramiko包下的client.py文件中包含了SSHClient类</p>
+<h3 id="安装">安装</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install paramiko</span><br></pre></td></tr></table></figure>
+<h3 id="源码分析">源码分析</h3>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3</span></span><br><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> paramiko</span><br><span class="line"><span class="comment">#初始化对象s</span></span><br><span class="line">s=paramiko.SSHClient()</span><br><span class="line"><span class="comment">#调用方法，使能连接不在host文件中的主机</span></span><br><span class="line">s.set_missing_host_key_policy(paramiko.AutoAddPolicy())</span><br><span class="line"><span class="comment">#调用connect方法连接主机</span></span><br><span class="line">s.connect(hostname=<span class="string">&#x27;192.168.1.1&#x27;</span>,port=<span class="number">22</span>,username=<span class="string">&#x27;admin&#x27;</span>,password=<span class="string">&#x27;admin&#x27;</span>,timeout=<span class="number">10</span>)</span><br><span class="line"><span class="comment">#发送并执行命令</span></span><br><span class="line">stdin, stdout, stderr = s.exec_command(<span class="string">&#x27;ifconfig wlan0&#x27;</span>)</span><br><span class="line"><span class="comment">#decode()方法，使输出结果排列整齐</span></span><br><span class="line">Result=stdout.read().decode()</span><br><span class="line">Err=stderr.read()</span><br><span class="line"><span class="comment">#打印结果</span></span><br><span class="line"><span class="built_in">print</span>(Result)</span><br><span class="line"><span class="built_in">print</span>(Err)</span><br><span class="line"><span class="comment">#关闭ssh连接</span></span><br><span class="line">s.close()</span><br></pre></td></tr></table></figure>
+<h3 id="包源码">包源码</h3>
+<p>paramiko包下的client.py文件中包含了SSHClient类</p>
 
 
                 <hr>

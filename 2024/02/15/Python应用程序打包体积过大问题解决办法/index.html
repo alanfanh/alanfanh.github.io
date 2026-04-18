@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -197,18 +197,34 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="主要原因"><a href="#主要原因" class="headerlink" title="主要原因"></a>主要原因</h4><p>python作为解释性语言，打包体积相较于编译型语言，打包程序体积大。如果需要追求程序体积小，程序运行速度快，只能用编译型语言解决。</p>
-<h4 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h4><p>实测在自己电脑python开发环境下打包，程序体积高达几百MB。为什么出现如此情况？<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">推测原因：python开发环境有很多其他第三模块包，不够干净，打包时同时将那些非必须第三包程序也打包进去。</span><br><span class="line">解决方案：使用python虚环境，只安装程序运行所必须的包解决程序体积过大问题</span><br></pre></td></tr></table></figure></p>
-<h4 id="实际应用验证"><a href="#实际应用验证" class="headerlink" title="实际应用验证"></a>实际应用验证</h4><p>以打包pdu控制程序为例进行验证<br><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此程序第三方包为pyside6、pyserial包</span><br></pre></td></tr></table></figure></p>
+                <h4 id="主要原因">主要原因</h4>
+<p>python作为解释性语言，打包体积相较于编译型语言，打包程序体积大。如果需要追求程序体积小，程序运行速度快，只能用编译型语言解决。</p>
+<h4 id="问题引入">问题引入</h4>
+<p>实测在自己电脑python开发环境下打包，程序体积高达几百MB。为什么出现如此情况？</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">推测原因：python开发环境有很多其他第三模块包，不够干净，打包时同时将那些非必须第三包程序也打包进去。</span><br><span class="line">解决方案：使用python虚环境，只安装程序运行所必须的包解决程序体积过大问题</span><br></pre></td></tr></table></figure>
+<h4 id="实际应用验证">实际应用验证</h4>
+<p>以打包pdu控制程序为例进行验证</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此程序第三方包为pyside6、pyserial包</span><br></pre></td></tr></table></figure>
 <ol>
-<li>终端切换目录，当前目录创建新的python虚环境env<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv env</span><br></pre></td></tr></table></figure></li>
-<li>如下命令切换到虚环境<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env\Scripts\activate</span><br></pre></td></tr></table></figure></li>
-<li>查看虚环境包<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(env) C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool&gt;pip3 list</span><br><span class="line">Package    Version</span><br><span class="line">---------- -------</span><br><span class="line">pip        <span class="number">20</span>.<span class="number">2</span>.<span class="number">3</span></span><br><span class="line">setuptools <span class="number">49</span>.<span class="number">2</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure></li>
-<li>虚环境下安装程序所需的第三包<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyside6</span><br><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyserial</span><br><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure>
-因网络问题导致包下载速度慢，可以参考上面使用国内源</li>
-<li>虚环境下使用pyinstaller进行打包<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F -p C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool&gt; scriptname  C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool\main.py</span><br></pre></td></tr></table></figure>
-在dist路径下查看最终的程序体积，大约40MB大小。</li>
+<li>终端切换目录，当前目录创建新的python虚环境env</li>
 </ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m venv env</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>如下命令切换到虚环境</li>
+</ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">env\Scripts\activate</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>查看虚环境包</li>
+</ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(env) C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool&gt;pip3 list</span><br><span class="line">Package    Version</span><br><span class="line">---------- -------</span><br><span class="line">pip        <span class="number">20</span>.<span class="number">2</span>.<span class="number">3</span></span><br><span class="line">setuptools <span class="number">49</span>.<span class="number">2</span>.<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>虚环境下安装程序所需的第三包</li>
+</ol>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyside6</span><br><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyserial</span><br><span class="line">pip install pyinstaller</span><br></pre></td></tr></table></figure>
+<p>因网络问题导致包下载速度慢，可以参考上面使用国内源<br>
+5. 虚环境下使用pyinstaller进行打包</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pyinstaller -F -p C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool&gt; scriptname  C:\Users\Administrator\Desktop\my_project\pdu-crtl-tool\main.py</span><br></pre></td></tr></table></figure>
+<p>在dist路径下查看最终的程序体积，大约40MB大小。</p>
 <ul>
 <li>以上实例可验证推测原因符合验证结果</li>
 </ul>

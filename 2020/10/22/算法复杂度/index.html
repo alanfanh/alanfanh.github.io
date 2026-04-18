@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -199,27 +199,37 @@
 
                 <p>在LeetCode上刷题，碰到一个题目，涉及时间复杂度的概念，如下。为了了解O(n)这个概念，后面去学习了时间复杂度相关内容。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">76. 最小覆盖子串</span><br><span class="line">给你一个字符串 S、一个字符串 T。请你设计一种算法，可以在 O(n) 的时间复杂度内，从字符串 S 里面找出：包含 T 所有字符的最小子串。 </span><br><span class="line"></span><br><span class="line">示例：输入：S = &quot;ADOBECODEBANC&quot;, T = &quot;ABC“</span><br><span class="line">             输出：&quot;BANC&quot; </span><br><span class="line"></span><br><span class="line">提示：如果 S 中不存这样的子串，则返回空字符串 &quot;&quot;。</span><br><span class="line">     如果 S 中存在这样的子串，我们保证它是唯一的答案。</span><br></pre></td></tr></table></figure>
-<h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>首先算法复杂度是衡量算法好坏的一个重要指标。其次对算法的分析是通过预估分析得到，而不是将以该算法编写的程序上机运行，统计程序运行时间。</p>
+<h4 id="概念">概念</h4>
+<p>首先算法复杂度是衡量算法好坏的一个重要指标。其次对算法的分析是通过预估分析得到，而不是将以该算法编写的程序上机运行，统计程序运行时间。</p>
 <blockquote>
 <p>程序执行时间受运行环境和输入规模的影响，代码绝对执行时间无法估计。有时候这种统计甚至会掩盖算法本身的优劣。<em>算法时间复杂度采用预估分析方法！</em></p>
 </blockquote>
-<h5 id="预估分析法"><a href="#预估分析法" class="headerlink" title="预估分析法"></a>预估分析法</h5><p>比较同一个问题的不同算法，通常的做法是，从算法中选取一种对于所研究的问题（或算法类型）来说是基本操作的原操作，以该基本操作的重复执行的次数作为算法的时间量度。</p>
+<h5 id="预估分析法">预估分析法</h5>
+<p>比较同一个问题的不同算法，通常的做法是，从算法中选取一种对于所研究的问题（或算法类型）来说是基本操作的原操作，以该基本操作的重复执行的次数作为算法的时间量度。</p>
 <p>非精确计算出算法的运行时间，而是用统计方法分析出不同算法的花费时间长短。</p>
 <p>主要分析代码的基本操作的执行次数。而算法花费时间与<strong>代码基本操作执行次数</strong>成正比。</p>
-<h5 id="T-n-与O-n"><a href="#T-n-与O-n" class="headerlink" title="T(n)与O(n)"></a>T(n)与O(n)</h5><p>（1）时间频度：一个算法花费的时间与算法中语句的执行次数成正比例，哪个算法中语句执行次数多，它花费时间就多。一个算法中的语句执行次数称为语句频度或时间频度。记为T(n)。</p>
+<h5 id="T-n-与O-n">T(n)与O(n)</h5>
+<p>（1）时间频度：一个算法花费的时间与算法中语句的执行次数成正比例，哪个算法中语句执行次数多，它花费时间就多。一个算法中的语句执行次数称为语句频度或时间频度。记为T(n)。</p>
 <p>（2）n的含义：n被称为问题的规模，当n变化时，T(n)也不断变化。当我们想了解T(n)与n之间的变化规律时，此时引入一个新的概念——时间复杂度。</p>
-<p>（3）时间复杂度：算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n),使得当n趋近于无穷大时，T(n)/f(n)的极限值为不等于零的常数，则称f(n)是T(n)的同数量级函数。记作T(n)=Ｏ(f(n))<strong>，</strong>而称Ｏ(f(n)) 为算法的渐进时间复杂度，简称时间复杂度，用大写O表示。</p>
-<h4 id="推导O-n"><a href="#推导O-n" class="headerlink" title="推导O(n)"></a>推导O(n)</h4><h5 id="分析T-n"><a href="#分析T-n" class="headerlink" title="分析T(n)"></a>分析T(n)</h5><p>分析由算法编写得到的代码可参考几个原则</p>
+<p>（3）时间复杂度：算法中基本操作重复执行的次数是问题规模n的某个函数，用T(n)表示，若有某个辅助函数f(n),使得当n趋近于无穷大时，T(n)/f(n)的极限值为不等于零的常数，则称f(n)是T(n)的同数量级函数。记作T(n)=Ｏ(f(n))**，**而称Ｏ(f(n)) 为算法的渐进时间复杂度，简称时间复杂度，用大写O表示。</p>
+<h4 id="推导O-n">推导O(n)</h4>
+<h5 id="分析T-n">分析T(n)</h5>
+<p>分析由算法编写得到的代码可参考几个原则</p>
 <ul>
 <li>O(1):适用输入输出语句、赋值语句、判断if/else语句、选择结构</li>
-<li>求和法则：适用常规语句，顺序结构<blockquote>
-<p>T1(n)=O(f(n))和T2(n)=O(g(n)),则 T1(n)+T2(n)=O(max(f(n), g(n)))<br>T1(m)=O(f(m)), T2(n)=O(g(n)),则 T1(m)+T2(n)=O(f(m) + g(n))</p>
+<li>求和法则：适用常规语句，顺序结构</li>
+</ul>
+<blockquote>
+<p>T1(n)=O(f(n))和T2(n)=O(g(n)),则 T1(n)+T2(n)=O(max(f(n), g(n)))<br>
+T1(m)=O(f(m)), T2(n)=O(g(n)),则 T1(m)+T2(n)=O(f(m) + g(n))</p>
 </blockquote>
-</li>
-<li>乘法法则：适用循环结构<blockquote>
-<p>T1(n)=O(f(n))和T2(n)=O(g(n)),则 T1<em>T2=O(f(n)</em>g(n))</p>
+<ul>
+<li>乘法法则：适用循环结构</li>
+</ul>
+<blockquote>
+<p>T1(n)=O(f(n))和T2(n)=O(g(n)),则 T1*T2=O(f(n)*g(n))</p>
 </blockquote>
-</li>
+<ul>
 <li>复杂算法可分解成比较容易估算的几个部分。</li>
 </ul>
 <p>以下列举了一些实例</p>
@@ -228,7 +238,8 @@
 <p>Python语法中对列表、集合、字符串、字典的部分操作时间复杂度为O(n)。具体可<a href="https://www.cnblogs.com/xiximayou/p/13797272.html">点击</a></p>
 <p><strong>循环减半则时间复杂度降为</strong>log<em>2**n</em>，代码如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">64</span></span><br><span class="line"><span class="keyword">while</span> n&gt;<span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(n)</span><br><span class="line">    n = n//<span class="number">2</span></span><br></pre></td></tr></table></figure>
-<h5 id="推导O-fn"><a href="#推导O-fn" class="headerlink" title="推导O((fn))"></a>推导O((fn))</h5><p>根据前面的概念。T(n)=O(f(n))，而O(f(n))为时间复杂度。可以根据T(n)推导出O(n)</p>
+<h5 id="推导O-fn">推导O((fn))</h5>
+<p>根据前面的概念。T(n)=O(f(n))，而O(f(n))为时间复杂度。可以根据T(n)推导出O(n)</p>
 <p><em>推导时间复杂度O(f(n))，有如下几个原则：</em></p>
 <ul>
 <li>如果运行时间是常数量级，用常数1表示；</li>
@@ -241,10 +252,12 @@
 <p>3、$T(n) = 5log_2n$ ，则$T(n)=O(log_2n)$；时间复杂度$O(log_2n)$</p>
 <p>4、$T(n) = 3n^2$，则$T(n)=O(n^2)$; 时间复杂度$O(n^2)$</p>
 <p>$O(2n^2+n+1) = O(3n^2+n+3) = O(7n^2+n) = O(n^2)$</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p><strong>常见时间复杂度：</strong></p>
+<h4 id="总结">总结</h4>
+<p><strong>常见时间复杂度：</strong></p>
 <p>常数阶$Ο(1)$、 对数阶$Ο(log_2n)$、线性阶$O(n)$、 线性对数阶$O(nlog_2n)$、平方阶$O(n^2)$，立方阶$O(n^3)$,…， k次方阶$O(n^k)$,指数阶$O(2^n)$。随着问题规模n的不断增大，上述时间复杂度不断增大，算法的执行效率越低。</p>
 <p><strong>经验规则</strong>：</p>
-<p>$Ο(1)＜Ο(log_2n)＜Ο(n)＜Ο(nlog_2n)＜Ο(n^2)＜Ο(n^3)＜…＜Ο(2^n)＜Ο(n!)$<br>如果一个算法的复杂度为$c$ 、 $log_2n$ 、$n$、$nlog_2n$，那么这个算法时间效率比较高，如果是$2^n$ 、$3^n$ 、$n!$，那么稍微大一些的$n$就会令这个算法不能动了，居于中间的几个则差强人意。</p>
+<p>$Ο(1)＜Ο(log_2n)＜Ο(n)＜Ο(nlog_2n)＜Ο(n^2)＜Ο(n^3)＜…＜Ο(2^n)＜Ο(n!)$<br>
+如果一个算法的复杂度为$c$ 、 $log_2n$ 、$n$、$nlog_2n$，那么这个算法时间效率比较高，如果是$2^n$ 、$3^n$ 、$n!$，那么稍微大一些的$n$就会令这个算法不能动了，居于中间的几个则差强人意。</p>
 
 
                 <hr>

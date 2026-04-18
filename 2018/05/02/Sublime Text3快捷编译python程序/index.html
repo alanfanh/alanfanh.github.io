@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -198,9 +198,21 @@
                 post-container">
 
                 <p>公司电脑是window系统，写python代码一直默认用的是notepad++。后面为了在自己的Macbook练习python程序，了解到了有一款神器—Sublime Text3。以下主要记录如何配置Sublime Text3使其快捷运行python代码。</p>
-<h3 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h3><h4 id="tab键设置"><a href="#tab键设置" class="headerlink" title="tab键设置"></a>tab键设置</h4><p>python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。<br>1、菜单栏打开Preferences-Settings，在新打开的窗口Preferences.sublime-settings–User中添加如下字段，tab键将默认转换为4个空格键。<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;tab_size&quot;</span><span class="punctuation">:</span> <span class="number">4</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;translate_tabs_to_spaces&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="sublime插件包"><a href="#sublime插件包" class="headerlink" title="sublime插件包"></a>sublime插件包</h4><p>sublime提供了很多插件包，但是需要自己手动下载安装。推荐安装python语法提示的相关插件，能够在你编码的时候的进行提示，大大提升你的编码速率。第二推荐安装你喜爱的主题插件，毕竟一个让你赏心悦目的界面能够让你眼睛不会那么疲劳。</p>
-<h4 id="快捷执行python代码设置"><a href="#快捷执行python代码设置" class="headerlink" title="快捷执行python代码设置"></a>快捷执行python代码设置</h4><p>首先打开终端，输入以下命令。因为我常用python3<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> -a python3</span><br></pre></td></tr></table></figure><br>此时得到返回结果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 is /Library/Frameworks/Python.framework/Versions/3.6/bin/python3</span><br><span class="line">python3 is /usr/local/bin/python3</span><br></pre></td></tr></table></figure><br>然后进入sublime的菜单栏，点击tools-Bulid System-New Bulid System，此时将会打开一个新窗口，修改如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;shell_cmd&quot;</span>: [<span class="string">&quot;/usr/local/bin/python3&quot;</span>,<span class="string">&quot;-u&quot;</span>,<span class="string">&quot;<span class="variable">$file</span>&quot;</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>保存为python3.sublime-build。进入tools-Bulid System，选择python3即可。</p>
+<h3 id="配置过程">配置过程</h3>
+<h4 id="tab键设置">tab键设置</h4>
+<p>python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。<br>
+1、菜单栏打开Preferences-Settings，在新打开的窗口Preferences.sublime-settings–User中添加如下字段，tab键将默认转换为4个空格键。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;tab_size&quot;: 4,</span><br><span class="line">&quot;translate_tabs_to_spaces&quot;: true,</span><br></pre></td></tr></table></figure>
+<h4 id="sublime插件包">sublime插件包</h4>
+<p>sublime提供了很多插件包，但是需要自己手动下载安装。推荐安装python语法提示的相关插件，能够在你编码的时候的进行提示，大大提升你的编码速率。第二推荐安装你喜爱的主题插件，毕竟一个让你赏心悦目的界面能够让你眼睛不会那么疲劳。</p>
+<h4 id="快捷执行python代码设置">快捷执行python代码设置</h4>
+<p>首先打开终端，输入以下命令。因为我常用python3</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span> -a python3</span><br></pre></td></tr></table></figure>
+<p>此时得到返回结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 is /Library/Frameworks/Python.framework/Versions/3.6/bin/python3</span><br><span class="line">python3 is /usr/local/bin/python3</span><br></pre></td></tr></table></figure>
+<p>然后进入sublime的菜单栏，点击tools-Bulid System-New Bulid System，此时将会打开一个新窗口，修改如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;shell_cmd&quot;: [&quot;/usr/local/bin/python3&quot;,&quot;-u&quot;,&quot;$file&quot;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>保存为python3.sublime-build。进入tools-Bulid System，选择python3即可。</p>
 
 
                 <hr>

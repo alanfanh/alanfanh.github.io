@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -197,8 +197,10 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><p>使用这个库之前，最好能掌握http协议相关知识。本文总结requests库常用的一些方法，以及我在实际开发相关工具时遇到的问题。</p>
-<h4 id="Requests库介绍"><a href="#Requests库介绍" class="headerlink" title="Requests库介绍"></a>Requests库介绍</h4><p>如果需要了解更多详细内容和用法，请点击<a href="http://cn.python-requests.org/zh_CN/latest/">这里</a>，查看官方API文档。</p>
+                <h4 id="前言">前言</h4>
+<p>使用这个库之前，最好能掌握http协议相关知识。本文总结requests库常用的一些方法，以及我在实际开发相关工具时遇到的问题。</p>
+<h4 id="Requests库介绍">Requests库介绍</h4>
+<p>如果需要了解更多详细内容和用法，请点击<a href="http://cn.python-requests.org/zh_CN/latest/">这里</a>，查看官方API文档。</p>
 <p>Requests是一个非常强大的基于http协议的python库（package）。到目前为止，主要应用在以下几个方面:</p>
 <ul>
 <li>简单爬虫工具，构造http  get报文向指定网站api接口请求数据。然后对数据进行处理，得到我们需要的有价值的数据。（项目：网评分析工具）</li>
@@ -207,7 +209,9 @@
 </ul>
 <p>安装</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install requests</span><br></pre></td></tr></table></figure>
-<h4 id="快速上手"><a href="#快速上手" class="headerlink" title="快速上手"></a>快速上手</h4><h5 id="get请求报文"><a href="#get请求报文" class="headerlink" title="get请求报文"></a>get请求报文</h5><p>通过get方法获取某个网页。以下代码r为网站响应的response对象。</p>
+<h4 id="快速上手">快速上手</h4>
+<h5 id="get请求报文">get请求报文</h5>
+<p>通过get方法获取某个网页。以下代码r为网站响应的response对象。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">r = requests.get(<span class="string">&#x27;https://api.github.com/events&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p>查看url链接</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">r.url</span><br></pre></td></tr></table></figure>
@@ -229,21 +233,29 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>payload = &#123;<span class="string">&#x27;key1&#x27;</span>:<span class="string">&#x27;value&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>:<span class="string">&#x27;value2&#x27;</span>&#125;</span><br><span class="line">urllib.urlencode(payload)  ==</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.get(<span class="string">&#x27;http://httpbin.org/get&#x27;</span>, params=payload)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.url</span><br><span class="line">http://httpbin.org/get?key1=value1&amp;key2=value2</span><br></pre></td></tr></table></figure>
 <p>异常状态响应码，抛出异常方法</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.get(<span class="string">&#x27;http://httpbin.org/status/404&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.status_code</span><br><span class="line"><span class="number">404</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.raise_for_status()</span><br></pre></td></tr></table></figure>
-<h5 id="定制请求报头"><a href="#定制请求报头" class="headerlink" title="定制请求报头"></a>定制请求报头</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>url = <span class="string">&#x27;https://api.github.com/some/endpoint&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>headers = &#123;<span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;my-app/0.0.1&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.get(url, headers=headers)</span><br></pre></td></tr></table></figure>
+<h5 id="定制请求报头">定制请求报头</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>url = <span class="string">&#x27;https://api.github.com/some/endpoint&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>headers = &#123;<span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;my-app/0.0.1&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.get(url, headers=headers)</span><br></pre></td></tr></table></figure>
 <p>所有的 header 值必须是 <code>string</code>、bytestring 或者 unicode。</p>
-<h5 id="post请求报文"><a href="#post请求报文" class="headerlink" title="post请求报文"></a>post请求报文</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>payload = &#123;<span class="string">&#x27;key1&#x27;</span>:<span class="string">&#x27;value1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>:<span class="string">&#x27;value2&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.post(<span class="string">&quot;http://httpbin.org/post&quot;</span>, data=payload)</span><br></pre></td></tr></table></figure>
-<h5 id="超时设置"><a href="#超时设置" class="headerlink" title="超时设置"></a>超时设置</h5><p>timeout参数给出服务器应答的超时时间，建议在实际生产代码中应用。</p>
+<h5 id="post请求报文">post请求报文</h5>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>payload = &#123;<span class="string">&#x27;key1&#x27;</span>:<span class="string">&#x27;value1&#x27;</span>,<span class="string">&#x27;key2&#x27;</span>:<span class="string">&#x27;value2&#x27;</span>&#125;</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.post(<span class="string">&quot;http://httpbin.org/post&quot;</span>, data=payload)</span><br></pre></td></tr></table></figure>
+<h5 id="超时设置">超时设置</h5>
+<p>timeout参数给出服务器应答的超时时间，建议在实际生产代码中应用。</p>
 <p>如果超过超时时间，服务器没有响应。将抛出异常。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.get(<span class="string">&#x27;http://github.com&#x27;</span>, timeout=<span class="number">0.001</span>)</span><br></pre></td></tr></table></figure>
-<h5 id="关于重定向"><a href="#关于重定向" class="headerlink" title="关于重定向"></a>关于重定向</h5><p>Requests会自动处理所有重定向。</p>
+<h5 id="关于重定向">关于重定向</h5>
+<p>Requests会自动处理所有重定向。</p>
 <p>当然你可以禁用重定向功能，allow_redirects参数赋值为False即可禁用。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = requests.get(<span class="string">&#x27;http://github.com&#x27;</span>, allow_redirects=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
-<h5 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h5><p>Cookie是解决HTTP无状态性的有效手段，服务器可以设置或读取Cookie中所包含的信息。当用户登录后，服务器会发送包含登录凭据的Cookie到用户浏览器客户端，而浏览器对该Cookie进行某种形式的存储（内存或硬盘）。用户再次访问该网站时，浏览器会发送该Cookie（Cookie未到期时）到服务器，服务器对该凭据进行验证，合法时使用户不必输入用户名和密码就可以直接登录。</p>
-<h4 id="高级用法"><a href="#高级用法" class="headerlink" title="高级用法"></a>高级用法</h4><h5 id="构建session"><a href="#构建session" class="headerlink" title="构建session"></a>构建session</h5><p>会话对象让你能够跨请求保持某些参数。它也会在同一个 Session 实例发出的所有请求之间保持 cookie。</p>
+<h5 id="cookie">cookie</h5>
+<p>Cookie是解决HTTP无状态性的有效手段，服务器可以设置或读取Cookie中所包含的信息。当用户登录后，服务器会发送包含登录凭据的Cookie到用户浏览器客户端，而浏览器对该Cookie进行某种形式的存储（内存或硬盘）。用户再次访问该网站时，浏览器会发送该Cookie（Cookie未到期时）到服务器，服务器对该凭据进行验证，合法时使用户不必输入用户名和密码就可以直接登录。</p>
+<h4 id="高级用法">高级用法</h4>
+<h5 id="构建session">构建session</h5>
+<p>会话对象让你能够跨请求保持某些参数。它也会在同一个 Session 实例发出的所有请求之间保持 cookie。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = requests.Session()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>s.get(<span class="string">&#x27;http://httpbin.org/cookies/set/sessioncookie/123456789&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = s.get(<span class="string">&quot;http://httpbin.org/cookies&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r.text</span><br></pre></td></tr></table></figure>
 <p>但是就算使用会话对象后，<strong>方法级别</strong>的参数也不会被跨请求保持。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>s = requests.Session()</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = s.get(<span class="string">&#x27;http://httpbin.org/cookies&#x27;</span>, cookies=&#123;<span class="string">&#x27;from-my&#x27;</span>: <span class="string">&#x27;browser&#x27;</span>&#125;)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(r.text)</span><br><span class="line"><span class="comment"># &#x27;&#123;&quot;cookies&quot;: &#123;&quot;from-my&quot;: &quot;browser&quot;&#125;&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>r = s.get(<span class="string">&#x27;http://httpbin.org/cookies&#x27;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(r.text)</span><br></pre></td></tr></table></figure>
-<h4 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h4><p>这里主要总结一下，使用requests库可能会遇到的一些问题以及给出解决方案。</p>
+<h4 id="问题总结">问题总结</h4>
+<p>这里主要总结一下，使用requests库可能会遇到的一些问题以及给出解决方案。</p>
 <p>1、response对象的内容，注意几个方法读取内容的数据类型。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 二进制，eg:b&#x27;test&#x27;</span></span><br><span class="line">r.content</span><br><span class="line"><span class="comment"># 字符，eg:&#x27;test&#x27;</span></span><br><span class="line">r.text</span><br><span class="line"><span class="comment"># json格式</span></span><br><span class="line">r.json()</span><br><span class="line"><span class="comment"># raw，原始套接字响应数据,参数设置stream=True</span></span><br><span class="line">r.raw</span><br></pre></td></tr></table></figure>
 <p>2、网络连接问题，将抛出connectionError错误。</p>

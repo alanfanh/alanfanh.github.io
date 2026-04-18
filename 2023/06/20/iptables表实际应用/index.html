@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -199,14 +199,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h4><p>问题1：Centos6.2计算机PC1，有两块网卡，eth2能够访问公网，ip为192.168.2.200，dns和网关192.168.2.254;<br>eth1与路由器Wan口直连，eth1 IP为192.168.11.1/24。在eth1上启用DHCP或者PPPoE服务，路由器R1通过DHCP和PPPoE获取IP地址；<br>如何在Centos下配置服务和iptables规则，使得连接R1路由器LAN口的PC2能够访问公网？</p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ol>
-<li>启用IPv4转发<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br></pre></td></tr></table></figure></li>
-<li>启用DHCP和PPPoE服务时，设置下发dns为192.168.2.254或其他公网可用dns;详见如何配置DHCP/PPPoE服务</li>
-<li>配置iptables转发规则，基于DHCP地址池和PPPoE地址池<br>DHCP服务<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.11.0/24 –o eth2  -j MASQUERADE</span><br></pre></td></tr></table></figure>
-PPPoE服务<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 10.10.10.0/24 –o eth2  -j MASQUERADE</span><br></pre></td></tr></table></figure>
-</li>
+                <h4 id="问题引入">问题引入</h4>
+<p>问题1：Centos6.2计算机PC1，有两块网卡，eth2能够访问公网，ip为192.168.2.200，dns和网关192.168.2.254;<br>
+eth1与路由器Wan口直连，eth1 IP为192.168.11.1/24。在eth1上启用DHCP或者PPPoE服务，路由器R1通过DHCP和PPPoE获取IP地址；<br>
+如何在Centos下配置服务和iptables规则，使得连接R1路由器LAN口的PC2能够访问公网？</p>
+<h4 id="解决方案">解决方案</h4>
+<ol>
+<li>启用IPv4转发</li>
 </ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>启用DHCP和PPPoE服务时，设置下发dns为192.168.2.254或其他公网可用dns;详见如何配置DHCP/PPPoE服务</li>
+<li>配置iptables转发规则，基于DHCP地址池和PPPoE地址池<br>
+DHCP服务</li>
+</ol>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 192.168.11.0/24 –o eth2  -j MASQUERADE</span><br></pre></td></tr></table></figure>
+<p>PPPoE服务</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -s 10.10.10.0/24 –o eth2  -j MASQUERADE</span><br></pre></td></tr></table></figure>
 
 
                 <hr>

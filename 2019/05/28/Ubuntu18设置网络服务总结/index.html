@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -197,26 +197,32 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="Ubuntu系统"><a href="#Ubuntu系统" class="headerlink" title="Ubuntu系统"></a>Ubuntu系统</h4><h5 id="系统版本"><a href="#系统版本" class="headerlink" title="系统版本"></a>系统版本</h5><p>Ubuntu/Debian比较类似，本文操作的系统是ubuntu-18.04.2-LTS 64位系统。</p>
+                <h4 id="Ubuntu系统">Ubuntu系统</h4>
+<h5 id="系统版本">系统版本</h5>
+<p>Ubuntu/Debian比较类似，本文操作的系统是ubuntu-18.04.2-LTS 64位系统。</p>
 <p>首先需要更新apt-get包管理工具，然后安装net-tools工具</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install net-tools</span><br></pre></td></tr></table></figure>
-<h5 id="绑定域名和IP地址"><a href="#绑定域名和IP地址" class="headerlink" title="绑定域名和IP地址"></a>绑定域名和IP地址</h5><p>打开/etc/host文件。</p>
+<h5 id="绑定域名和IP地址">绑定域名和IP地址</h5>
+<p>打开/etc/host文件。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/hosts</span><br></pre></td></tr></table></figure>
 <p>按i进入编辑模式，输入以下内容，绑定IP地址和域名。</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">172.16.105.207</span>  smtp.xxxx.cn</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">172.16.105.207  smtp.xxxx.cn</span><br></pre></td></tr></table></figure>
 <p>按Esc键，再输入:wq进行保存。</p>
-<h5 id="开机自动加载路由"><a href="#开机自动加载路由" class="headerlink" title="开机自动加载路由"></a>开机自动加载路由</h5><p>打开/etc/network/interfaces，网络接口配置。</p>
+<h5 id="开机自动加载路由">开机自动加载路由</h5>
+<p>打开/etc/network/interfaces，网络接口配置。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/network/interfaces</span><br></pre></td></tr></table></figure>
 <p>按i进入编辑模式，输入以下内容，设置网卡接口为静态IP，并自动加载路由。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">auto ens38</span><br><span class="line">iface ens38 inet static</span><br><span class="line">address 192.168.97.64</span><br><span class="line">netmask 255.255.255.0</span><br><span class="line">up route add -net 172.16.105.0 netmask 255.255.255.0 gw 192.168.97.1 ens38</span><br></pre></td></tr></table></figure>
 <p>按Esc键，再输入:wq进行保存。</p>
-<h5 id="静态DNS设置"><a href="#静态DNS设置" class="headerlink" title="静态DNS设置"></a>静态DNS设置</h5><p>使用以下命令可以查看各网络接口的DNS以及全局DNS。</p>
+<h5 id="静态DNS设置">静态DNS设置</h5>
+<p>使用以下命令可以查看各网络接口的DNS以及全局DNS。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemd-resolve  --status</span><br></pre></td></tr></table></figure>
 <p>修改/etc/resolv.conf文件，添加DNS。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/resolv.conf</span><br></pre></td></tr></table></figure>
 <p>添加全局DNS信息，修改以下文件。（如无必要，不建议修改）</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/systemd/resolved.conf</span><br></pre></td></tr></table></figure>
-<h5 id="开机自动运行"><a href="#开机自动运行" class="headerlink" title="开机自动运行"></a>开机自动运行</h5><p>一般Linux系统启动，初始化加载initd，但ubuntu18.04改用了systemd管理。systemd 默认会读取 /etc/systemd/system下的文件。执行以下命令，可以查看到该路径下存在很多指向/lib/systemd/system目录文件的软连接。</p>
+<h5 id="开机自动运行">开机自动运行</h5>
+<p>一般Linux系统启动，初始化加载initd，但ubuntu18.04改用了systemd管理。systemd 默认会读取 /etc/systemd/system下的文件。执行以下命令，可以查看到该路径下存在很多指向/lib/systemd/system目录文件的软连接。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /etc/systemd/system</span><br></pre></td></tr></table></figure>
 <p>执行以下命令。你可以看到有很多启动脚本，其中就有我们需要的rc.local.service。</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /lib/systemd/system</span><br></pre></td></tr></table></figure>

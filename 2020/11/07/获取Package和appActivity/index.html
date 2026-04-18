@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -197,11 +197,13 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="环境说明"><a href="#环境说明" class="headerlink" title="环境说明"></a>环境说明</h4><p>以下环境安装的系统平台为Windows，驱动安卓真机；脚本开发使用Python3</p>
+                <h4 id="环境说明">环境说明</h4>
+<p>以下环境安装的系统平台为Windows，驱动安卓真机；脚本开发使用Python3</p>
 <blockquote>
 <p>获取Package和Activity前，需要确保App自动化测试环境搭建成功</p>
 </blockquote>
-<h4 id="获取Package"><a href="#获取Package" class="headerlink" title="获取Package"></a>获取Package</h4><p>下面以speedtest App为例，其他安卓App获取方式同理</p>
+<h4 id="获取Package">获取Package</h4>
+<p>下面以speedtest App为例，其他安卓App获取方式同理</p>
 <p><strong>方法一</strong>：通过adb命令获取</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 查看当前device中所有apk对应的package name和<span class="built_in">path</span></span><br><span class="line">adb shell pm list package -f</span><br><span class="line"> </span><br><span class="line"># 仅查看第三方的apk package</span><br><span class="line">adb shell pm list package -<span class="number">3</span> -f</span><br></pre></td></tr></table></figure>
 <p>注意：cmd terminal的查找命令在linux和mac操作系统中对应关键字时grep，在Windows操作系统中对应关键字是 findstr</p>
@@ -210,7 +212,8 @@
 <p>1、安装Airtest IDE软件，并连接安卓真机</p>
 <p>2、手机上打开speedtest APP；Airtest IDE软件Poco辅助窗口选择Android</p>
 <p>3、展开xml树结构，并选中。查看Log窗口的package字段的值即可获取该App的packageName</p>
-<h4 id="获取appActivity"><a href="#获取appActivity" class="headerlink" title="获取appActivity"></a>获取appActivity</h4><p><strong>方法一</strong>：adb命令获取</p>
+<h4 id="获取appActivity">获取appActivity</h4>
+<p><strong>方法一</strong>：adb命令获取</p>
 <p>如果需要获取speedtest App的appActivity，首先在手机上打开Speedtest App，然后输入以下命令</p>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># dumpsys命令</span><br><span class="line">adb shell dumpsys window w | <span class="built_in">findstr</span> mCurrent</span><br></pre></td></tr></table></figure>
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 对应定位到的appActivity就会自动被定位到并输出如下：</span><br><span class="line">mCurrentFocus=Window&#123;<span class="number">9</span>c1afd u0 org.zwanoo.android.speedtest/com.ookla.mobile4.</span><br><span class="line">screens.main.MainViewActivity&#125;</span><br></pre></td></tr></table></figure>
@@ -221,9 +224,9 @@
 <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb logcat &gt;D:/log.txt</span><br></pre></td></tr></table></figure>
 <p>然后打开Speedtest App，操作几次，并在终端关闭日志写入。</p>
 <p>打开log.txt文件，搜索<code>Package Name:org.zwanoo.android.speedtest</code>；以下为log.txt中的部分日志</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">731</span>  <span class="number">3260</span> <span class="number">15780</span> D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, EGLBoolean) returns <span class="number">0</span>x3000</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">732</span>  <span class="number">3625</span> <span class="number">13833</span> I AppLifeChangeSensor:  CAWARENESS: activityResumed componentName = ComponentInfo&#123;org.zwanoo.android.speedtest/com.ookla.mobile4.screens.main.MainActivity&#125;</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">732</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEActivityMonitor: handleActivityChange,  curPackage:org.zwanoo.android.speedtest, curClass:com.ookla.mobile4.screens.main.MainActivity</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span> <span class="number">31522</span> <span class="number">31522</span> I ViewRootImpl: jank_removeInvalidNode <span class="literal">all</span> the node in jank list is out of time</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">732</span>  <span class="number">1252</span>  <span class="number">1357</span> I StatusBarDisable: setFlags what=<span class="number">0</span> which=<span class="number">1</span> pkg=Window&#123;d43dea6 u0 org.zwanoo.android.speedtest/com.ookla.mobile4.screens.welcome.WelcomeActivity&#125;</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span>  <span class="number">1252</span>  <span class="number">1354</span> W HwActivityManagerServiceEx: HwActivityNotifier end call for activityLifeState under user <span class="number">0</span> cost <span class="number">1</span></span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence input :org.zwanoo.android.speedtest,com.ookla.mobile4.screens.main.MainActivity</span><br><span class="line"><span class="attribute">11</span>-<span class="number">10</span> <span class="number">17</span>:<span class="number">50</span>:<span class="number">37</span>.<span class="number">733</span>  <span class="number">1252</span>  <span class="number">5214</span> D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence input :org.zwanoo.android.speedtest,null</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">11-10 17:50:37.731  3260 15780 D mali_winsys: EGLint new_window_surface(egl_winsys_display *, void *, EGLSurface, EGLConfig, egl_winsys_surface **, EGLBoolean) returns 0x3000</span><br><span class="line">11-10 17:50:37.732  3625 13833 I AppLifeChangeSensor:  CAWARENESS: activityResumed componentName = ComponentInfo&#123;org.zwanoo.android.speedtest/com.ookla.mobile4.screens.main.MainActivity&#125;</span><br><span class="line">11-10 17:50:37.732  1252  5214 D HiData_HwAPPQoEActivityMonitor: handleActivityChange,  curPackage:org.zwanoo.android.speedtest, curClass:com.ookla.mobile4.screens.main.MainActivity</span><br><span class="line">11-10 17:50:37.733 31522 31522 I ViewRootImpl: jank_removeInvalidNode all the node in jank list is out of time</span><br><span class="line">11-10 17:50:37.732  1252  1357 I StatusBarDisable: setFlags what=0 which=1 pkg=Window&#123;d43dea6 u0 org.zwanoo.android.speedtest/com.ookla.mobile4.screens.welcome.WelcomeActivity&#125;</span><br><span class="line">11-10 17:50:37.733  1252  1354 W HwActivityManagerServiceEx: HwActivityNotifier end call for activityLifeState under user 0 cost 1</span><br><span class="line">11-10 17:50:37.733  1252  5214 D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence input :org.zwanoo.android.speedtest,com.ookla.mobile4.screens.main.MainActivity</span><br><span class="line">11-10 17:50:37.733  1252  5214 D HiData_HwAPPQoEResourceMangerImpl: checkIsMonitorAPKScence input :org.zwanoo.android.speedtest,null</span><br></pre></td></tr></table></figure>
 <p>根据搜索结果，并排除不正确的Activity后，可得到下面正确的appActivity</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org<span class="selector-class">.zwanoo</span><span class="selector-class">.android</span>.speedtest/com<span class="selector-class">.ookla</span><span class="selector-class">.mobile4</span><span class="selector-class">.screens</span><span class="selector-class">.main</span>.MainActivity</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">org.zwanoo.android.speedtest/com.ookla.mobile4.screens.main.MainActivity</span><br></pre></td></tr></table></figure>
 
 
                 <hr>

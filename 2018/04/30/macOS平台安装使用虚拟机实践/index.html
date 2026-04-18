@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -161,7 +161,7 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        background-image: url('img/home-bg-o.jpg')
+        background-image: url('/img/home-bg.jpg')
     }
 </style>
 <header class="intro-header" >
@@ -197,14 +197,18 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h5 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h5><p>因为女朋友周末在家工作需要用到windows系统，而家里只有一台macbook pro。博主之前读书时用到的windows笔记本，因为体验太差，被博主彻底抛弃，放在老家吃灰。因为只是简单的办公需求，重新购置一台新的windows笔记本也不够划算。所以考虑以上种种。博主考虑到使用parallels Desktop+win7的一个解决方案。当然还有其他的解决方法，比如说安装双系统、直接安装windows系统。但博主觉得macbook装windows系统有点不伦不类，所以强烈推荐使用虚拟机方法。</p>
-<h5 id="软件下载"><a href="#软件下载" class="headerlink" title="软件下载"></a>软件下载</h5><p>win7系统iso文件<a href="ed2k://|file|cn_windows_7_ultimate_with_sp1_x64_dvd_u_677408.iso|3420557312|B58548681854236C7939003B583A8078|/">下载地址</a></p>
+                <h5 id="应用场景">应用场景</h5>
+<p>因为女朋友周末在家工作需要用到windows系统，而家里只有一台macbook pro。博主之前读书时用到的windows笔记本，因为体验太差，被博主彻底抛弃，放在老家吃灰。因为只是简单的办公需求，重新购置一台新的windows笔记本也不够划算。所以考虑以上种种。博主考虑到使用parallels Desktop+win7的一个解决方案。当然还有其他的解决方法，比如说安装双系统、直接安装windows系统。但博主觉得macbook装windows系统有点不伦不类，所以强烈推荐使用虚拟机方法。</p>
+<h5 id="软件下载">软件下载</h5>
+<p>win7系统iso文件<a href="ed2k://%7Cfile%7Ccn_windows_7_ultimate_with_sp1_x64_dvd_u_677408.iso%7C3420557312%7CB58548681854236C7939003B583A8078%7C/">下载地址</a></p>
 <p>Parallels Desktop软件，推荐使用<a href="https://www.virtualbox.org/">virtualbox</a>，毕竟免费。</p>
-<h5 id="环境安装与搭建"><a href="#环境安装与搭建" class="headerlink" title="环境安装与搭建"></a>环境安装与搭建</h5><p>打开Parallels安装包，进行安装。安装完成后，会生成如下路径</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/user/y</span>ouraccount/Parallels</span><br></pre></td></tr></table></figure>
-<p>将下载完成的iso软件放置以上路径下，打开Parallels软件，选择<strong><em>新建-安装windows</em></strong>，双击。下一步查找该iso文件，并打开。下一个步骤可能会遇到需要windows产品秘钥，如果自己暂时没有，可以考虑先把秘钥前方的小勾勾去掉，也是一样可以正常安装的，然后就等待windows7系统安装完成。</p>
+<h5 id="环境安装与搭建">环境安装与搭建</h5>
+<p>打开Parallels安装包，进行安装。安装完成后，会生成如下路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/user/youraccount/Parallels</span><br></pre></td></tr></table></figure>
+<p>将下载完成的iso软件放置以上路径下，打开Parallels软件，选择<em><strong>新建-安装windows</strong></em>，双击。下一步查找该iso文件，并打开。下一个步骤可能会遇到需要windows产品秘钥，如果自己暂时没有，可以考虑先把秘钥前方的小勾勾去掉，也是一样可以正常安装的，然后就等待windows7系统安装完成。</p>
 <p>当然如果有对linux系统有需求，也可以选择下载安装免费系统下的linux。</p>
-<h5 id="Parallels其他个性化配置"><a href="#Parallels其他个性化配置" class="headerlink" title="Parallels其他个性化配置"></a>Parallels其他个性化配置</h5><p>保持默认配置即可。如果有需求，可以通过点击<strong><em>操作-配置</em></strong>，配置虚拟机的CPU与内存、磁盘空间、USB与蓝牙、网络等配置。关于网络这一块，默认使用的是共享网络，也就是是虚拟机是可以访问外网的。对于多网卡设备，也可以使用桥接方式，进行网络区分。</p>
+<h5 id="Parallels其他个性化配置">Parallels其他个性化配置</h5>
+<p>保持默认配置即可。如果有需求，可以通过点击<em><strong>操作-配置</strong></em>，配置虚拟机的CPU与内存、磁盘空间、USB与蓝牙、网络等配置。关于网络这一块，默认使用的是共享网络，也就是是虚拟机是可以访问外网的。对于多网卡设备，也可以使用桥接方式，进行网络区分。</p>
 
 
                 <hr>

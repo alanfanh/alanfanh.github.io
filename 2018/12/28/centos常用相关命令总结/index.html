@@ -96,7 +96,7 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -110,7 +110,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -199,23 +199,79 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>因为公司自动化平台基于centos，所以与centos系统打交道较多。本篇博文主要将平时常用的一些linux命令总结记录一下。所以对一些命令的具体参数不会详细介绍。<br>后续持续更新中·····</p>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h4 id="ifconfig"><a href="#ifconfig" class="headerlink" title="ifconfig"></a>ifconfig</h4><p>查看eth0接口相关信息<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0</span><br></pre></td></tr></table></figure><br>关闭/启用eth0接口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 down</span><br><span class="line">ifconfig eth0 up</span><br></pre></td></tr></table></figure></p>
-<h4 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h4><p>查看所有进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps ax</span><br></pre></td></tr></table></figure><br>查看pppoe-server进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps ax | grep pppoe-server |grep -v grep</span><br></pre></td></tr></table></figure></p>
-<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><p>查找根目录下匹配Python的文件名<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name Python</span><br></pre></td></tr></table></figure><br>查找当前目录下匹配的文件名<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name Python</span><br></pre></td></tr></table></figure></p>
-<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><p>grep (global search regular expression(RE) and print out the line,全面搜索正则表达式并把行打印出来)是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。<br>查找指定进程，不显示grep本身<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps ax | grep httpd | grep -v grep</span><br></pre></td></tr></table></figure><br>从指定文件中查找关键字<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i  <span class="string">&#x27;linux&#x27;</span> test.txt</span><br></pre></td></tr></table></figure></p>
-<h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><p>查看文件内容<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/resolv.conf</span><br></pre></td></tr></table></figure></p>
-<h4 id="vi"><a href="#vi" class="headerlink" title="vi"></a>vi</h4><p>编辑文本文件。vi后，键入i，然后编辑，最后按Esc键，输入:wq保存退出。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resolv.conf</span><br></pre></td></tr></table></figure></p>
-<h4 id="route"><a href="#route" class="headerlink" title="route"></a>route</h4><p>查看路由表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n</span><br></pre></td></tr></table></figure><br>查看路由表<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route</span><br></pre></td></tr></table></figure><br>添加默认网关<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add -net 192.168.1.0 netmask 255.255.255.0 dev eth0</span><br></pre></td></tr></table></figure><br>删除默认网关<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route del default gw 192.168.1.1</span><br></pre></td></tr></table></figure><br>添加路由规则<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route add -net 192.168.10.1/24 dev eth1</span><br><span class="line">​````bash</span><br><span class="line">ip route add 192.168.1.0/24 via 10.10.10.10</span><br><span class="line">route命令帮助信息</span><br><span class="line">​````bash</span><br><span class="line">man route</span><br></pre></td></tr></table></figure></p>
-<h4 id="tar"><a href="#tar" class="headerlink" title="tar"></a>tar</h4><p>解压压缩文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  </span><br></pre></td></tr></table></figure></p>
-<h4 id="tcpdump"><a href="#tcpdump" class="headerlink" title="tcpdump"></a>tcpdump</h4><p>tcpdump是linux下的命令行抓包工具。<br>指定接口进行抓包并写入test.cap文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth1 -w test.cap文件</span><br></pre></td></tr></table></figure></p>
-<h4 id="netstat"><a href="#netstat" class="headerlink" title="netstat"></a>netstat</h4><p>查看打开的端口<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anltp</span><br></pre></td></tr></table></figure></p>
-<h4 id="sz-rz"><a href="#sz-rz" class="headerlink" title="sz/rz"></a>sz/rz</h4><p>发送文件至系统路径<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sz test.cap</span><br></pre></td></tr></table></figure><br>上传文件至Linux系统<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rz test.cap</span><br></pre></td></tr></table></figure></p>
-<h4 id="kill"><a href="#kill" class="headerlink" title="kill"></a>kill</h4><p>杀掉进程<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 httpd</span><br></pre></td></tr></table></figure></p>
-<h4 id="history"><a href="#history" class="headerlink" title="history"></a>history</h4><p>查看之前使用过的命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span></span><br></pre></td></tr></table></figure></p>
-<h4 id="init"><a href="#init" class="headerlink" title="init"></a>init</h4><p>切换图形登录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init 5</span><br></pre></td></tr></table></figure><br>关闭centos<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init 0</span><br></pre></td></tr></table></figure></p>
-<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><p>删除指定目录下的文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f /var/tmp/test.txt</span><br></pre></td></tr></table></figure><br>删除指定目录，这是一个非常危险的命令，慎用！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /var/tmp/test</span><br></pre></td></tr></table></figure></p>
-
+                <h3 id="前言">前言</h3>
+<p>因为公司自动化平台基于centos，所以与centos系统打交道较多。本篇博文主要将平时常用的一些linux命令总结记录一下。所以对一些命令的具体参数不会详细介绍。<br>
+后续持续更新中·····</p>
+<h3 id="常用命令">常用命令</h3>
+<h4 id="ifconfig">ifconfig</h4>
+<p>查看eth0接口相关信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0</span><br></pre></td></tr></table></figure>
+<p>关闭/启用eth0接口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 down</span><br><span class="line">ifconfig eth0 up</span><br></pre></td></tr></table></figure>
+<h4 id="ps">ps</h4>
+<p>查看所有进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps ax</span><br></pre></td></tr></table></figure>
+<p>查看pppoe-server进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps ax | grep pppoe-server |grep -v grep</span><br></pre></td></tr></table></figure>
+<h4 id="find">find</h4>
+<p>查找根目录下匹配Python的文件名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find / -name Python</span><br></pre></td></tr></table></figure>
+<p>查找当前目录下匹配的文件名</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find . -name Python</span><br></pre></td></tr></table></figure>
+<h4 id="grep">grep</h4>
+<p>grep (global search regular expression(RE) and print out the line,全面搜索正则表达式并把行打印出来)是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。<br>
+查找指定进程，不显示grep本身</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps ax | grep httpd | grep -v grep</span><br></pre></td></tr></table></figure>
+<p>从指定文件中查找关键字</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -i  <span class="string">&#x27;linux&#x27;</span> test.txt</span><br></pre></td></tr></table></figure>
+<h4 id="cat">cat</h4>
+<p>查看文件内容</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<h4 id="vi">vi</h4>
+<p>编辑文本文件。vi后，键入i，然后编辑，最后按Esc键，输入:wq保存退出。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+<h4 id="route">route</h4>
+<p>查看路由表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route -n</span><br></pre></td></tr></table></figure>
+<p>查看路由表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route</span><br></pre></td></tr></table></figure>
+<p>添加默认网关</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add -net 192.168.1.0 netmask 255.255.255.0 dev eth0</span><br></pre></td></tr></table></figure>
+<p>删除默认网关</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route del default gw 192.168.1.1</span><br></pre></td></tr></table></figure>
+<p>添加路由规则</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">route add -net 192.168.10.1/24 dev eth1</span><br><span class="line">​````bash</span><br><span class="line">ip route add 192.168.1.0/24 via 10.10.10.10</span><br><span class="line">route命令帮助信息</span><br><span class="line">​````bash</span><br><span class="line">man route</span><br></pre></td></tr></table></figure>
+<h4 id="tar">tar</h4>
+<p>解压压缩文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf  </span><br></pre></td></tr></table></figure>
+<h4 id="tcpdump">tcpdump</h4>
+<p>tcpdump是linux下的命令行抓包工具。<br>
+指定接口进行抓包并写入test.cap文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tcpdump -i eth1 -w test.cap文件</span><br></pre></td></tr></table></figure>
+<h4 id="netstat">netstat</h4>
+<p>查看打开的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -anltp</span><br></pre></td></tr></table></figure>
+<h4 id="sz-rz">sz/rz</h4>
+<p>发送文件至系统路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sz test.cap</span><br></pre></td></tr></table></figure>
+<p>上传文件至Linux系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rz test.cap</span><br></pre></td></tr></table></figure>
+<h4 id="kill">kill</h4>
+<p>杀掉进程</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> -9 httpd</span><br></pre></td></tr></table></figure>
+<h4 id="history">history</h4>
+<p>查看之前使用过的命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span></span><br></pre></td></tr></table></figure>
+<h4 id="init">init</h4>
+<p>切换图形登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init 5</span><br></pre></td></tr></table></figure>
+<p>关闭centos</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">init 0</span><br></pre></td></tr></table></figure>
+<h4 id="rm">rm</h4>
+<p>删除指定目录下的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f /var/tmp/test.txt</span><br></pre></td></tr></table></figure>
+<p>删除指定目录，这是一个非常危险的命令，慎用！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /var/tmp/test</span><br></pre></td></tr></table></figure>
 
                 <hr>
 
