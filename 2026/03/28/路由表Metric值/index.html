@@ -13,11 +13,11 @@
 
     <title>
         
-          记录一些好用的SQL查询语句 - FanHao的博客 | Fanhao&#39;s Blog
+          路由表Metric值 - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2020/10/10/记录一些好用SQL语句/">
+    <link rel="canonical" href="https://alanfanh.github.io/2026/03/28/路由表Metric值/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -171,14 +171,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#SQL" title="SQL">SQL</a>
+                          <a class="tag" href="/tags/#Metric" title="Metric">Metric</a>
                         
                     </div>
-                    <h1>记录一些好用的SQL查询语句</h1>
+                    <h1>路由表Metric值</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by FanHao on
-                        2020-10-10
+                        2026-03-28
                     </span>
                 </div>
             </div>
@@ -197,14 +197,27 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h4 id="说明">说明</h4>
-<blockquote>
-<p>总结统计查询Bugfree上bug相关信息的SQL语句</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 按产品分类，查询创建时间<span class="number">2019</span><span class="number">-01</span><span class="number">-01</span><span class="operator">~</span><span class="number">2019</span><span class="number">-12</span><span class="number">-19</span>内的bug并且解决方案为<span class="keyword">External</span>的bug数</span><br><span class="line"><span class="keyword">select</span> (<span class="keyword">select</span> name <span class="keyword">from</span> bf_product  <span class="keyword">where</span> t.product_id  <span class="operator">=</span> id ),product_id,<span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">from</span>  bf_bug_info t <span class="keyword">WHERE</span> created_at <span class="operator">&gt;</span> <span class="string">&#x27;2019-01-01 00:00:01&#x27;</span> <span class="keyword">and</span> created_at <span class="operator">&lt;</span> <span class="string">&#x27;2019-12-19 18:59:00&#x27;</span> <span class="keyword">and</span> solution <span class="operator">=</span> &quot;External&quot; <span class="keyword">group</span> <span class="keyword">by</span>  product_id ;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>持续更新中…</p>
-</blockquote>
+                <h4 id="认识路由表Metric值">认识路由表Metric值</h4>
+<p>以下为Linux系统下的路由表，50为默认路由WAN0的Metric值；中文通常翻译为跃点数(Windows)、路由常量或路由开销。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@obc:~# route</span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">default         192.168.130.250 0.0.0.0         UG    50     0        0 wan0</span><br><span class="line">192.168.20.0    0.0.0.0         255.255.255.0   U     0      0        0 lan</span><br><span class="line">192.168.130.0   0.0.0.0         255.255.255.0   U     50     0        0 wan0</span><br><span class="line">240.16.0.0      0.0.0.0         255.255.0.0     U     0      0        0 vnetc</span><br></pre></td></tr></table></figure>
+<p>以下为windows下的IPv4路由表；跃点数为路由开销；<br>
+默认路由网关为192.168.20.1，接口192.168.20.64，Metric为25</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">活动路由:</span><br><span class="line">网络目标        网络掩码          网关       接口   跃点数</span><br><span class="line">          0.0.0.0          0.0.0.0     192.168.20.1    192.168.20.64     25</span><br><span class="line">        127.0.0.0        255.0.0.0            在链路上         127.0.0.1    331</span><br><span class="line">        127.0.0.1  255.255.255.255            在链路上         127.0.0.1    331</span><br><span class="line">  127.255.255.255  255.255.255.255            在链路上         127.0.0.1    331</span><br><span class="line">     192.168.20.0    255.255.255.0            在链路上     192.168.20.64    281</span><br><span class="line">    192.168.20.64  255.255.255.255            在链路上     192.168.20.64    281</span><br><span class="line">   192.168.20.255  255.255.255.255            在链路上     192.168.20.64    281</span><br><span class="line">        224.0.0.0        240.0.0.0            在链路上         127.0.0.1    331</span><br><span class="line">        224.0.0.0        240.0.0.0            在链路上     192.168.20.64    281</span><br><span class="line">  255.255.255.255  255.255.255.255            在链路上         127.0.0.1    331</span><br><span class="line">  255.255.255.255  255.255.255.255            在链路上     192.168.20.64    281</span><br></pre></td></tr></table></figure>
+<h4 id="两种系统Metric值相同点">两种系统Metric值相同点</h4>
+<h5 id="网络主备切换">网络主备切换</h5>
+<p>实例1：两张网卡都有默认路由：网卡 A（有线）： 默认路由 Metric 设为 10；网卡 B（Wi-Fi）： 默认路由 Metric 设为 30；正常情况下所有流量均会走A网卡（有线较稳定），当A路由失效时（网线断联），系统自动将流量切换至B；</p>
+<h5 id="内外网分流">内外网分流</h5>
+<p>实例2：两张网卡实现内外网分流：外网默认走默认路由，metric值设置10。内网手动添加静态路由规则<br>
+route -p add 10.0.0.0 mask 255.0.0.010.26.1.1 metric 5<br>
+（假设公司内网网段10.10.10.0/8  内网网关为10.26.1.1）</p>
+<h4 id="差异点：">差异点：</h4>
+<p>Linux系统可以设置metric值相同的两条默认路由规则实现网速叠加或者负载均衡。windows由于系统差异无法实现：当多条默认路由的 Metric 完全相同时，Windows会触发ECMP（等价多路径路由）机制。但Windows对ECMP的处理并不是完美的逐包或逐连接分流，而是系统会随机或者根据某种哈希算法，锁定其中一张网卡作为当前的主要通道。可能会导致网络不稳定、TCP 连接频繁断开、游戏掉线或网站需要反复登录（因为你的出口 IP 在两个网卡之间来回跳跃）。</p>
+<h4 id="应用示例">应用示例</h4>
+<p>观察以下IPv4路由表，访问百度等一些流量默认走哪个网卡？</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">活动路由:</span><br><span class="line">网络目标        网络掩码          网关       接口   跃点数</span><br><span class="line">          0.0.0.0          0.0.0.0     192.168.20.1    192.168.20.64     25</span><br><span class="line">          0.0.0.0          0.0.0.0  192.168.130.250   192.168.130.87     30</span><br><span class="line">        127.0.0.0        255.0.0.0            在链路上         127.0.0.1    331</span><br><span class="line">        127.0.0.1  255.255.255.255            在链路上         127.0.0.1    331</span><br><span class="line">  127.255.255.255  255.255.255.255            在链路上         127.0.0.1    331</span><br><span class="line">     192.168.20.0    255.255.255.0            在链路上     192.168.20.64    281</span><br><span class="line">    192.168.20.64  255.255.255.255            在链路上     192.168.20.64    281</span><br><span class="line">   192.168.20.255  255.255.255.255            在链路上     192.168.20.64    281</span><br><span class="line">    192.168.130.0    255.255.255.0            在链路上    192.168.130.87    286</span><br><span class="line">   192.168.130.87  255.255.255.255            在链路上    192.168.130.87    286</span><br><span class="line">  192.168.130.255  255.255.255.255            在链路上    192.168.130.87    286</span><br><span class="line">        224.0.0.0        240.0.0.0            在链路上         127.0.0.1    331</span><br><span class="line">        224.0.0.0        240.0.0.0            在链路上     192.168.20.64    281</span><br><span class="line">        224.0.0.0        240.0.0.0            在链路上    192.168.130.87    286</span><br><span class="line">  255.255.255.255  255.255.255.255            在链路上         127.0.0.1    331</span><br><span class="line">  255.255.255.255  255.255.255.255            在链路上     192.168.20.64    281</span><br><span class="line">  255.255.255.255  255.255.255.255            在链路上    192.168.130.87    286</span><br></pre></td></tr></table></figure>
+<p>根据metric值大小比较，由于小的Metric值具备更高优先级，默认走192.168.20.1这个网关出去。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@obc:/data# route -n</span><br><span class="line">Kernel IP routing table</span><br><span class="line">Destination     Gateway         Genmask         Flags Metric Ref    Use Iface</span><br><span class="line">0.0.0.0         192.168.130.250 0.0.0.0         UG    50     0        0 wan0</span><br><span class="line">0.0.0.0         192.168.130.250 0.0.0.0         UG    70     0        0 wan1</span><br><span class="line">192.168.20.0    0.0.0.0         255.255.255.0   U     0      0        0 lan</span><br><span class="line">192.168.130.0   0.0.0.0         255.255.255.0   U     50     0        0 wan0</span><br><span class="line">192.168.130.0   0.0.0.0         255.255.255.0   U     70     0        0 wan1</span><br><span class="line">240.16.0.0      0.0.0.0         255.255.0.0     U     0      0        0  vnetc</span><br></pre></td></tr></table></figure>
+<p>linux系统路由表；由表中Metric值可知除匹配路由规则外，其他所有流量默认走WAN0接口。</p>
 
 
                 <hr>
@@ -214,12 +227,12 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2020/10/22/算法复杂度/" data-toggle="tooltip" data-placement="top" title="算法复杂度">&larr; Previous Post</a>
+                            <a href="/2026/06/04/Centos配置DNS服务/" data-toggle="tooltip" data-placement="top" title="Centos配置DNS服务">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2020/10/10/搭建dhcp服务器/" data-toggle="tooltip" data-placement="top" title="Centos搭建DHCP服务器">Next Post &rarr;</a>
+                            <a href="/2026/03/02/Linux系统3种常用DHCP服务对比/" data-toggle="tooltip" data-placement="top" title="Linux系统3种常用DHCP服务对比">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -246,7 +259,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#SQL" title="SQL">SQL</a>
+                          <a class="tag" href="/tags/#Metric" title="Metric">Metric</a>
                         
                     </div>
                 </section>

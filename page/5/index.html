@@ -190,6 +190,92 @@
 
 <div class="post-preview">
 
+    <a href="/2019/03/08/scapy包学习总结/">
+        <h2 class="post-title">
+            scapy包总结
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                前言
+本文主要依据官网文档(英文)和源码相关函数用法编写。如有错误，欢迎反馈。
+scapy包介绍
+scapy包模块主要用来构造或者伪造网络中的各种数据报文。提供了从Ether层、IP层、传输层（UDP/TCP）、数据层各层的数据报文字段的构造方法。也可以用来解析数据报文。并能实现伪造异常报文，网络攻击，探测等功能。
+scapy模块还支持构造IPv6报文，802.11无线报文以及蓝牙报文(只支......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2019-03-08
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/02/28/xlrd读取数据注意类型/">
+        <h2 class="post-title">
+            xlrd模块用法的一些总结
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                xlrd模块
+介绍
+python xlrd库主要用来读取excel表格文件的数据，支持.xls和.xlsx类型的文件。
+python版本3.6，xlrd版本1.1.0。
+1pip3 install xlrd
+基础用法
+打开一份excel表格
+12import xlrddata = xlrd.open_workbook(path)
+获取excel文件所有工作簿的名称
+1names = data......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2019-02-28
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2019/02/20/python参数理解/">
+        <h2 class="post-title">
+            关于python参数传递的理解
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                前言
+之前和同学聊到了python关键字del与内存回收相关的问题。通过以下内容可以帮助理解
+参数
+参数有形参和实参之分。形参也就是形式参数，不在内存中占用内存地址，如def定义函数时括号内的变量就是形参。实参全称为实际参数，在调用函数时提供的值或者变量称作为实际参数，占用内存地址。
+12345678910#下面x,y即为形参def add(x,y):    return x+y#1,2为实......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2019-02-20
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2018/12/28/centos常用相关命令总结/">
         <h2 class="post-title">
             centos常用相关命令总结
@@ -389,85 +475,6 @@ py2exe是一个将python脚本转换成windows上的可独立执行的可执行�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2018/06/20/getopt模块用法/">
-        <h2 class="post-title">
-            getopt模块用法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                  因为需要通过外部传参来执行python代码，查阅资料，了解到python自带的getopt模块能够实现我的需求。此篇文章主要记录getopt模块的相关用法。
-getopt简述
-  getopt模块专门用来处理命令行参数。具体用法我们通过代码实例进行验证。
-  如果你想直接一步到位，不想阅读我后面的文章，你也可以输入以下代码查看相关帮助信息。
-12import getoptprint(ge......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-06-20
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/05/10/python+selenium技术/">
-        <h2 class="post-title">
-            python+selenium技术
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                  这两天软件的一位同学，让我用python给他写一个挂机脚本。具体需求是：登录设备管理页面，进入指定页面，等待页面超时，再进行点击页面操作;之前这一块技术，自己学习过。但是坑爹的是，很长一段时间没使用，对于定位标签，竟然还需要去查找资料。此篇文章主要记录selenium相关技术，包括关于如何定位页面标签。省去以后查找资料的时间。
-什么是selenium？
-  selenium是一个免费、开......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-05-10
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2018/05/02/Sublime Text3快捷编译python程序/">
-        <h2 class="post-title">
-            MacOS平台在Sublime Text3中快速运行python代码
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                公司电脑是window系统，写python代码一直默认用的是notepad++。后面为了在自己的Macbook练习python程序，了解到了有一款神器—Sublime Text3。以下主要记录如何配置Sublime Text3使其快捷运行python代码。
-配置过程
-tab键设置
-python代码中如果tab键和空格键混用，代码会执行报错。所以首先设置将tab键转换为空格键。
-1、菜单栏打开......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2018-05-02
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -507,10 +514,6 @@ python代码中如果tab键和空格键混用，代码会执行报错。所以�
                     <div class="tags">
                         
                             
-                            <a href="/tags/#Centos" title="Centos" rel="13">Centos</a>
-                            
-                        
-                            
                             <a href="/tags/#Appium" title="Appium" rel="2">Appium</a>
                             
                         
@@ -519,9 +522,11 @@ python代码中如果tab键和空格键混用，代码会执行报错。所以�
                             
                         
                             
-                            <a href="/tags/#Linux" title="Linux" rel="5">Linux</a>
+                            <a href="/tags/#Centos" title="Centos" rel="15">Centos</a>
                             
                         
+                            
+                            <a href="/tags/#Linux" title="Linux" rel="5">Linux</a>
                             
                         
                             
@@ -529,7 +534,11 @@ python代码中如果tab键和空格键混用，代码会执行报错。所以�
                             
                         
                             
+                        
+                            
                             <a href="/tags/#PyQt" title="PyQt" rel="2">PyQt</a>
+                            
+                        
                             
                         
                             

@@ -13,11 +13,11 @@
 
     <title>
         
-          记录一些好用的SQL查询语句 - FanHao的博客 | Fanhao&#39;s Blog
+          FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/2020/10/10/记录一些好用SQL语句/">
+    <link rel="canonical" href="https://alanfanh.github.io/i_dont_wanna_use_default_archives/2026/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -153,135 +153,7 @@
 
 
     <!-- Main Content -->
-    
-<!-- Image to hack wechat -->
-<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
-<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
-
-<!-- Post Header -->
-<style type="text/css">
-    header.intro-header{
-        background-image: url('/img/home-bg.jpg')
-    }
-</style>
-<header class="intro-header" >
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <div class="tags">
-                        
-                          <a class="tag" href="/tags/#SQL" title="SQL">SQL</a>
-                        
-                    </div>
-                    <h1>记录一些好用的SQL查询语句</h1>
-                    <h2 class="subheading"></h2>
-                    <span class="meta">
-                        Posted by FanHao on
-                        2020-10-10
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-    <!-- Post Container -->
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                post-container">
-
-                <h4 id="说明">说明</h4>
-<blockquote>
-<p>总结统计查询Bugfree上bug相关信息的SQL语句</p>
-</blockquote>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 按产品分类，查询创建时间<span class="number">2019</span><span class="number">-01</span><span class="number">-01</span><span class="operator">~</span><span class="number">2019</span><span class="number">-12</span><span class="number">-19</span>内的bug并且解决方案为<span class="keyword">External</span>的bug数</span><br><span class="line"><span class="keyword">select</span> (<span class="keyword">select</span> name <span class="keyword">from</span> bf_product  <span class="keyword">where</span> t.product_id  <span class="operator">=</span> id ),product_id,<span class="built_in">count</span>(<span class="number">1</span>) <span class="keyword">from</span>  bf_bug_info t <span class="keyword">WHERE</span> created_at <span class="operator">&gt;</span> <span class="string">&#x27;2019-01-01 00:00:01&#x27;</span> <span class="keyword">and</span> created_at <span class="operator">&lt;</span> <span class="string">&#x27;2019-12-19 18:59:00&#x27;</span> <span class="keyword">and</span> solution <span class="operator">=</span> &quot;External&quot; <span class="keyword">group</span> <span class="keyword">by</span>  product_id ;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>持续更新中…</p>
-</blockquote>
-
-
-                <hr>
-
-                
-
-                <ul class="pager">
-                    
-                        <li class="previous">
-                            <a href="/2020/10/22/算法复杂度/" data-toggle="tooltip" data-placement="top" title="算法复杂度">&larr; Previous Post</a>
-                        </li>
-                    
-                    
-                        <li class="next">
-                            <a href="/2020/10/10/搭建dhcp服务器/" data-toggle="tooltip" data-placement="top" title="Centos搭建DHCP服务器">Next Post &rarr;</a>
-                        </li>
-                    
-                </ul>
-
-                
-
-                
-
-            </div>
-    <!-- Side Catalog Container -->
-        
-
-    <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#SQL" title="SQL">SQL</a>
-                        
-                    </div>
-                </section>
-                
-
-                <!-- Friends Blog -->
-                
-                <hr>
-                <h5>FRIENDS</h5>
-                <ul class="list-inline">
-
-                    
-                        <li><a href="http://alanfanh.github.io" target="_blank">FanHao</a></li>
-                    
-                        <li><a href="#" target="_blank">Foo</a></li>
-                    
-                        <li><a href="http://zaaack.github.io/" target="_blank">Zack</a></li>
-                    
-                        <li><a href="https://yuelng.github.io/" target="_blank">YueLng</a></li>
-                    
-                </ul>
-                
-            </div>
-
-        </div>
-    </div>
-</article>
-
-
-
-
-
-
-
-
+    <!-- Default Archive layout, we use archives instead. -->
 
     <!-- Footer -->
     <!-- Footer -->

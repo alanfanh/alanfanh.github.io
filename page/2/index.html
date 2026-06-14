@@ -190,6 +190,95 @@
 
 <div class="post-preview">
 
+    <a href="/2022/09/20/Centos7下部署Django Web项目/">
+        <h2 class="post-title">
+            Centos7下部署Django Web项目
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                关于采用nginx+uWSGI方式将Django项目部署到Centos生产环境下的介绍与配置
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2022-09-20
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2022/03/24/Samba服务配置文件详解/">
+        <h2 class="post-title">
+            Samba服务配置文件详解
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                配置文件参数详解
+Samba的主配置文件为/etc/samba/smb.conf，主要由两部分构成
+
+Global Settings (55-245行)，该设置都是与Samba服务整体运行环境有关的选项，它的设置项目是针对所有共享资源的。
+Share Definitions （246-尾行），该设置针对的是共享目录个别的设置，只对当前的共享资源起作用。
+
+
+全局参数详解如下：
+
+123456......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2022-03-24
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2022/03/18/Centos配置Samba服务/">
+        <h2 class="post-title">
+            Centos配置Samba服务
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                搭建Samba服务
+
+安装服务组件
+
+1yum -y install samba samba-client samba-common
+
+配置
+查看smb.conf配置文件帮助信息
+
+1man smb.conf
+编辑文件添加如下内容；配置数据存放路径
+1234567[root@master ~]# vi /etc/samba/smb.conf[myshare]        comment =......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2022-03-18
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2021/09/21/Centos配置DHCPv6服务/">
         <h2 class="post-title">
             Centos配置DHCPv6服务
@@ -366,7 +455,7 @@ App自动化环境安装的系统平台为Windows，使用Appium，驱动安卓�
 
     <a href="/2020/10/10/搭建dhcp服务器/">
         <h2 class="post-title">
-            在Centos中搭建DHCP服务器
+            Centos搭建DHCP服务器
         </h2>
         <h3 class="post-subtitle">
             
@@ -392,91 +481,6 @@ App自动化环境安装的系统平台为Windows，使用Appium，驱动安卓�
     <p class="post-meta">
         Posted by FanHao on
         2020-10-10
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/09/28/Centos配置PPPoE服务器/">
-        <h2 class="post-title">
-            Centos配置PPPoE服务器
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                说明
-Centos7.7  x86_64,已安装yum和rpm工具
-安装服务器
-yum搜索rp-pppoe，并安装。
-1yum install -y rp-pppoe
-检查是否安装成功
-12rpm -q rp-pppoe# rp-pppoe-3.11-7.el7.x86_64
-配置启用
-以下配置仅支持IPv4，不包含IPv6的相关配置。
-12345678910# 编辑PPPoE服务配置文件v......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-09-28
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/08/20/Centos安装软件工具包的几种方式/">
-        <h2 class="post-title">
-            Centos安装软件工具包的几种方式
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                说明
-Centos7.7 x86_64，默认安装有yum、rpm、tar等工具。
-镜像源
-切换yum镜像源
-123456789# 切换路径yum源配置路径cd /etc/yum.repos.d/# 备份默认的源配置mv CentOS-Base.repo CentOS-Base.repo.bak# 下载阿里云的repo配置文件并另写入Centos-Base.repo中wget -O CentO......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-08-20
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/07/28/Django数据查询方法/">
-        <h2 class="post-title">
-            Django模型数据查询方法
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                说明
-python3.6 Django2.2.10
-django通过ORM定义模型类，以下为Person，Book模型代码
-1234567891011121314151617181920from django.db import modelsclass Person(models.Model):    &quot;&quot;&quot;Person&quot;&quot;&quot;   ......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-07-28
     </p>
 
 </div>
@@ -521,10 +525,6 @@ django通过ORM定义模型类，以下为Person，Book模型代码
                     <div class="tags">
                         
                             
-                            <a href="/tags/#Centos" title="Centos" rel="13">Centos</a>
-                            
-                        
-                            
                             <a href="/tags/#Appium" title="Appium" rel="2">Appium</a>
                             
                         
@@ -533,9 +533,11 @@ django通过ORM定义模型类，以下为Person，Book模型代码
                             
                         
                             
-                            <a href="/tags/#Linux" title="Linux" rel="5">Linux</a>
+                            <a href="/tags/#Centos" title="Centos" rel="15">Centos</a>
                             
                         
+                            
+                            <a href="/tags/#Linux" title="Linux" rel="5">Linux</a>
                             
                         
                             
@@ -543,7 +545,11 @@ django通过ORM定义模型类，以下为Person，Book模型代码
                             
                         
                             
+                        
+                            
                             <a href="/tags/#PyQt" title="PyQt" rel="2">PyQt</a>
+                            
+                        
                             
                         
                             
