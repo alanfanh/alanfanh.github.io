@@ -190,6 +190,38 @@
 
 <div class="post-preview">
 
+    <a href="/2026/06/08/Centos配置DHCPv6服务二/">
+        <h2 class="post-title">
+            Centos配置DHCPv6服务(二)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                说明
+彻底摒弃老旧dibbler构建的IPv6服务，使用更专业以及更现代kea构建dhcpv6服务；kea同时具备DHCPv4、DHCPv6服务，本次仅配置启用DHCPv6服务。
+安装
+Centos7.9
+1[root@localhost /]# yum install kea
+检查是否安装成功
+1rpm -q kea
+配置启用
+以下配置仅包含IPv6的相关配置。
+编辑DHCPv6主配置文件......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2026-06-08
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2026/06/04/Centos配置DNS服务/">
         <h2 class="post-title">
             Centos配置DNS服务
@@ -415,42 +447,6 @@ eth1与路由器Wan口直连，eth1 IP为192.168.11.1/24。在eth1上启用DHCP�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2023/06/15/iptables表规则配置/">
-        <h2 class="post-title">
-            iptables表规则
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                iptables表规则
-
-
-链上规则的次序，即为检查的次序
-同类规则(访问同一应用)，匹配范围小的放上面；
-不同类规则(访问不同应用)，匹配到报文频率较大的放上面；
-将那些可由一条规则描述的多个规则合并为一个；
-设置的默认策略(policy)；
-
-
-规则
-规则由匹配条件和处理动作组成。
-匹配条件一般为协议、源地址、目的地址、源端口、目的端口；还有一些扩展条件，但需使用内核扩展模块。
-处理动作......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2023-06-15
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -494,7 +490,7 @@ eth1与路由器Wan口直连，eth1 IP为192.168.11.1/24。在eth1上启用DHCP�
                             
                         
                             
-                            <a href="/tags/#Centos" title="Centos" rel="15">Centos</a>
+                            <a href="/tags/#Centos" title="Centos" rel="16">Centos</a>
                             
                         
                             
@@ -502,9 +498,9 @@ eth1与路由器Wan口直连，eth1 IP为192.168.11.1/24。在eth1上启用DHCP�
                             
                         
                             
-                            <a href="/tags/#Python" title="Python" rel="24">Python</a>
-                            
                         
+                            
+                            <a href="/tags/#Python" title="Python" rel="24">Python</a>
                             
                         
                             

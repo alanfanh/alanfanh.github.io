@@ -190,6 +190,41 @@
 
 <div class="post-preview">
 
+    <a href="/2020/10/10/搭建dhcp服务器/">
+        <h2 class="post-title">
+            Centos搭建DHCP服务器
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                系统平台
+系统为Centos7.7 x86_64，已安装rpm和yum等工具
+安装
+查询是否已安装软件包，已安装可以跳过此步骤
+1rpm -q dhcp
+如果未安装则通过yum安装
+1yum install -y dhcp
+也可以搜索安装其他dhcp服务器软件包
+1yum search all dhcp
+配置
+配置网卡接口为静态ip
+1ifconfig eth1 192.168.11.1
+或......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2020-10-10
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2020/09/28/Centos配置PPPoE服务器/">
         <h2 class="post-title">
             Centos配置PPPoE服务器
@@ -449,33 +484,6 @@ orm模型全称对象关系映射模型，能够将数据库中的表映射成�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2019/11/20/Tim斯坦福毕业致辞/">
-        <h2 class="post-title">
-            Stanford-2019
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                ​																				Stanford-2019
-​                   																											Tim Cook
-Thank you. Thank you.
-Good morning, Class of 2019!
-Thank you, President Tessier-Lavigne, for that very gen......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2019-11-20
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -523,7 +531,7 @@ Thank you, President Tessier-Lavigne, for that very gen......
                             
                         
                             
-                            <a href="/tags/#Centos" title="Centos" rel="15">Centos</a>
+                            <a href="/tags/#Centos" title="Centos" rel="16">Centos</a>
                             
                         
                             
@@ -531,9 +539,9 @@ Thank you, President Tessier-Lavigne, for that very gen......
                             
                         
                             
-                            <a href="/tags/#Python" title="Python" rel="24">Python</a>
-                            
                         
+                            
+                            <a href="/tags/#Python" title="Python" rel="24">Python</a>
                             
                         
                             

@@ -190,6 +190,42 @@
 
 <div class="post-preview">
 
+    <a href="/2023/06/15/iptables表规则配置/">
+        <h2 class="post-title">
+            iptables表规则
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            
+                iptables表规则
+
+
+链上规则的次序，即为检查的次序
+同类规则(访问同一应用)，匹配范围小的放上面；
+不同类规则(访问不同应用)，匹配到报文频率较大的放上面；
+将那些可由一条规则描述的多个规则合并为一个；
+设置的默认策略(policy)；
+
+
+规则
+规则由匹配条件和处理动作组成。
+匹配条件一般为协议、源地址、目的地址、源端口、目的端口；还有一些扩展条件，但需使用内核扩展模块。
+处理动作......
+            
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by FanHao on
+        2023-06-15
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2022/09/20/Centos7下部署Django Web项目/">
         <h2 class="post-title">
             Centos7下部署Django Web项目
@@ -451,41 +487,6 @@ App自动化环境安装的系统平台为Windows，使用Appium，驱动安卓�
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2020/10/10/搭建dhcp服务器/">
-        <h2 class="post-title">
-            Centos搭建DHCP服务器
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-                系统平台
-系统为Centos7.7 x86_64，已安装rpm和yum等工具
-安装
-查询是否已安装软件包，已安装可以跳过此步骤
-1rpm -q dhcp
-如果未安装则通过yum安装
-1yum install -y dhcp
-也可以搜索安装其他dhcp服务器软件包
-1yum search all dhcp
-配置
-配置网卡接口为静态ip
-1ifconfig eth1 192.168.11.1
-或......
-            
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by FanHao on
-        2020-10-10
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -533,7 +534,7 @@ App自动化环境安装的系统平台为Windows，使用Appium，驱动安卓�
                             
                         
                             
-                            <a href="/tags/#Centos" title="Centos" rel="15">Centos</a>
+                            <a href="/tags/#Centos" title="Centos" rel="16">Centos</a>
                             
                         
                             
@@ -541,9 +542,9 @@ App自动化环境安装的系统平台为Windows，使用Appium，驱动安卓�
                             
                         
                             
-                            <a href="/tags/#Python" title="Python" rel="24">Python</a>
-                            
                         
+                            
+                            <a href="/tags/#Python" title="Python" rel="24">Python</a>
                             
                         
                             
