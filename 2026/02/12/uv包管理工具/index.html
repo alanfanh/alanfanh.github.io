@@ -13,11 +13,11 @@
 
     <title>
         
-          About - FanHao的博客 | Fanhao&#39;s Blog
+          新型Python包管理工具uv - FanHao的博客 | Fanhao&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="https://alanfanh.github.io/about/">
+    <link rel="canonical" href="https://alanfanh.github.io/2026/02/12/uv包管理工具/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -153,169 +153,125 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/home-bg-o.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://alanfanh.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>About</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Alan</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
+                        
+                    </div>
+                    <h1>新型Python包管理工具uv</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by FanHao on
+                        2026-02-12
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
-            
-                <p>Hello,I’m Alan.<br>
-Welcome to my personal blog.I’m going to record my technical knowledge in my blog. Hope to help you.</p>
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h4 id="优势">优势</h4>
+<p>替代pip运行速度极快、venv虚环境、易于管理不同python版本、以及现代化的项目管理</p>
+<h4 id="安装">安装</h4>
+<p>MacOS系统</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install uv</span><br></pre></td></tr></table></figure>
+<p>Windows系统打开cmd执行如下命令</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell -ExecutionPolicy ByPass -c &quot;irm https://astral.sh/uv/install.ps1 | iex&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="实际应用">实际应用</h4>
+<p>安装最新python版本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">uv python install</span><br><span class="line">uv python install cpython-3.10.20-windows-x86_64-none</span><br></pre></td></tr></table></figure>
+<p>安装指定python版本</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv python install cpython-3.10.20-windows-x86_64-none</span><br></pre></td></tr></table></figure>
+<p>卸载指定版本python</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv python uninstall cpython-3.14.5-windows-x86_64-none</span><br></pre></td></tr></table></figure>
+<p>管理python</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv python list</span><br></pre></td></tr></table></figure>
+<p>替代pip管理包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv pip list</span><br></pre></td></tr></table></figure>
+<p>项目管理</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv init my-project</span><br></pre></td></tr></table></figure>
+<p>安装requests库，执行如下命令uv将自动在此项目虚环境中安装依赖库，且将依赖版本写入项目包版本管理文件中；避免勿扰全局环境</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> my-project</span><br><span class="line">uv add requests</span><br></pre></td></tr></table></figure>
+<p>移除项目包依赖，自动同步项目包管理pyproject.toml文件</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv remove requests</span><br></pre></td></tr></table></figure>
+<p>运行项目</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run python main.py</span><br></pre></td></tr></table></figure>
+<p>运行python</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uv run python</span><br></pre></td></tr></table></figure>
 
 
-                <!-- 如果开启评论功能 -->
+                <hr>
+
                 
-                    <hr>
 
+                <ul class="pager">
                     
-
+                        <li class="previous">
+                            <a href="/2026/03/02/Linux系统3种常用DHCP服务对比/" data-toggle="tooltip" data-placement="top" title="Linux系统3种常用DHCP服务对比">&larr; Previous Post</a>
+                        </li>
                     
-
-
                     
-
+                        <li class="next">
+                            <a href="/2025/07/12/PyQt编程界面无响应状态问题总结/" data-toggle="tooltip" data-placement="top" title="PyQt程序界面无响应状态问题总结">Next Post &rarr;</a>
+                        </li>
                     
+                </ul>
 
-
+                
 
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+
     <!-- Sidebar Container -->
+
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
                 <!-- Featured Tags -->
                 
                 <section>
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        
-                            
-                            <a href="/tags/#Appium" title="Appium" rel="2">Appium</a>
-                            
-                        
-                            
-                            <a href="/tags/#Django" title="Django" rel="4">Django</a>
-                            
-                        
-                            
-                            <a href="/tags/#Centos" title="Centos" rel="16">Centos</a>
-                            
-                        
-                            
-                            <a href="/tags/#Linux" title="Linux" rel="5">Linux</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Python" title="Python" rel="25">Python</a>
-                            
-                        
-                            
-                            <a href="/tags/#PyQt" title="PyQt" rel="2">PyQt</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Hexo" title="Hexo" rel="2">Hexo</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
+                       
+                          <a class="tag" href="/tags/#Python" title="Python">Python</a>
                         
                     </div>
                 </section>
                 
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
-                    <div class="short-about">
-
-                        
-                            <img src="/img/avatar2.jpg" />
-                        
-
-                        
-                            <p>我要成为code的魔法师!</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                            
-                            
-
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/alanfanh">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                            
-                        </ul>
-                    </div>
-                </section>
-                
                 <!-- Friends Blog -->
                 
                 <hr>
@@ -334,9 +290,17 @@ Welcome to my personal blog.I’m going to record my technical knowledge in my b
                 </ul>
                 
             </div>
-        
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
 
 
     <!-- Footer -->
